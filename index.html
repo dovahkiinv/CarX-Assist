@@ -147,6 +147,18 @@
       transform: translateY(-1px);
     }
 
+    .btn-github.disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
     /* Container */
     .container {
       max-width: 1200px;
@@ -590,10 +602,10 @@
         <button class="lang-btn" data-lang="pl">PL</button>
         <button class="lang-btn active" data-lang="en">EN</button>
       </div>
-      <a href="CarX_Assist.zip" download class="btn-github">
+      <div class="btn-github disabled" title="Download ZIP unavailable">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
         <span data-i18n="downloadZip">Download ZIP</span>
-      </a>
+      </div>
     </div>
   </header>
 
