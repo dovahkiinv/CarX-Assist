@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -587,12 +587,12 @@
     </a>
     <div class="nav-actions">
       <div class="lang-toggle" id="langToggle">
-        <button class="lang-btn active" data-lang="pl">PL</button>
-        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="pl">PL</button>
+        <button class="lang-btn active" data-lang="en">EN</button>
       </div>
       <a href="CarX_Assist.zip" download class="btn-github">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-        <span data-i18n="downloadZip">Pobierz ZIP</span>
+        <span data-i18n="downloadZip">Download ZIP</span>
       </a>
     </div>
   </header>
@@ -601,18 +601,18 @@
 
     <!-- Hero Section -->
     <section class="hero">
-      <span class="hero-badge" data-i18n="heroBadge">Fizyka CarX w Assetto Corsa</span>
+      <span class="hero-badge" data-i18n="heroBadge">CarX Physics in Assetto Corsa</span>
       <h1 class="hero-title">
-        <span data-i18n="heroTitle1">Mistrzowskie Sterowanie Padem</span><br>
-        <span data-i18n="heroTitle2">Dla Każdego Auta Driftowego</span>
+        <span data-i18n="heroTitle1">Masterful Gamepad Drift Steering</span><br>
+        <span data-i18n="heroTitle2">For Every Drift Car Pack</span>
       </h1>
       <p class="hero-subtitle" data-i18n="heroDesc">
-        Oficjalny kalkulator kątów, przewodnik ustawień kontrolera i konfigurator skryptu CarX Assist dla CSP. Oblicz idealny kąt kontry dla paczek WDT, Gravy Garage, VDC i ciesz się płynnym driftem bez spinów.
+        Official steer lock calculator, controller setup guide, and CarX Assist config generator for CSP. Calculate the optimal countersteer angle for WDT, Gravy Garage, VDC packs and enjoy smooth drifting without accidental spins.
       </p>
       <div class="hero-btns">
-        <a href="#calculator" class="btn-primary" data-i18n="btnCalc">Kalkulator Kątów</a>
-        <a href="#tweaks" class="btn-secondary" data-i18n="btnTweaks">Ustawienia Kontrolera</a>
-        <a href="#install" class="btn-secondary" data-i18n="btnInstall">Instrukcja Instalacji</a>
+        <a href="#calculator" class="btn-primary" data-i18n="btnCalc">Angle Calculator</a>
+        <a href="#tweaks" class="btn-secondary" data-i18n="btnTweaks">Controller Settings</a>
+        <a href="#install" class="btn-secondary" data-i18n="btnInstall">Installation Guide</a>
       </div>
     </section>
 
@@ -624,26 +624,31 @@
         <div class="card-header">
           <h2 class="card-title">
             <span class="icon">◎</span>
-            <span data-i18n="visTitle">Wizualizacja Kąta Kontry w Czasie Rzeczywistym</span>
+            <span data-i18n="visTitle">Real-Time Countersteer Angle Visualizer</span>
           </h2>
         </div>
         
         <div class="canvas-container">
           <canvas id="driftCanvas" width="460" height="280"></canvas>
         </div>
+        <div style="display: flex; justify-content: space-around; font-size: 11px; margin-top: 6px; color: var(--text-muted); background: rgba(0,0,0,0.25); padding: 6px; border-radius: 6px;">
+          <span><strong style="color: #00ff88;">── ➔</strong> <span data-i18n="legTraj">Motion Trajectory</span></span>
+          <span><strong style="color: #ff7b00;">■</strong> <span data-i18n="legNose">Car Front (Nose)</span></span>
+          <span><strong style="color: #00d2ff;">──</strong> <span data-i18n="legWheels">Wheel Countersteer</span></span>
+        </div>
 
         <div class="stat-row">
           <div class="stat-box">
-            <div class="stat-label" data-i18n="statDriftAngle">Kąt Ślizgu Auta</div>
+            <div class="stat-label" data-i18n="statDriftAngle">Car Drift Angle</div>
             <div class="stat-value" id="dispDriftAngle">35.0°</div>
           </div>
           <div class="stat-box">
-            <div class="stat-label" data-i18n="statSteerAngle">Kąt Kół (Kontra)</div>
+            <div class="stat-label" data-i18n="statSteerAngle">Wheel Angle (Counter)</div>
             <div class="stat-value highlight" id="dispWheelAngle">38.5°</div>
           </div>
           <div class="stat-box">
             <div class="stat-label" data-i18n="statStatus">Status</div>
-            <div class="stat-value" id="dispStatus" style="color: var(--green);">STABILNY</div>
+            <div class="stat-value" id="dispStatus" style="color: var(--green);">STABLE</div>
           </div>
         </div>
       </div>
@@ -653,9 +658,9 @@
         <div class="card-header">
           <h2 class="card-title">
             <span class="icon">⚡</span>
-            <span data-i18n="calcTitle">Kalkulator Paczek Samochodów</span>
+            <span data-i18n="calcTitle">Car Pack Angle Calculator</span>
           </h2>
-          <span style="font-size: 12px; color: var(--text-muted);" data-i18n="selectPack">Wybierz paczkę:</span>
+          <span style="font-size: 12px; color: var(--text-muted);" data-i18n="selectPack">Select car pack:</span>
         </div>
 
         <div class="preset-chips">
@@ -669,7 +674,7 @@
         <!-- Slider 1: Drift Angle -->
         <div class="control-group">
           <div class="control-label">
-            <span data-i18n="lblSimSlip">Symulowany Kąt Poślizgu (Drift Angle):</span>
+            <span data-i18n="lblSimSlip">Simulated Drift Angle:</span>
             <span class="control-val" id="valSimSlip">35.0°</span>
           </div>
           <input type="range" id="sliderSlip" min="-65" max="65" step="0.5" value="35">
@@ -678,7 +683,7 @@
         <!-- Slider 2: Gamepad Stick Position -->
         <div class="control-group">
           <div class="control-label">
-            <span data-i18n="lblStick">Wychylenie Gałki Pada (Stick Input):</span>
+            <span data-i18n="lblStick">Gamepad Stick Input:</span>
             <span class="control-val" id="valStick">0%</span>
           </div>
           <input type="range" id="sliderStick" min="-100" max="100" step="1" value="0">
@@ -687,7 +692,7 @@
         <!-- Slider 3: Max Car Lock -->
         <div class="control-group">
           <div class="control-label">
-            <span data-i18n="lblLock">Maksymalny Kąt Skrętu Auta (Car Lock):</span>
+            <span data-i18n="lblLock">Max Car Steering Lock:</span>
             <span class="control-val" id="valLock">53.0°</span>
           </div>
           <input type="range" id="sliderLock" min="40" max="68" step="0.5" value="53">
@@ -696,7 +701,7 @@
         <!-- Slider 4: Countersteer Multiplier -->
         <div class="control-group">
           <div class="control-label">
-            <span data-i18n="lblCounterMult">Siła Kontry Asysty (Countersteer Multiplier):</span>
+            <span data-i18n="lblCounterMult">Countersteer Multiplier:</span>
             <span class="control-val" id="valCounterMult">1.10x</span>
           </div>
           <input type="range" id="sliderCounterMult" min="0.70" max="1.60" step="0.05" value="1.10">
@@ -705,7 +710,7 @@
         <!-- Recommended Values Box -->
         <div style="background: rgba(0, 210, 255, 0.05); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 8px; padding: 12px; margin-top: 14px;">
           <div style="font-size: 12px; font-weight: 600; color: var(--cyan); margin-bottom: 6px;" data-i18n="recHeader">
-            ZALECANA KONFIGURACJA W GRZE (CARX GAMEPAD):
+            RECOMMENDED IN-GAME SETTINGS (CARX GAMEPAD):
           </div>
           <div style="display: flex; justify-content: space-between; font-size: 13px;">
             <span>Max Drift Steer Angle: <strong id="recAngle" style="color: #fff;">53.0°</strong></span>
@@ -723,9 +728,9 @@
       <div class="card-header">
         <h2 class="card-title">
           <span class="icon">🎮</span>
-          <span data-i18n="tweaksTitle">Optymalne Ustawienia Gamepada w Content Manager</span>
+          <span data-i18n="tweaksTitle">Optimal Gamepad Settings in Content Manager</span>
         </h2>
-        <span class="pill-rec" data-i18n="tweaksImportant">Kluczowe dla prawidłowego działania</span>
+        <span class="pill-rec" data-i18n="tweaksImportant">Crucial for proper operation</span>
       </div>
 
       <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;" data-i18n="tweaksIntro">
@@ -735,36 +740,36 @@
       <table class="tweaks-table">
         <thead>
           <tr>
-            <th data-i18n="thParam">Parametr</th>
-            <th data-i18n="thVal">Zalecana Wartość</th>
-            <th data-i18n="thWhy">Dlaczego?</th>
+            <th data-i18n="thParam">Setting</th>
+            <th data-i18n="thVal">Recommended Value</th>
+            <th data-i18n="thWhy">Why?</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong>Deadzone (Martwa Strefa)</strong></td>
             <td class="val">0%</td>
-            <td data-i18n="whyDeadzone">Eliminuje dziurę w środku gałki. Skrypt posiada własny mikrofiltr szumów.</td>
+            <td data-i18n="whyDeadzone">Removes dead space at stick center. The script has its own micro noise filter.</td>
           </tr>
           <tr>
             <td><strong>Steering Speed (Szybkość Skrętu)</strong></td>
             <td class="val">100%</td>
-            <td data-i18n="whySpeed">Usuwa sztuczne opóźnienie Kunos. Szybkość kontry reguluje sam skrypt CarX.</td>
+            <td data-i18n="whySpeed">Removes artificial Kunos lag. Countersteer speed is controlled directly by CarX.</td>
           </tr>
           <tr>
             <td><strong>Speed Sensitivity (Czułość do Prędkości)</strong></td>
             <td class="val">0 km/h</td>
-            <td data-i18n="whySens">Zapobiega blokowaniu skrętu przy wyższych prędkościach driftu (90+ km/h).</td>
+            <td data-i18n="whySens">Prevents steer angle lockouts during high speed entries (90+ km/h).</td>
           </tr>
           <tr>
             <td><strong>Gamma (Krzywa Liniowości)</strong></td>
             <td class="val">1.50 - 2.20</td>
-            <td data-i18n="whyGamma">Zapewnia chirurgiczną precyzję mikro-korekt w środkowym zakresie drążka.</td>
+            <td data-i18n="whyGamma">Provides surgical micro-correction precision around stick center.</td>
           </tr>
           <tr>
             <td><strong>Steering Filter (Filtr Skrętu)</strong></td>
             <td class="val">0%</td>
-            <td data-i18n="whyFilter">Filtrowanie wykonuje algorytm CarX Damping wewnątrz assist.lua.</td>
+            <td data-i18n="whyFilter">Filtering is handled internally by the CarX Damping algorithm in assist.lua.</td>
           </tr>
         </tbody>
       </table>
@@ -777,26 +782,26 @@
         <div class="card-header">
           <h2 class="card-title">
             <span class="icon">📦</span>
-            <span data-i18n="installTitle">Instalacja Skryptu Krok po Kroku</span>
+            <span data-i18n="installTitle">Step-by-Step Installation</span>
           </h2>
         </div>
 
         <ol class="step-list">
           <li class="step-item">
-            <h4 data-i18n="step1Title">Wymagany Custom Shaders Patch (CSP)</h4>
-            <p data-i18n="step1Desc">Upewnij się, że masz zainstalowany Content Manager oraz CSP 0.2.3 lub nowszy.</p>
+            <h4 data-i18n="step1Title">Custom Shaders Patch (CSP) Required</h4>
+            <p data-i18n="step1Desc">Ensure Content Manager and CSP 0.2.3 or higher are installed.</p>
           </li>
           <li class="step-item">
-            <h4 data-i18n="step2Title">Wypakuj archiwum CarX_Assist.zip</h4>
-            <p data-i18n="step2Desc">Skopiuj foldery <code>extension</code> oraz <code>apps</code> bezpośrednio do głównego katalogu Assetto Corsa (np. <code>D:\SteamLibrary\steamapps\common\assettocorsa\</code>).</p>
+            <h4 data-i18n="step2Title">Extract CarX_Assist.zip</h4>
+            <p data-i18n="step2Desc">Copy extension and apps folders directly to your main Assetto Corsa root folder.</p>
           </li>
           <li class="step-item">
-            <h4 data-i18n="step3Title">Aktywuj asystę w Content Manager</h4>
-            <p data-i18n="step3Desc">Przejdź do: <em>Settings &rarr; Custom Shaders Patch &rarr; Gamepad FX</em>. Zaznacz "Active" i z listy rozwijanej wybierz <strong>CarX Drift Assist</strong>.</p>
+            <h4 data-i18n="step3Title">Activate script in Content Manager</h4>
+            <p data-i18n="step3Desc">Navigate to Settings → CSP → Gamepad FX. Check Active and select CarX Drift Assist.</p>
           </li>
           <li class="step-item">
-            <h4 data-i18n="step4Title">Włącz menu w grze</h4>
-            <p data-i18n="step4Desc">W grze najedź myszką na prawą krawędź ekranu, otwórz listę aplikacji i kliknij <strong>CarX Gamepad</strong>, aby dostrajać kąty i asysty na żywo!</p>
+            <h4 data-i18n="step4Title">Enable In-Game App</h4>
+            <p data-i18n="step4Desc">In-game, open the right-side apps bar and activate CarX Gamepad to tune angles live!</p>
           </li>
         </ol>
       </div>
@@ -805,7 +810,7 @@
         <div class="card-header">
           <h2 class="card-title">
             <span class="icon">💡</span>
-            <span data-i18n="faqTitle">Częste Pytania & Porady</span>
+            <span data-i18n="faqTitle">FAQ & Pro Tips</span>
           </h2>
         </div>
 
@@ -834,7 +839,7 @@
   <footer>
     <div style="margin-bottom: 8px;">
       CarX Gamepad Assist for Assetto Corsa &bull; Open Source Mod &bull; 
-      <span data-i18n="footerFree">Darmowy hosting na GitHub Pages</span>
+      <span data-i18n="footerFree">Free hosting via GitHub Pages</span>
     </div>
     <div style="font-size: 12px; color: #5a667a;">
       Stworzone dla społeczności Assetto Corsa Drift &bull; Inspirowane fizyką CarX Drift Racing Online
@@ -857,6 +862,14 @@
         statDriftAngle: "Kąt Ślizgu Auta",
         statSteerAngle: "Kąt Kół (Kontra)",
         statStatus: "Status",
+        legTraj: "Trajektoria Ruchu",
+        legNose: "Maska (Przód)",
+        legWheels: "Kontra Kół",
+        dirLeft: "(Lewo)",
+        dirRight: "(Prawo)",
+        counterP: "(Prawo / Kontra)",
+        counterL: "(Lewo / Kontra)",
+        center: "(Środek)", 
         statusStable: "STABILNY",
         statusCounter: "PEŁNA KONTRA",
         statusSpin: "RYZYKO SPINU!",
@@ -866,7 +879,7 @@
         lblStick: "Wychylenie Gałki Pada (Stick Input):",
         lblLock: "Maksymalny Kąt Skrętu Auta (Car Lock):",
         lblCounterMult: "Siła Kontry Asysty (Countersteer Multiplier):",
-        recHeader: "ZALECANA KONFIGURACJA W GRZE (CARX GAMEPAD):",
+        recHeader: "RECOMMENDED IN-GAME SETTINGS (CARX GAMEPAD):",
         tweaksTitle: "Optymalne Ustawienia Gamepada w Content Manager",
         tweaksImportant: "Kluczowe dla prawidłowego działania",
         tweaksIntro: "Skrypt CarX Assist przejmuje całkowitą kontrolę nad fizyką wirtualnej kierownicy. Aby uniknąć opóźnień (\"laga\") i martwych stref, w zakładce Settings → Controls → Gamepad należy ustawić:",
@@ -908,7 +921,15 @@
         visTitle: "Real-Time Countersteer Angle Visualizer",
         statDriftAngle: "Car Drift Angle",
         statSteerAngle: "Wheel Angle (Counter)",
-        statStatus: "Status",
+                statStatus: "Status",
+        legTraj: "Motion Trajectory",
+        legNose: "Car Front (Nose)",
+        legWheels: "Wheel Countersteer",
+        dirLeft: "(Left)",
+        dirRight: "(Right)",
+        counterP: "(Right / Counter)",
+        counterL: "(Left / Counter)",
+        center: "(Center)", 
         statusStable: "STABLE",
         statusCounter: "FULL LOCK",
         statusSpin: "SPIN RISK!",
@@ -950,7 +971,7 @@
       }
     };
 
-    let currentLang = 'pl';
+    let currentLang = 'en';
 
     function setLanguage(lang) {
       currentLang = lang;
@@ -1027,7 +1048,8 @@
       valCounterMult.textContent = counterMult.toFixed(2) + 'x';
 
       // CarX countersteer calculation logic:
-      // Assist countersteers against slip angle, user stick adds / subtracts steering
+      // When car drifts (slip angle != 0), assist countersteers in opposite direction to catch the slide.
+      // E.g. car rotated left (-25°): wheels must steer right (+angle relative to chassis).
       const assistCounter = -driftAngle * counterMult;
       const userSteer = stickInput * maxLock;
       let calculatedWheelAngle = assistCounter + userSteer;
@@ -1035,11 +1057,14 @@
       const isClamped = Math.abs(calculatedWheelAngle) > maxLock;
       calculatedWheelAngle = clamp(calculatedWheelAngle, -maxLock, maxLock);
 
-      dispDriftAngle.textContent = Math.abs(driftAngle).toFixed(1) + '° ' + (driftAngle > 0 ? '(P)' : driftAngle < 0 ? '(L)' : '');
-      dispWheelAngle.textContent = Math.abs(calculatedWheelAngle).toFixed(1) + '° ' + (calculatedWheelAngle > 0 ? '(P)' : calculatedWheelAngle < 0 ? '(L)' : '');
+      const texts = i18n[currentLang];
+      const slipDir = driftAngle < -0.5 ? texts.dirLeft : (driftAngle > 0.5 ? texts.dirRight : texts.center);
+      const wheelDir = calculatedWheelAngle > 0.5 ? texts.counterP : (calculatedWheelAngle < -0.5 ? texts.counterL : texts.center);
+
+      dispDriftAngle.textContent = Math.abs(driftAngle).toFixed(1) + '° ' + slipDir;
+      dispWheelAngle.textContent = Math.abs(calculatedWheelAngle).toFixed(1) + '° ' + wheelDir;
 
       // Evaluate stability
-      const texts = i18n[currentLang];
       if (Math.abs(driftAngle) > maxLock * 1.05) {
         dispStatus.textContent = texts.statusSpin;
         dispStatus.style.color = '#ff3344';
@@ -1064,30 +1089,75 @@
       const wheelW = 12;
       const wheelL = 26;
 
+      // 1. WORLD SPACE (ROAD & MOTION TRAJECTORY)
+      // Car is traveling along the road straight up (towards 12 o'clock)
+      ctx.save();
+
+      // Road track edges
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(centerX - 130, 0);
+      ctx.lineTo(centerX - 130, canvas.height);
+      ctx.moveTo(centerX + 130, 0);
+      ctx.lineTo(centerX + 130, canvas.height);
+      ctx.stroke();
+
+      // Road center dashed line
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.setLineDash([8, 8]);
+      ctx.beginPath();
+      ctx.moveTo(centerX, 0);
+      ctx.lineTo(centerX, canvas.height);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Fixed World Trajectory Arrow (Motion Vector)
+      ctx.strokeStyle = '#00ff88';
+      ctx.fillStyle = '#00ff88';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY + 85);
+      ctx.lineTo(centerX, centerY - 110);
+      ctx.stroke();
+
+      // Arrowhead
+      ctx.beginPath();
+      ctx.moveTo(centerX - 5, centerY - 100);
+      ctx.lineTo(centerX, centerY - 115);
+      ctx.lineTo(centerX + 5, centerY - 100);
+      ctx.fill();
+
+      // Small trajectory badge
+      ctx.font = '10px Rajdhani, sans-serif';
+      ctx.fillStyle = '#00ff88';
+      ctx.textAlign = 'right';
+      ctx.fillText(currentLang === 'pl' ? 'TRAJEKTORIA RUCHU (DROGA)' : 'MOTION TRAJECTORY (ROAD)', centerX - 10, centerY - 102);
+
+      ctx.restore();
+
+      // 2. CAR BODY SPACE (Rotated by car drift heading)
       ctx.save();
       ctx.translate(centerX, centerY);
 
-      // Rotate whole canvas by car drift angle (representing car heading)
-      // Drift angle means car body is rotated relative to trajectory (upwards)
+      // In canvas: positive rotation = clockwise.
+      // driftAngleDeg: negative = nose pointing left, positive = nose pointing right
       const driftRad = (driftAngleDeg * Math.PI) / 180;
-      ctx.rotate(-driftRad);
+      ctx.rotate(driftRad);
 
-      // Trajectory arrow (background)
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 2;
-      ctx.setLineDash([4, 4]);
-      ctx.beginPath();
-      ctx.moveTo(0, 100);
-      ctx.lineTo(0, -120);
-      ctx.stroke();
-      ctx.setLineDash([]);
+      // Skid marks behind rear wheels (when sideways)
+      if (Math.abs(driftAngleDeg) > 4.0) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+        ctx.fillRect(-carWidth / 2 - 7, carLength / 2 - 12, wheelW, 40);
+        ctx.fillRect(carWidth / 2 - 5, carLength / 2 - 12, wheelW, 40);
+      }
 
       // Car Body
       ctx.fillStyle = '#161d2d';
       ctx.strokeStyle = '#00d2ff';
       ctx.lineWidth = 2;
-      ctx.shadowColor = 'rgba(0, 210, 255, 0.3)';
-      ctx.shadowBlur = 10;
+      ctx.shadowColor = 'rgba(0, 210, 255, 0.35)';
+      ctx.shadowBlur = 12;
       
       // Rounded chassis
       ctx.beginPath();
@@ -1105,13 +1175,13 @@
       ctx.fill();
       ctx.stroke();
 
-      // Hood stripe (indicator of car front)
+      // Front Hood Direction Indicator (Orange arrow showing car's nose heading)
       ctx.fillStyle = '#ff7b00';
-      ctx.fillRect(-3, -carLength / 2 + 4, 6, 20);
+      ctx.fillRect(-3, -carLength / 2 + 4, 6, 22);
 
-      // Rear Wheels (fixed)
+      // Rear Wheels (fixed parallel to car chassis)
       ctx.fillStyle = '#222';
-      ctx.strokeStyle = '#444';
+      ctx.strokeStyle = '#555';
       ctx.lineWidth = 1.5;
       
       // Rear Left
@@ -1126,7 +1196,8 @@
       ctx.fill();
       ctx.stroke();
 
-      // Front Wheels (steered)
+      // Front Wheels (steered by calculatedWheelAngle)
+      // wheelAngleDeg is relative to chassis (positive = steered right, negative = steered left)
       const wheelRad = (wheelAngleDeg * Math.PI) / 180;
 
       function drawFrontWheel(x, y) {
@@ -1136,12 +1207,23 @@
         ctx.fillStyle = '#00d2ff';
         ctx.strokeStyle = '#fff';
         ctx.lineWidth = 1.5;
-        ctx.shadowColor = 'rgba(0, 210, 255, 0.8)';
-        ctx.shadowBlur = 6;
+        ctx.shadowColor = 'rgba(0, 210, 255, 0.85)';
+        ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.roundRect(-wheelW / 2, -wheelL / 2, wheelW, wheelL, 3);
         ctx.fill();
         ctx.stroke();
+
+        // Countersteer direction vector line
+        ctx.strokeStyle = 'rgba(0, 210, 255, 0.7)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(0, -wheelL / 2);
+        ctx.lineTo(0, -wheelL / 2 - 30);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
         ctx.restore();
       }
 
@@ -1158,7 +1240,8 @@
       el.addEventListener('input', updatePhysics);
     });
 
-    // Initialize
+    // Initialize with English as default
+    setLanguage('en');
     updatePhysics();
   </script>
 </body>
