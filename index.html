@@ -78,12 +78,48 @@
           </div>
 
           <!-- Setup Name Input -->
-          <div class="slider-group" style="background: rgba(0,0,0,0.3); padding: 14px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 18px;">
+          <div class="slider-group" style="background: rgba(0,0,0,0.3); padding: 14px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px;">
             <div class="slider-header" style="margin-bottom: 8px;">
               <span class="slider-label" style="font-size: 14px; font-weight: 700; color: #fff;" data-i18n="genLblName">Setup Name:</span>
             </div>
-            <input type="text" id="genName" value="CarX Assist (DRO 1:1)" style="width: 100%; background: #040508; border: 1px solid rgba(0,210,255,0.3); color: #fff; padding: 10px 14px; border-radius: 6px; font-family: var(--font-body); font-size: 15px; font-weight: 600;">
+            <input type="text" id="genName" value="CarX Assist (DRO 1:1)" style="width: 100%; background: #040405; border: 1px solid rgba(239, 68, 68, 0.38); color: #fff; padding: 10px 14px; border-radius: 6px; font-family: var(--font-body); font-size: 15px; font-weight: 600;">
             <div class="slider-desc" data-i18n="genNameHelp">Enter a custom name for your profile before saving or copying.</div>
+          </div>
+
+          <!-- Interactive 3D Blender Nissan Silvia S15 (Live Steer & Lock View) -->
+          <div class="s15-embed-box" id="s15GenWidget">
+            <div class="s15-embed-hdr">
+              <div class="s15-embed-title">
+                <span>⚡</span>
+                <span data-i18n="gen3DTitle">Nissan Silvia S15 • Live Drift Lock 3D</span>
+              </div>
+              <span class="s15-stage-pill" id="s15GenLockBadge">LOCK: <strong>65.0°</strong></span>
+            </div>
+            <div class="s15-stage-frame">
+              <div class="s15-stage-hud-tl">
+                <div class="s15-stage-pill" id="s15GenHudPose">STEER: <strong>0.0°</strong> • DRIFT: <strong>0°</strong></div>
+              </div>
+              <div class="s15-stage-cams">
+                <button class="s15-mini-btn active" id="genCam_hero" onclick="setS15ViewportCam('gen','hero')">3/4</button>
+                <button class="s15-mini-btn" id="genCam_front" onclick="setS15ViewportCam('gen','front')">Przód</button>
+                <button class="s15-mini-btn" id="genCam_top" onclick="setS15ViewportCam('gen','top')">Góra</button>
+                <button class="s15-mini-btn" id="genCam_wheel" onclick="setS15ViewportCam('gen','wheel')">Koło</button>
+              </div>
+              <div class="s15-stage-mount" id="s15StageGen"></div>
+              <div class="s15-stage-fx">
+                <button class="s15-mini-btn" id="genFxCad" onclick="toggleS15ViewportRender('gen','cad')">📐 CAD</button>
+                <button class="s15-mini-btn" id="genFxWheelsOnly" onclick="toggleS15WheelsOnly('gen')">🎯 Same Koła</button>
+                <button class="s15-mini-btn" id="genFxAuto" onclick="toggleS15ViewportAuto('gen')">🔄</button>
+                <button class="s15-mini-btn" id="genFxSpin" onclick="toggleS15ViewportSpin('gen')">🛞 Kręć</button>
+              </div>
+            </div>
+            <div class="slider-group" style="margin-top: 10px; margin-bottom: 2px;">
+              <div class="slider-header" style="margin-bottom: 4px;">
+                <span class="slider-label" style="font-size: 12px;" data-i18n="lblGenTestAngle">Kąt Testowy Kontry / Driftu S15:</span>
+                <span class="slider-val" style="font-size: 12px;" id="valGenTestAngle">0.0°</span>
+              </div>
+              <input type="range" id="genTestAngle" min="-70" max="70" step="1" value="0" oninput="onGenSliderChange()">
+            </div>
           </div>
 
           <!-- Stability Diagnosis Card -->
@@ -119,15 +155,15 @@
             </div>
             <!-- Import Row (2-Way Full Compatibility!) -->
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-              <button class="btn btn-ghost" onclick="triggerSetupFileInput()" style="flex: 1; border-color: rgba(0, 210, 255, 0.35); color: var(--cyan);" data-i18n="btnImportFile">📥 Import Setup from File</button>
-              <button class="btn btn-ghost" onclick="pasteSetupFromClipboard()" style="flex: 1; border-color: rgba(255, 123, 0, 0.35); color: var(--orange);" data-i18n="btnPasteClip">📋 Paste Setup from Clipboard</button>
+              <button class="btn btn-ghost" onclick="triggerSetupFileInput()" style="flex: 1; border-color: rgba(239, 68, 68, 0.45); color: var(--cyan);" data-i18n="btnImportFile">📥 Import Setup from File</button>
+              <button class="btn btn-ghost" onclick="pasteSetupFromClipboard()" style="flex: 1; border-color: rgba(248, 113, 113, 0.35); color: #fca5a5;" data-i18n="btnPasteClip">📋 Paste Setup from Clipboard</button>
             </div>
           </div>
 
           <!-- Hidden File Input for .json / .carx.json / .carx / .ini / .csv uploads -->
           <input type="file" id="setupFileInput" accept=".json,.carx.json,.carx,.ini,.csv" style="display: none;" onchange="handleSetupFileUpload(event)">
 
-          <div style="margin-top: 20px; background: rgba(0, 210, 255, 0.04); border: 1px solid rgba(0, 210, 255, 0.15); border-radius: 8px; padding: 14px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+          <div style="margin-top: 20px; background: rgba(220, 38, 38, 0.05); border: 1px solid rgba(239, 68, 68, 0.22); border-radius: 8px; padding: 14px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
             <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px;">📥 How to load in Assetto Corsa:</div>
             <div><strong style="color: #fff;">1.</strong> <span data-i18n="genHelpStep1">Open Assetto Corsa and launch any drift track with CarX Assist active.</span></div>
             <div><strong style="color: #fff;">2.</strong> <span data-i18n="genHelpStep2">Open the 'CarX Gamepad' app on the right HUD app tray and go to the 'Setups' tab.</span></div>
@@ -152,7 +188,7 @@
           <!-- Presets -->
           <div style="margin-bottom: 12px; font-size: 13px; color: var(--text-muted);" data-i18n="genPresetsTitle">Quick Drift Car Presets:</div>
           <div class="preset-pills">
-            <button class="preset-pill active" onclick="loadGenPreset('v2test')" style="border-color: rgba(0, 210, 255, 0.75); color: #fff; font-weight: 700;">⚡ CarX Assist (DRO 1:1)</button>
+            <button class="preset-pill active" onclick="loadGenPreset('v2test')" style="font-weight: 700;">⚡ CarX Assist (DRO 1:1)</button>
             
             <button class="preset-pill" onclick="loadGenPreset('wdt_street')">WDT Street (48°)</button>
             <button class="preset-pill" onclick="loadGenPreset('wdt_pro')">WDT Pro (53°)</button>
@@ -298,7 +334,7 @@
         </div>
 
                         <!-- Workflow Guide: Step-by-Step CarX -> Web -> Assetto Corsa -->
-        <div style="margin: 0 24px 16px 24px; background: rgba(14, 20, 32, 0.85); border: 1px solid rgba(0, 210, 255, 0.25); border-radius: 10px; padding: 14px 18px;">
+        <div style="margin: 0 24px 16px 24px; background: rgba(12, 11, 13, 0.92); border: 1px solid rgba(239, 68, 68, 0.28); border-radius: 10px; padding: 14px 18px;">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <span style="font-size: 16px;">🏁</span>
@@ -306,7 +342,7 @@
                 JAK TO DZIAŁA? PRZEPŁYW DANYCH: CARX ➔ STRONA WWW ➔ ASSETTO CORSA
               </span>
             </div>
-            <button class="btn btn-ghost" id="acWfBtnCopy" onclick="navigator.clipboard.writeText('C:\\Users\\Gaming\\Documents\\Assetto Corsa\\setups'); showToast('Skopiowano ścieżkę do folderu setupów AC!');" style="font-size: 11px; padding: 4px 10px; border-color: rgba(0,210,255,0.35); color: var(--cyan);">
+            <button class="btn btn-ghost" id="acWfBtnCopy" onclick="navigator.clipboard.writeText('C:\\Users\\Gaming\\Documents\\Assetto Corsa\\setups'); showToast('Skopiowano ścieżkę do folderu setupów AC!');" style="font-size: 11px; padding: 4px 10px; border-color: rgba(239,68,68,0.42); color: #ff4d5a;">
               📋 Kopiuj ścieżkę do setupów AC
             </button>
           </div>
@@ -331,18 +367,18 @@
               </div>
               <div id="acWfCard2Body" style="font-size: 12px; line-height: 1.55; color: #cbd5e1;">
                 • Dostosuj ciśnienia opon, przełożenia skrzyni i sztywność amortyzatorów (suwaki automatycznie synchronizują symetrię lewej i prawej strony LF/RF i LR/RR).<br>
-                • Gdy setup jest gotowy, kliknij pomarańczowy przycisk <strong>„💾 Pobierz plik .ini dla AC”</strong>.<br>
+                • Gdy setup jest gotowy, kliknij przycisk <strong>„💾 Pobierz plik .ini”</strong> powyżej.<br>
                 • Przeglądarka pobierze gotowy plik konfiguracyjny <code style="color:#22c55e; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code>.
               </div>
             </div>
 
             <!-- KROK 3 -->
             <div class="ac-adv-card alert-slip" style="border-left-width: 3px;">
-              <div class="ac-adv-card-title" id="acWfCard3Title" style="color: #f59e0b;">
+              <div class="ac-adv-card-title" id="acWfCard3Title" style="color: #fca5a5;">
                 <span>3️⃣</span> CO WCZYTAĆ W ASSETTO CORSA?
               </div>
               <div id="acWfCard3Body" style="font-size: 12px; line-height: 1.55; color: #cbd5e1;">
-                • <strong>Setup auta:</strong> Przenieś pobrany plik <code style="color:#f59e0b; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code> do folderu:<br>
+                • <strong>Setup auta:</strong> Przenieś pobrany plik <code style="color:#fca5a5; background: rgba(0,0,0,0.45); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code> do folderu:<br>
                 <code style="display:inline-block; margin-top:2px; font-size:11px; background:rgba(0,0,0,0.5); padding:2px 6px; border-radius:4px; color:#f8fafc;">Dokumenty\Assetto Corsa\setups\&lt;auto&gt;\generic\</code><br>
                 W grze w Pitstopie wejdź w <strong>Setup ➔ Load ➔ generic</strong> i wybierz <strong>last_carx</strong>.<br>
                 • <strong>Asysta kierowania (Gamepad FX):</strong> W Content Managerze (<em>Settings ➔ Controls ➔ Gamepad FX</em>) upewnij się, że aktywny jest skrypt <strong>CarX Assist</strong>.
@@ -350,13 +386,13 @@
             </div>
 
             <!-- KROK 4 / STEROWANIE -->
-            <div class="ac-adv-card" style="border-left: 3px solid #a855f7; background: rgba(168, 85, 247, 0.08); grid-column: 1 / -1;">
-              <div class="ac-adv-card-title" style="color: #c084fc; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div class="ac-adv-card" style="border-left: 3px solid #ef4444; background: rgba(220, 38, 38, 0.08); grid-column: 1 / -1;">
+              <div class="ac-adv-card-title" style="color: #ff4d5a; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
                 <div style="display: flex; align-items: center; gap: 6px;" id="acWfCard4Title">
                   <span>🎮</span>
                   <span>USTAWIENIA STEROWANIA PADA & SKRYPTU ASSIST.LUA (GDZIE SĄ, GDZIE SIĘ ZAPISUJĄ I JAK WCZYTAĆ?)</span>
                 </div>
-                <button class="btn btn-ghost" id="acWfBtnCopyAssist" onclick="navigator.clipboard.writeText('C:\\Users\\Gaming\\Desktop\\Skrypt CarX Assetto\\extension\\lua\\joypad-assist\\carx_assist'); showToast('Skopiowano ścieżkę do folderu assist.lua!');" style="font-size: 11px; padding: 2px 8px; border-color: rgba(192, 132, 252, 0.4); color: #c084fc;">
+                <button class="btn btn-ghost" id="acWfBtnCopyAssist" onclick="navigator.clipboard.writeText('C:\\Users\\Gaming\\Desktop\\Skrypt CarX Assetto\\extension\\lua\\joypad-assist\\carx_assist'); showToast('Skopiowano ścieżkę do folderu assist.lua!');" style="font-size: 11px; padding: 2px 8px; border-color: rgba(239, 68, 68, 0.45); color: #ff4d5a;">
                   📋 Kopiuj ścieżkę do assist.lua
                 </button>
               </div>
@@ -364,12 +400,12 @@
                 <strong>1. Gdzie są ustawienia sterowania na stronie WWW?</strong><br>
                 W zakładce u góry: <strong>🛠️ Setup Generator & Presets</strong> masz suwaki skrętu (Kąt skrętu 50°–75°, Autocatch Ratio, Stabilizacja yaw, Płynność kontry, Anti-spin). Możesz tam kliknąć <strong>„💾 Pobierz plik assist.lua”</strong> lub <strong>„📋 Kopiuj kod do schowka”</strong>.<br><br>
                 <strong>2. Gdzie wkleić / wczytać do skryptu CarX Assist w grze?</strong><br>
-                Plik <code style="color:#c084fc; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">assist.lua</code> oraz <code style="color:#c084fc; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">settings.ini</code> znajdują się w folderze gry:<br>
-                <code style="display:inline-block; margin: 3px 0; background:rgba(0,0,0,0.5); padding:2px 8px; border-radius:4px; color:#f8fafc; font-family:var(--font-mono);">assettocorsa\extension\lua\joypad-assist\carx_assist\assist.lua</code><br>
+                Plik <code style="color:#fca5a5; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">assist.lua</code> oraz <code style="color:#fca5a5; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">settings.ini</code> znajdują się w folderze gry:<br>
+                <code style="display:inline-block; margin: 3px 0; background:rgba(0,0,0,0.55); padding:2px 8px; border-radius:4px; color:#f8fafc; font-family:var(--font-mono);">assettocorsa\extension\lua\joypad-assist\carx_assist\assist.lua</code><br>
                 Gdy podmienisz ten plik, gra od razu wystartuje z Twoją nową fizyką sterowania.<br><br>
                 <strong>3. Gdzie zapisują się ustawienia z Content Managera i podczas jazdy?</strong><br>
-                • <strong>Ustawienia pada (CM):</strong> <em>Settings ➔ Controls ➔ Gamepad</em> zapisują się w <code style="color:#38bdf8; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">Documents\Assetto Corsa\cfg\controls.ini</code>.<br>
-                • <strong>Ustawienia skryptu na żywo:</strong> W grze po prawej stronie włącz aplikację <strong>CarXGamepad</strong>. Zmiany suwaków w grze zapisują się automatycznie w <code style="color:#38bdf8; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">Documents\Assetto Corsa\cfg\extension\joypad-assist\carx_assist.ini</code>.
+                • <strong>Ustawienia pada (CM):</strong> <em>Settings ➔ Controls ➔ Gamepad</em> zapisują się w <code style="color:#ff6b7a; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">Documents\Assetto Corsa\cfg\controls.ini</code>.<br>
+                • <strong>Ustawienia skryptu na żywo:</strong> W grze po prawej stronie włącz aplikację <strong>CarXGamepad</strong>. Zmiany suwaków w grze zapisują się automatycznie w <code style="color:#ff6b7a; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">Documents\Assetto Corsa\cfg\extension\joypad-assist\carx_assist.ini</code>.
               </div>
             </div>
           </div>
@@ -379,43 +415,43 @@
           <!-- LEFT SIDEBAR: EXACT AC GAME TABS -->
           <div class="ac-garage-sidebar">
             <div class="ac-sidebar-btn-load" onclick="triggerAcIniUpload()">
-              <span>Load</span>
+              <span id="acTabLbl_load">Load</span>
               <span style="font-size: 12px; opacity: 0.6;">📁</span>
             </div>
             <div class="ac-sidebar-tab active" data-actab="gears" onclick="switchAcTab('gears')">
-              <span>Gears</span>
+              <span id="acTabLbl_gears">Gears</span>
               <span class="ac-tab-dot"></span>
             </div>
             <div class="ac-sidebar-tab" data-actab="tyres" onclick="switchAcTab('tyres')">
-              <span>Tyres</span>
+              <span id="acTabLbl_tyres">Tyres</span>
               <span class="ac-tab-dot"></span>
             </div>
             <div class="ac-sidebar-tab" data-actab="fuel" onclick="switchAcTab('fuel')">
-              <span>Fuel</span>
+              <span id="acTabLbl_fuel">Fuel</span>
               <span class="ac-tab-dot" style="opacity: 0;"></span>
             </div>
             <div class="ac-sidebar-tab" data-actab="alignment" onclick="switchAcTab('alignment')">
-              <span>Alignment</span>
+              <span id="acTabLbl_alignment">Alignment</span>
               <span class="ac-tab-dot"></span>
             </div>
             <div class="ac-sidebar-tab" data-actab="dampers" onclick="switchAcTab('dampers')">
-              <span>Dampers</span>
+              <span id="acTabLbl_dampers">Dampers</span>
               <span class="ac-tab-dot" style="opacity: 0;"></span>
             </div>
             <div class="ac-sidebar-tab" data-actab="drivetrain" onclick="switchAcTab('drivetrain')">
-              <span>Drivetrain</span>
+              <span id="acTabLbl_drivetrain">Drivetrain</span>
               <span class="ac-tab-dot" style="opacity: 0;"></span>
             </div>
             <div class="ac-sidebar-tab" data-actab="generic" onclick="switchAcTab('generic')">
-              <span>Generic</span>
+              <span id="acTabLbl_generic">Generic</span>
               <span class="ac-tab-dot" style="opacity: 0;"></span>
             </div>
             <div class="ac-sidebar-tab" data-actab="suspension" onclick="switchAcTab('suspension')">
-              <span>Suspension</span>
+              <span id="acTabLbl_suspension">Suspension</span>
               <span class="ac-tab-dot" style="opacity: 0;"></span>
             </div>
             <div class="ac-sidebar-tab" data-actab="summary" onclick="switchAcTab('summary')">
-              <span>Summary</span>
+              <span id="acTabLbl_summary">Summary</span>
               <span class="ac-tab-dot" style="background: var(--cyan); opacity: 0.9;"></span>
             </div>
           </div>
@@ -431,8 +467,8 @@
                   <table class="ac-gears-table">
                     <thead>
                       <tr>
-                        <th>Gear</th>
-                        <th>Top speed (km/h)</th>
+                        <th id="acThGear">Gear</th>
+                        <th id="acThSpeed">Top speed (km/h)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -448,7 +484,7 @@
                     <div class="ac-ctrl-unit">
                       <button class="ac-btn-step" onclick="stepAcParam('finalRatio', -1)">&lt;</button>
                       <div class="ac-slider-body">
-                        <span class="ac-ctrl-label">Final Gear Ratio</span>
+                        <span class="ac-ctrl-label" id="acLblFinalRatio">Final Gear Ratio</span>
                         <div class="ac-ctrl-slider-wrap">
                           <input type="range" class="ac-range-input" id="acSlider_finalRatio" min="2.50" max="5.00" step="0.01" value="3.69" oninput="onAcSliderInput('finalRatio', this.value)">
                         </div>
@@ -462,8 +498,8 @@
                 <!-- RPM Chart Canvas -->
                 <div class="ac-gears-canvas-box">
                   <div style="font-family: var(--font-mono); font-size: 11px; color: #94a3b8; margin-bottom: 6px; width: 100%; display: flex; justify-content: space-between;">
-                    <span>RPM vs SPEED (km/h)</span>
-                    <span style="color: #ef4444;">REDLINE: 7200 RPM</span>
+                    <span id="acGearsRpmTitle">RPM vs SPEED (km/h)</span>
+                    <span id="acGearsRedlineTitle" style="color: #ef4444;">REDLINE: 7200 RPM</span>
                   </div>
                   <canvas id="acGearsCanvas" width="380" height="190" style="width: 100%; max-width: 420px; height: 190px;"></canvas>
                 </div>
@@ -563,7 +599,7 @@
                 <div class="ac-ctrl-unit">
                   <button class="ac-btn-step" onclick="stepAcParam('fuel', -1)">&lt;</button>
                   <div class="ac-slider-body">
-                    <span class="ac-ctrl-label">Fuel (Ilość paliwa)</span>
+                    <span class="ac-ctrl-label" id="acLblFuel">Fuel Load</span>
                     <div class="ac-ctrl-slider-wrap">
                       <input type="range" class="ac-range-input" id="acSlider_fuel" min="5" max="70" step="1" value="30" oninput="onAcSliderInput('fuel', this.value)">
                     </div>
@@ -587,7 +623,7 @@
 
             <!-- 4. ALIGNMENT PANE -->
             <div class="ac-pane" id="pane-alignment">
-              <div style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">PRZÓD (FRONT ALIGNMENT - CAMBER & TOE)</div>
+              <div id="acHdrAlignFront" style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">FRONT ALIGNMENT (CAMBER & TOE)</div>
               <div class="ac-controls-grid-2">
                 <!-- Camber LF -->
                 <div class="ac-ctrl-unit">
@@ -595,7 +631,7 @@
                   <div class="ac-slider-body">
                     <span class="ac-ctrl-label">Camber LF*</span>
                     <div class="ac-ctrl-slider-wrap">
-                      <input type="range" class="ac-range-input" id="acSlider_camberLF" min="-7.0" max="0.0" step="0.1" value="-5.0" oninput="onAcSliderInput('camberLF', this.value)">
+                      <input type="range" class="ac-range-input" id="acSlider_camberLF" min="-11.0" max="10.0" step="0.1" value="-5.0" oninput="onAcSliderInput('camberLF', this.value)">
                     </div>
                     <span class="ac-ctrl-val-display" id="acVal_camberLF">-5.0°</span>
                   </div>
@@ -608,7 +644,7 @@
                   <div class="ac-slider-body">
                     <span class="ac-ctrl-label">Camber RF*</span>
                     <div class="ac-ctrl-slider-wrap">
-                      <input type="range" class="ac-range-input" id="acSlider_camberRF" min="-7.0" max="0.0" step="0.1" value="-5.0" oninput="onAcSliderInput('camberRF', this.value)">
+                      <input type="range" class="ac-range-input" id="acSlider_camberRF" min="-11.0" max="10.0" step="0.1" value="-5.0" oninput="onAcSliderInput('camberRF', this.value)">
                     </div>
                     <span class="ac-ctrl-val-display" id="acVal_camberRF">-5.0°</span>
                   </div>
@@ -642,7 +678,7 @@
                 </div>
               </div>
 
-              <div style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">TYŁ (REAR ALIGNMENT - CAMBER & TOE)</div>
+              <div id="acHdrAlignRear" style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">REAR ALIGNMENT (CAMBER & TOE)</div>
               <div class="ac-controls-grid-2">
                 <!-- Camber LR -->
                 <div class="ac-ctrl-unit">
@@ -650,7 +686,7 @@
                   <div class="ac-slider-body">
                     <span class="ac-ctrl-label">Camber LR*</span>
                     <div class="ac-ctrl-slider-wrap">
-                      <input type="range" class="ac-range-input" id="acSlider_camberLR" min="-4.0" max="1.0" step="0.1" value="-0.8" oninput="onAcSliderInput('camberLR', this.value)">
+                      <input type="range" class="ac-range-input" id="acSlider_camberLR" min="-11.0" max="10.0" step="0.1" value="-0.8" oninput="onAcSliderInput('camberLR', this.value)">
                     </div>
                     <span class="ac-ctrl-val-display" id="acVal_camberLR">-0.8°</span>
                   </div>
@@ -663,7 +699,7 @@
                   <div class="ac-slider-body">
                     <span class="ac-ctrl-label">Camber RR</span>
                     <div class="ac-ctrl-slider-wrap">
-                      <input type="range" class="ac-range-input" id="acSlider_camberRR" min="-4.0" max="1.0" step="0.1" value="-0.8" oninput="onAcSliderInput('camberRR', this.value)">
+                      <input type="range" class="ac-range-input" id="acSlider_camberRR" min="-11.0" max="10.0" step="0.1" value="-0.8" oninput="onAcSliderInput('camberRR', this.value)">
                     </div>
                     <span class="ac-ctrl-val-display" id="acVal_camberRR">-0.8°</span>
                   </div>
@@ -711,7 +747,7 @@
 
             <!-- 5. DAMPERS PANE -->
             <div class="ac-pane" id="pane-dampers">
-              <div style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 2px;">PRZÓD (FRONT DAMPER SETTINGS)</div>
+              <div id="acHdrDampFront" style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 2px;">FRONT DAMPERS (BUMP & REBOUND)</div>
               <div class="ac-controls-grid-2">
                 <!-- Bump F -->
                 <div class="ac-ctrl-unit">
@@ -814,7 +850,7 @@
                 </div>
               </div>
 
-              <div style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 2px;">TYŁ (REAR DAMPER SETTINGS)</div>
+              <div id="acHdrDampRear" style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 2px;">REAR DAMPERS (BUMP & REBOUND)</div>
               <div class="ac-controls-grid-2">
                 <!-- Bump R -->
                 <div class="ac-ctrl-unit">
@@ -1028,7 +1064,7 @@
 
             <!-- 8. SUSPENSION PANE -->
             <div class="ac-pane" id="pane-suspension">
-              <div style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">PRZÓD (FRONT SUSPENSION - ARB, SPRĘŻYNY, PRZEŚWIT)</div>
+              <div id="acHdrSuspFront" style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">FRONT SUSPENSION (ARB, SPRINGS, RIDE HEIGHT)</div>
               <!-- ARB Front -->
               <div style="display: flex; justify-content: center; margin-bottom: 12px;">
                 <div class="ac-ctrl-unit" style="width: 100%; max-width: 440px;">
@@ -1098,7 +1134,7 @@
                 </div>
               </div>
 
-              <div style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">TYŁ (REAR SUSPENSION - ARB, SPRĘŻYNY, PRZEŚWIT)</div>
+              <div id="acHdrSuspRear" style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">REAR SUSPENSION (ARB, SPRINGS, RIDE HEIGHT)</div>
               <!-- ARB Rear -->
               <div style="display: flex; justify-content: center; margin-bottom: 12px;">
                 <div class="ac-ctrl-unit" style="width: 100%; max-width: 440px;">
@@ -1185,11 +1221,11 @@
               <div class="ac-summary-wrap">
                 <div class="ac-telem-header-box">
                   <div>
-                    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan); letter-spacing: 0.08em;">VEHICLE CHASSIS TELEMETRY</div>
+                    <div id="acTelemSubHdr" style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan); letter-spacing: 0.08em;">VEHICLE CHASSIS TELEMETRY</div>
                     <div class="ac-telem-car-title" id="acTelemCarTitle">Uniwersalny Setup Telemetrii (Wczytaj .ini)</div>
                   </div>
                   <div style="display: flex; gap: 8px;">
-                    <span class="badge-ac-sync" id="acTelemBadge" style="background: rgba(0,210,255,0.15); border-color: rgba(0,210,255,0.4); color: var(--cyan);">
+                    <span class="badge-ac-sync" id="acTelemBadge" style="background: rgba(220,38,38,0.16); border-color: rgba(239,68,68,0.45); color: #ff4d5a;">
                       Assetto Corsa Physics
                     </span>
                   </div>
@@ -1199,15 +1235,15 @@
                 <table class="ac-telem-table">
                   <thead>
                     <tr>
-                      <th style="width: 32%;">Parametr</th>
-                      <th style="width: 26%;">Left</th>
+                      <th style="width: 32%;" id="acThParam">Parameter</th>
+                      <th style="width: 26%;" id="acThLeft">Left</th>
                       <th style="width: 16%;">Σ / Δ</th>
-                      <th style="width: 26%;">Right</th>
+                      <th style="width: 26%;" id="acThRight">Right</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="ac-telem-axle-hdr">
-                      <td colspan="4">PRZÓD (FRONT AXLE)</td>
+                      <td colspan="4" id="acHdrSumFront">FRONT AXLE</td>
                     </tr>
                     <tr>
                       <td>Toe (°)</td>
@@ -1249,15 +1285,15 @@
                 <table class="ac-telem-table">
                   <thead>
                     <tr>
-                      <th style="width: 32%;">Parametr</th>
-                      <th style="width: 26%;">Left</th>
+                      <th style="width: 32%;" id="acThParam">Parameter</th>
+                      <th style="width: 26%;" id="acThLeft">Left</th>
                       <th style="width: 16%;">Σ / Δ</th>
-                      <th style="width: 26%;">Right</th>
+                      <th style="width: 26%;" id="acThRight">Right</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="ac-telem-axle-hdr">
-                      <td colspan="4">TYŁ (REAR AXLE)</td>
+                      <td colspan="4" id="acHdrSumRear">REAR AXLE</td>
                     </tr>
                     <tr>
                       <td>Toe (°)</td>
@@ -1286,6 +1322,77 @@
               </div>
             </div>
 
+          </div>
+
+          <!-- RIGHT COLUMN: SIDE-BY-SIDE REAL 3D SILVIA S15 AC GARAGE VIEWPORT -->
+          <div class="ac-garage-3d-panel" id="s15GarageWidget">
+            <div class="s15-embed-hdr" style="margin-bottom: 2px;">
+              <div class="s15-embed-title">
+                <span>🏎️</span>
+                <span id="ac3dPanelTitle">SILVIA S15 • LIVE SETUP 3D</span>
+              </div>
+              <a href="index2.html" class="s15-mini-btn" style="text-decoration: none; border-color: rgba(239,68,68,0.45); color: #ff4d5a;">↗ Full 3D</a>
+            </div>
+            <div class="s15-stage-frame">
+              <div class="s15-stage-hud-tl">
+                <div class="s15-stage-pill" id="s15GarageHudGeo">CAMBER F/R: <strong>-5.0° / -0.8°</strong></div>
+                <div class="s15-stage-pill" id="s15GarageHudSpec">PSI: <strong>21/17</strong> • FUEL: <strong>30L</strong> • H: <strong>60/70</strong></div>
+              </div>
+              <div class="s15-stage-cams">
+                <button class="s15-mini-btn active" id="garageCam_hero" onclick="setS15ViewportCam('garage','hero')">3/4</button>
+                <button class="s15-mini-btn" id="garageCam_front" onclick="setS15ViewportCam('garage','front')">Przód</button>
+                <button class="s15-mini-btn" id="garageCam_rear" onclick="setS15ViewportCam('garage','rear')">Tył</button>
+                <button class="s15-mini-btn" id="garageCam_side" onclick="setS15ViewportCam('garage','side')">Bok</button>
+                <button class="s15-mini-btn" id="garageCam_top" onclick="setS15ViewportCam('garage','top')">Góra</button>
+                <button class="s15-mini-btn" id="garageCam_wheel" onclick="setS15ViewportCam('garage','wheel')">Koło</button>
+              </div>
+              <div class="s15-stage-mount" id="s15StageGarage"></div>
+              <div class="s15-stage-fx">
+                <button class="s15-mini-btn" id="garageFxCad" onclick="toggleS15ViewportRender('garage','cad')">📐 CAD</button>
+                <button class="s15-mini-btn" id="garageFxWheelsOnly" onclick="toggleS15WheelsOnly('garage')">🎯 Same Koła</button>
+                <button class="s15-mini-btn" id="garageFxAuto" onclick="toggleS15ViewportAuto('garage')">🔄</button>
+                <button class="s15-mini-btn" id="garageFxSpin" onclick="toggleS15ViewportSpin('garage')">🛞 Kręć</button>
+              </div>
+            </div>
+
+            <!-- Live Dampers & Suspension Physics Test Bar -->
+            <div class="s15-test-bar">
+              <div class="s15-test-hdr" style="flex-wrap: wrap; gap: 6px;">
+                <span id="lblAc3dTestBar">🔧 Test Amortyzatorów &amp; Zawieszenia:</span>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span id="s15SuspTestStatus" style="font-family:var(--font-mono); font-size:10.5px; color:#fca5a5;">ARB 12000/4000 • Sprężyny 117/67</span>
+                  <button class="s15-mini-btn" id="btnSuspPlayLoop" onclick="toggleAcSuspLoop()" style="border-color: rgba(239,68,68,0.55); color:#ff4d5a;">▶ Play</button>
+                </div>
+              </div>
+              <div class="s15-test-btns">
+                <button class="s15-test-btn" id="btnSuspTestBump" onclick="triggerAcSuspTest('bump')">〰️ Tarka / Wybój</button>
+                <button class="s15-test-btn" id="btnSuspTestRoll" onclick="triggerAcSuspTest('roll')">↪️ Przechył (ARB)</button>
+                <button class="s15-test-btn" id="btnSuspTestPitch" onclick="triggerAcSuspTest('pitch')">🛑 Hamowanie / Squat</button>
+              </div>
+            </div>
+
+            <div class="slider-group" style="margin: 2px 0;">
+              <div class="slider-header" style="margin-bottom: 4px;">
+                <span class="slider-label" style="font-size: 12px;" id="lblAc3dSteerPreview">Podgląd Skrętu Kół (Steer):</span>
+                <span class="slider-val" style="font-size: 12px;" id="valAc3dSteerPreview">0.0°</span>
+              </div>
+              <input type="range" id="ac3dSteerPreview" min="-68" max="68" step="1" value="0" oninput="updateS15Viewports()">
+            </div>
+
+            <div class="s15-subbar">
+              <div style="display:flex; align-items:center; gap:5px;">
+                <span id="lblAc3dPaint">Lakier:</span>
+                <button class="s15-swatch-mini active" style="background:#0d0d12;" onclick="setS15ViewportPaint(0x0d0d12,this)"></button>
+                <button class="s15-swatch-mini" style="background:#b91c1c;" onclick="setS15ViewportPaint(0xb91c1c,this)"></button>
+                <button class="s15-swatch-mini" style="background:#e5e7eb;" onclick="setS15ViewportPaint(0xe5e7eb,this)"></button>
+              </div>
+              <div style="display:flex; align-items:center; gap:5px;">
+                <span id="lblAc3dRim">Felgi:</span>
+                <button class="s15-swatch-mini active" style="background:#dc2626;" onclick="setS15ViewportRim(0xdc2626,this)"></button>
+                <button class="s15-swatch-mini" style="background:#b45309;" onclick="setS15ViewportRim(0xb45309,this)"></button>
+                <button class="s15-swatch-mini" style="background:#eab308;" onclick="setS15ViewportRim(0xeab308,this)"></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1609,8 +1716,6 @@ Rumble effects:          0%    (Prevents motor vibration shaking analog stick)</
           </p>
         </div>
       </div>
-
-      </div>
     </section>
 
     <!-- TAB 5: Extra Features & Aids (NO Tyre Smoke) -->
@@ -1667,8 +1772,6 @@ Rumble effects:          0%    (Prevents motor vibration shaking analog stick)</
             </div>
           </div>
         </div>
-      </div>
-
       </div>
     </section>
 
@@ -1732,8 +1835,6 @@ Rumble effects:          0%    (Prevents motor vibration shaking analog stick)</
           💡 How to enable in game: Move mouse to the right edge of the screen, open the Apps tray, click 'Gamepad Overlay', and pin it anywhere on your screen for streaming or learning!
         </div>
       </div>
-
-      </div>
     </section>
 
     <!-- TAB 7: CarX to AC Drift Guide -->
@@ -1789,8 +1890,6 @@ Rumble effects:          0%    (Prevents motor vibration shaking analog stick)</
           <strong style="color: #fff;" data-i18n="faq2Q">Q: Does this require any DLL injection or CarX files?</strong>
           <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;" data-i18n="faq2A">A: Zero DLLs! It is written in 100% pure CSP Lua and Python. It is completely safe, zero ban risk, and does not require CarX Drift Racing Online to be installed.</p>
         </div>
-      </div>
-
       </div>
     </section>
 
@@ -1877,8 +1976,9 @@ Rumble effects:          0%    (Prevents motor vibration shaking analog stick)</
 
   <div id="toast">Setup copied to clipboard!</div>
 
-  <!-- Local Three.js script -->
+  <!-- Local Three.js + Real Blender Nissan Silvia S15 Mesh -->
   <script src="three.min.js"></script>
+  <script src="s15_real_mesh.js"></script>
   <!-- Main Application Script -->
   <script src="app.js"></script>
 </body>

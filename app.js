@@ -93,8 +93,8 @@ const translations = {
     recDamp: "Drift Damping:",
     recCenter: "Speed Centering:",
 
-    gen3DTitle: "Interactive 3D Car & Drift Response",
-    lblGenTestAngle: "Test Drift Angle (Manual Pose):",
+    gen3DTitle: "Nissan Silvia S15 • Live Drift Lock 3D",
+    lblGenTestAngle: "Test Drift / Countersteer Angle:",
     diagTitle: "Live Setup Stability Diagnosis",
     diagEngineLbl: "Physics Engine:",
     diagStyleLbl: "Handling Style:",
@@ -415,8 +415,8 @@ const translations = {
     recDamp: "Tłumienie Drgań:",
     recCenter: "Centrowanie Prędkością:",
 
-    gen3DTitle: "Interaktywne Auto 3D & Reakcja na Setup",
-    lblGenTestAngle: "Kąt Testowy Driftu (Ustawienie Płynne):",
+    gen3DTitle: "Nissan Silvia S15 • Live Drift Lock 3D",
+    lblGenTestAngle: "Kąt Testowy Kontry / Driftu S15:",
     diagTitle: "Diagnoza Stabilności Setupu na Żywo",
     diagEngineLbl: "Silnik Fizyki:",
     diagStyleLbl: "Styl Prowadzenia:",
@@ -680,7 +680,7 @@ const translations = {
 function updateAcWorkflowLang(lang) {
   const isPl = (lang === 'pl');
 
-  // Garage topbar
+  // 1. Garage topbar
   const elBadge = document.getElementById('acBadgeReadout');
   if (elBadge) {
     elBadge.innerHTML = `<span class="pulse-dot"></span> ` + (isPl ? `1:1 Odczyt z Gry` : `1:1 Live Game Readout`);
@@ -704,7 +704,7 @@ function updateAcWorkflowLang(lang) {
     elBtnSync.innerHTML = isPl ? `🔄 Zsynchronizuj z CarX` : `🔄 Sync with CarX`;
   }
 
-  // Workflow Guide box
+  // 2. Workflow Guide box
   const elWfHeader = document.getElementById('acWfHeader');
   if (elWfHeader) {
     elWfHeader.textContent = isPl ?
@@ -739,10 +739,10 @@ function updateAcWorkflowLang(lang) {
   if (elCard2Body) {
     elCard2Body.innerHTML = isPl ?
       `• Dostosuj ciśnienia opon, przełożenia skrzyni i sztywność amortyzatorów (suwaki automatycznie synchronizują symetrię lewej i prawej strony LF/RF i LR/RR).<br>` +
-      `• Gdy setup jest gotowy, kliknij pomarańczowy przycisk <strong>„💾 Pobierz plik .ini dla AC”</strong>.<br>` +
+      `• Gdy setup jest gotowy, kliknij przycisk <strong>„💾 Pobierz plik .ini”</strong> powyżej.<br>` +
       `• Przeglądarka pobierze gotowy plik konfiguracyjny <code style="color:#22c55e; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code>.` :
       `• Adjust tyre pressures, gear ratios, and damper stiffness (sliders automatically synchronize left/right axle symmetry LF/RF & LR/RR).<br>` +
-      `• When your setup is tuned, click the orange <strong>"💾 Download .ini file for AC"</strong> button.<br>` +
+      `• When your setup is tuned, click the <strong>"💾 Download .ini file"</strong> button above.<br>` +
       `• The browser will generate and download <code style="color:#22c55e; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code>.`;
   }
 
@@ -753,11 +753,11 @@ function updateAcWorkflowLang(lang) {
   const elCard3Body = document.getElementById('acWfCard3Body');
   if (elCard3Body) {
     elCard3Body.innerHTML = isPl ?
-      `• <strong>Setup auta:</strong> Przenieś pobrany plik <code style="color:#f59e0b; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code> do folderu:<br>` +
+      `• <strong>Setup auta:</strong> Przenieś pobrany plik <code style="color:#fca5a5; background: rgba(0,0,0,0.45); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code> do folderu:<br>` +
       `<code style="display:inline-block; margin-top:2px; font-size:11px; background:rgba(0,0,0,0.5); padding:2px 6px; border-radius:4px; color:#f8fafc;">Dokumenty\\Assetto Corsa\\setups\\&lt;auto&gt;\\generic\\</code><br>` +
       `W grze w Pitstopie wejdź w <strong>Setup ➔ Load ➔ generic</strong> i wybierz <strong>last_carx</strong>.<br>` +
       `• <strong>Asysta kierowania (Gamepad FX):</strong> W Content Managerze (<em>Settings ➔ Controls ➔ Gamepad FX</em>) upewnij się, że aktywny jest skrypt <strong>CarX Assist</strong>.` :
-      `• <strong>Car Setup:</strong> Move the downloaded <code style="color:#f59e0b; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code> into:<br>` +
+      `• <strong>Car Setup:</strong> Move the downloaded <code style="color:#fca5a5; background: rgba(0,0,0,0.45); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code> into:<br>` +
       `<code style="display:inline-block; margin-top:2px; font-size:11px; background:rgba(0,0,0,0.5); padding:2px 6px; border-radius:4px; color:#f8fafc;">Documents\\Assetto Corsa\\setups\\&lt;car&gt;\\generic\\</code><br>` +
       `In the in-game Pitstop go to <strong>Setup ➔ Load ➔ generic</strong> and select <strong>last_carx</strong>.<br>` +
       `• <strong>Steering Assist (Gamepad FX):</strong> In Content Manager (<em>Settings ➔ Controls ➔ Gamepad FX</em>) ensure <strong>CarX Assist</strong> script is enabled.`;
@@ -779,22 +779,136 @@ function updateAcWorkflowLang(lang) {
       `<strong>1. Gdzie są ustawienia sterowania na stronie WWW?</strong><br>` +
       `W zakładce u góry: <strong>🛠️ Setup Generator & Presets</strong> masz suwaki skrętu (Kąt skrętu 50°–75°, Autocatch Ratio, Stabilizacja yaw, Płynność kontry, Anti-spin). Możesz tam kliknąć <strong>„💾 Pobierz plik assist.lua”</strong> lub <strong>„📋 Kopiuj kod do schowka”</strong>.<br><br>` +
       `<strong>2. Gdzie wkleić / wczytać do skryptu CarX Assist w grze?</strong><br>` +
-      `Plik <code style="color:#c084fc; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">assist.lua</code> oraz <code style="color:#c084fc; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">settings.ini</code> znajdują się w folderze gry:<br>` +
-      `<code style="display:inline-block; margin: 3px 0; background:rgba(0,0,0,0.5); padding:2px 8px; border-radius:4px; color:#f8fafc; font-family:var(--font-mono);">assettocorsa\\extension\\lua\\joypad-assist\\carx_assist\\assist.lua</code><br>` +
+      `Plik <code style="color:#fca5a5; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">assist.lua</code> oraz <code style="color:#fca5a5; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">settings.ini</code> znajdują się w folderze gry:<br>` +
+      `<code style="display:inline-block; margin: 3px 0; background:rgba(0,0,0,0.55); padding:2px 8px; border-radius:4px; color:#f8fafc; font-family:var(--font-mono);">assettocorsa\\extension\\lua\\joypad-assist\\carx_assist\\assist.lua</code><br>` +
       `Gdy podmienisz ten plik, gra od razu wystartuje z Twoją nową fizyką sterowania.<br><br>` +
       `<strong>3. Gdzie zapisują się ustawienia z Content Managera i podczas jazdy?</strong><br>` +
-      `• <strong>Ustawienia pada (CM):</strong> <em>Settings ➔ Controls ➔ Gamepad</em> zapisują się w <code style="color:#38bdf8; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">Documents\\Assetto Corsa\\cfg\\controls.ini</code>.<br>` +
-      `• <strong>Ustawienia skryptu na żywo:</strong> W grze po prawej stronie włącz aplikację <strong>CarXGamepad</strong>. Zmiany suwaków w grze zapisują się automatycznie w <code style="color:#38bdf8; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">Documents\\Assetto Corsa\\cfg\\extension\\joypad-assist\\carx_assist.ini</code>.` :
+      `• <strong>Ustawienia pada (CM):</strong> <em>Settings ➔ Controls ➔ Gamepad</em> zapisują się w <code style="color:#ff6b7a; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">Documents\\Assetto Corsa\\cfg\\controls.ini</code>.<br>` +
+      `• <strong>Ustawienia skryptu na żywo:</strong> W grze po prawej stronie włącz aplikację <strong>CarXGamepad</strong>. Zmiany suwaków w grze zapisują się automatycznie w <code style="color:#ff6b7a; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">Documents\\Assetto Corsa\\cfg\\extension\\joypad-assist\\carx_assist.ini</code>.` :
       `<strong>1. Where are steering settings on the web portal?</strong><br>` +
       `In the top navigation tab: <strong>🛠️ Setup Generator & Presets</strong> you will find all gamepad steering controls (Steering lock 50°–75°, Autocatch Ratio, Yaw stabilization, Countersteer smoothness, Anti-spin). You can click <strong>"💾 Download assist.lua file"</strong> or <strong>"📋 Copy code to clipboard"</strong>.<br><br>` +
       `<strong>2. Where to paste / load into the CarX Assist script in Assetto Corsa?</strong><br>` +
-      `<code style="color:#c084fc; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">assist.lua</code> and <code style="color:#c084fc; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">settings.ini</code> reside in the AC directory:<br>` +
-      `<code style="display:inline-block; margin: 3px 0; background:rgba(0,0,0,0.5); padding:2px 8px; border-radius:4px; color:#f8fafc; font-family:var(--font-mono);">assettocorsa\\extension\\lua\\joypad-assist\\carx_assist\\assist.lua</code><br>` +
+      `<code style="color:#fca5a5; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">assist.lua</code> and <code style="color:#fca5a5; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">settings.ini</code> reside in the AC directory:<br>` +
+      `<code style="display:inline-block; margin: 3px 0; background:rgba(0,0,0,0.55); padding:2px 8px; border-radius:4px; color:#f8fafc; font-family:var(--font-mono);">assettocorsa\\extension\\lua\\joypad-assist\\carx_assist\\assist.lua</code><br>` +
       `Replacing this file applies your custom steering physics immediately in-game.<br><br>` +
       `<strong>3. Where do Content Manager and in-game adjustments save?</strong><br>` +
-      `• <strong>Gamepad Settings (CM):</strong> <em>Settings ➔ Controls ➔ Gamepad</em> are saved in <code style="color:#38bdf8; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">Documents\\Assetto Corsa\\cfg\\controls.ini</code>.<br>` +
-      `• <strong>Live In-Game Script Settings:</strong> Open the <strong>CarXGamepad</strong> app on the right in-game HUD. Changes made via in-game sliders are saved automatically in <code style="color:#38bdf8; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">Documents\\Assetto Corsa\\cfg\\extension\\joypad-assist\\carx_assist.ini</code>.`;
+      `• <strong>Gamepad Settings (CM):</strong> <em>Settings ➔ Controls ➔ Gamepad</em> are saved in <code style="color:#ff6b7a; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">Documents\\Assetto Corsa\\cfg\\controls.ini</code>.<br>` +
+      `• <strong>Live In-Game Script Settings:</strong> Open the <strong>CarXGamepad</strong> app on the right in-game HUD. Changes made via in-game sliders are saved automatically in <code style="color:#ff6b7a; background:rgba(0,0,0,0.45); padding:1px 5px; border-radius:3px;">Documents\\Assetto Corsa\\cfg\\extension\\joypad-assist\\carx_assist.ini</code>.`;
   }
+
+  // 3. Section Headers (Alignment, Dampers, Suspension, Summary) - 100% pure EN or PL!
+  const hAlignF = document.getElementById('acHdrAlignFront');
+  if (hAlignF) hAlignF.textContent = isPl ? 'GEOMETRIA PRZÓD (POCHYLENIE & ZBIEŻNOŚĆ)' : 'FRONT ALIGNMENT (CAMBER & TOE)';
+  const hAlignR = document.getElementById('acHdrAlignRear');
+  if (hAlignR) hAlignR.textContent = isPl ? 'GEOMETRIA TYŁ (POCHYLENIE & ZBIEŻNOŚĆ)' : 'REAR ALIGNMENT (CAMBER & TOE)';
+
+  const hDampF = document.getElementById('acHdrDampFront');
+  if (hDampF) hDampF.textContent = isPl ? 'AMORTYZATORY PRZÓD (ŚCISKANIE & ODBICIE)' : 'FRONT DAMPERS (BUMP & REBOUND)';
+  const hDampR = document.getElementById('acHdrDampRear');
+  if (hDampR) hDampR.textContent = isPl ? 'AMORTYZATORY TYŁ (ŚCISKANIE & ODBICIE)' : 'REAR DAMPERS (BUMP & REBOUND)';
+
+  const hSuspF = document.getElementById('acHdrSuspFront');
+  if (hSuspF) hSuspF.textContent = isPl ? 'ZAWIESZENIE PRZÓD (STABILIZATOR, SPRĘŻYNY, PRZEŚWIT)' : 'FRONT SUSPENSION (ARB, SPRINGS, RIDE HEIGHT)';
+  const hSuspR = document.getElementById('acHdrSuspRear');
+  if (hSuspR) hSuspR.textContent = isPl ? 'ZAWIESZENIE TYŁ (STABILIZATOR, SPRĘŻYNY, PRZEŚWIT)' : 'REAR SUSPENSION (ARB, SPRINGS, RIDE HEIGHT)';
+
+  const hSumF = document.getElementById('acHdrSumFront');
+  if (hSumF) hSumF.textContent = isPl ? 'OŚ PRZEDNIA' : 'FRONT AXLE';
+  const hSumR = document.getElementById('acHdrSumRear');
+  if (hSumR) hSumR.textContent = isPl ? 'OŚ TYLNA' : 'REAR AXLE';
+
+  // 4. Fuel Label
+  const lblFuel = document.getElementById('acLblFuel');
+  if (lblFuel) lblFuel.textContent = isPl ? 'Ilość paliwa' : 'Fuel Load';
+
+  // 5. Telemetry & Summary Table Headers
+  const telemSub = document.getElementById('acTelemSubHdr');
+  if (telemSub) telemSub.textContent = isPl ? 'TELEMETRIA PODWOZIA POJAZDU' : 'VEHICLE CHASSIS TELEMETRY';
+  const telemCar = document.getElementById('acTelemCarTitle');
+  if (telemCar && !acSetupState._customCarLoaded) {
+    telemCar.textContent = isPl ? 'Uniwersalny Setup Telemetrii (Wczytaj .ini)' : 'Universal Telemetry Setup (Load .ini)';
+  }
+  const telemBadge = document.getElementById('acTelemBadge');
+  if (telemBadge) telemBadge.textContent = isPl ? 'Fizyka Assetto Corsa' : 'Assetto Corsa Physics';
+
+  const thParam = document.getElementById('acThParam');
+  if (thParam) thParam.textContent = isPl ? 'Parametr' : 'Parameter';
+  const thLeft = document.getElementById('acThLeft');
+  if (thLeft) thLeft.textContent = isPl ? 'Lewy' : 'Left';
+  const thRight = document.getElementById('acThRight');
+  if (thRight) thRight.textContent = isPl ? 'Prawy' : 'Right';
+
+  // 6. Sidebar Tabs
+  const tabLoad = document.getElementById('acTabLbl_load');
+  if (tabLoad) tabLoad.textContent = isPl ? 'Wczytaj' : 'Load';
+  const tabGears = document.getElementById('acTabLbl_gears');
+  if (tabGears) tabGears.textContent = isPl ? 'Skrzynia' : 'Gears';
+  const tabTyres = document.getElementById('acTabLbl_tyres');
+  if (tabTyres) tabTyres.textContent = isPl ? 'Opony' : 'Tyres';
+  const tabFuel = document.getElementById('acTabLbl_fuel');
+  if (tabFuel) tabFuel.textContent = isPl ? 'Paliwo' : 'Fuel';
+  const tabAlign = document.getElementById('acTabLbl_alignment');
+  if (tabAlign) tabAlign.textContent = isPl ? 'Geometria' : 'Alignment';
+  const tabDamp = document.getElementById('acTabLbl_dampers');
+  if (tabDamp) tabDamp.textContent = isPl ? 'Amortyzatory' : 'Dampers';
+  const tabDiff = document.getElementById('acTabLbl_drivetrain');
+  if (tabDiff) tabDiff.textContent = isPl ? 'Napęd' : 'Drivetrain';
+  const tabGen = document.getElementById('acTabLbl_generic');
+  if (tabGen) tabGen.textContent = isPl ? 'Hamulce' : 'Generic';
+  const tabSusp = document.getElementById('acTabLbl_suspension');
+  if (tabSusp) tabSusp.textContent = isPl ? 'Zawieszenie' : 'Suspension';
+  const tabSum = document.getElementById('acTabLbl_summary');
+  if (tabSum) tabSum.textContent = isPl ? 'Podsumowanie' : 'Summary';
+
+  // 7. Gears Table & Chart
+  const thGear = document.getElementById('acThGear');
+  if (thGear) thGear.textContent = isPl ? 'Bieg' : 'Gear';
+  const thSpeed = document.getElementById('acThSpeed');
+  if (thSpeed) thSpeed.textContent = isPl ? 'V-Max (km/h)' : 'Top speed (km/h)';
+  const lblFR = document.getElementById('acLblFinalRatio');
+  if (lblFR) lblFR.textContent = isPl ? 'Przełożenie główne (Final Drive)' : 'Final Gear Ratio';
+  const rpmTitle = document.getElementById('acGearsRpmTitle');
+  if (rpmTitle) rpmTitle.textContent = isPl ? 'OBROTY vs PRĘDKOŚĆ (km/h)' : 'RPM vs SPEED (km/h)';
+  const redTitle = document.getElementById('acGearsRedlineTitle');
+  if (redTitle) redTitle.textContent = isPl ? 'ODCINA: 7200 RPM' : 'REDLINE: 7200 RPM';
+
+  // 8. Embedded S15 3D Panels (Generator & AC Garage)
+  const camLabelsPl = { hero: '3/4', front: 'Przód', rear: 'Tył', side: 'Bok', top: 'Góra', wheel: 'Koło' };
+  const camLabelsEn = { hero: '3/4', front: 'Front', rear: 'Rear', side: 'Side', top: 'Top', wheel: 'Wheel' };
+  const cMap = isPl ? camLabelsPl : camLabelsEn;
+  ['gen', 'garage'].forEach((prefix) => {
+    Object.keys(cMap).forEach((k) => {
+      const btn = document.getElementById(`${prefix}Cam_${k}`);
+      if (btn) btn.textContent = cMap[k];
+    });
+    const cadBtn = document.getElementById(`${prefix}FxCad`);
+    if (cadBtn) cadBtn.textContent = isPl ? '📐 CAD' : '📐 CAD';
+    const spinBtn = document.getElementById(`${prefix}FxSpin`);
+    if (spinBtn) spinBtn.textContent = isPl ? '🛞 Kręć' : '🛞 Spin';
+    const woBtn = document.getElementById(`${prefix}FxWheelsOnly`);
+    if (woBtn) woBtn.textContent = isPl ? '🎯 Same Koła' : '🎯 Wheels Only';
+  });
+  const lblTest = document.getElementById('lblAc3dTestBar');
+  if (lblTest) lblTest.textContent = isPl ? '🔧 Test Amortyzatorów & Zawieszenia:' : '🔧 Dampers & Suspension Test:';
+  const bBump = document.getElementById('btnSuspTestBump');
+  if (bBump) bBump.textContent = isPl ? '〰️ Tarka / Wybój' : '〰️ Kerb / Bump';
+  const bRoll = document.getElementById('btnSuspTestRoll');
+  if (bRoll) bRoll.textContent = isPl ? '↪️ Przechył (ARB)' : '↪️ Corner Roll (ARB)';
+  const bPitch = document.getElementById('btnSuspTestPitch');
+  if (bPitch) bPitch.textContent = isPl ? '🛑 Hamowanie / Squat' : '🛑 Dive / Squat';
+  const bPlay = document.getElementById('btnSuspPlayLoop');
+  if (bPlay && s15Viewports.garage) {
+    const running = Boolean(s15Viewports.garage.phys.testLoop);
+    bPlay.textContent = running ? (isPl ? '⏸ Pauza' : '⏸ Pause') : '▶ Play';
+  }
+  const ac3dTitle = document.getElementById('ac3dPanelTitle');
+  if (ac3dTitle) ac3dTitle.textContent = isPl ? 'SILVIA S15 • SETUP 3D NA ŻYWO' : 'SILVIA S15 • LIVE SETUP 3D';
+  const lblSteerP = document.getElementById('lblAc3dSteerPreview');
+  if (lblSteerP) lblSteerP.textContent = isPl ? 'Podgląd Skrętu Kół (Steer):' : 'Wheel Steer Preview:';
+  const lblPaint = document.getElementById('lblAc3dPaint');
+  if (lblPaint) lblPaint.textContent = isPl ? 'Lakier:' : 'Paint:';
+  const lblRim = document.getElementById('lblAc3dRim');
+  if (lblRim) lblRim.textContent = isPl ? 'Felgi:' : 'Rims:';
 }
 
 function setLang(lang) {
@@ -1223,7 +1337,7 @@ function loadGenPreset(key) {
   }
 
   onGenSliderChange();
-  updateAcWorkflowLang(lang);
+  updateAcWorkflowLang(currentLang);
   initAcGarage();
 }
 
@@ -1237,7 +1351,8 @@ function onGenSliderChange() {
   const pred = parseFloat(document.getElementById('genPredGain').value);
   const gas = parseFloat(document.getElementById('genGasGamma').value);
   const brk = parseFloat(document.getElementById('genBrakeGamma').value);
-  const testAngle = parseFloat(document.getElementById('genTestAngle')?.value || -32.0);
+  const rawTestAngle = document.getElementById('genTestAngle')?.value;
+  const testAngle = (rawTestAngle !== undefined && rawTestAngle !== '') ? parseFloat(rawTestAngle) : 0;
 
   document.getElementById('valGenLock').textContent = lock.toFixed(1) + '°';
   document.getElementById('valGenKeep').textContent = keep + '%';
@@ -1254,6 +1369,7 @@ function onGenSliderChange() {
 
   updateStabilityDiagnosis();
   updateCarTuningRecommendations();
+  updateS15Viewports();
 }
 
 function updateStabilityDiagnosis() {
@@ -1864,665 +1980,762 @@ function onCalcSliderChange() {
   }
 }
 
-// --- View Modes (3D vs 2D) ---
-let currentViewModeCalc = '3d';
-let currentViewModeGen = '3d';
+// ==========================================================================
+// REAL BLENDER 3D NISSAN SILVIA S15 ENGINE (SHARED BY SETUP GEN & AC GARAGE)
+// ==========================================================================
 
-function setViewMode(mode, targetTab) {
-  if (targetTab === 'calc') {
-    currentViewModeCalc = mode;
-    document.getElementById('btnView3D_calc').classList.toggle('active', mode === '3d');
-    document.getElementById('btnView2D_calc').classList.toggle('active', mode === '2d');
-    document.getElementById('stage3D_calc').style.display = (mode === '3d') ? 'block' : 'none';
-    document.getElementById('canvas2D_calc').style.display = (mode === '2d') ? 'block' : 'none';
-  } else if (targetTab === 'gen') {
-    currentViewModeGen = mode;
-    document.getElementById('btnView3D_gen').classList.toggle('active', mode === '3d');
-    document.getElementById('btnView2D_gen').classList.toggle('active', mode === '2d');
-    document.getElementById('stage3D_gen').style.display = (mode === '3d') ? 'block' : 'none';
-    document.getElementById('canvas2D_gen').style.display = (mode === '2d') ? 'block' : 'none';
-  }
-}
+let _s15DecodedCache = null;
+function getDecodedS15Buffers() {
+  if (_s15DecodedCache) return _s15DecodedCache;
+  if (typeof window.S15_REAL_MESH === 'undefined') return null;
 
-// --- Clean 3D Three.js & 2D Canvas Engine ---
-
-let rendererCalc, sceneCalc, cameraCalc, carGroupCalc, frontLeftCalc, frontRightCalc, roadLinesCalc = [];
-let rendererGen, sceneGen, cameraGen, carGroupGen, frontLeftGen, frontRightGen, roadLinesGen = [];
-
-/**
- * Builds a high-fidelity sports drift coupe (Silvia S15 / GT86 / Supra aesthetic)
- * with widebody flared arches, front carbon splitter, intercooler, dual exhaust,
- * high-mount GT wing, 6-spoke concave TE37-style sports wheels with Brembo calipers.
- */
-function buildCarModel(accentColor) {
-  const group = new THREE.Group();
-
-  const paintColor = 0x111624; // Deep metallic midnight
-  const carbonColor = 0x090b10; // Dark matte carbon
-  const glassColor = 0x081018; // Tinted automotive glass
-  const chromeColor = 0xd8dde8; // Polished metal / aluminum
-  const caliperColor = 0xee1832; // Brembo racing red
-  const accentHex = accentColor || 0x00d2ff;
-
-  // Materials
-  const paintMat = new THREE.MeshStandardMaterial({
-    color: paintColor,
-    roughness: 0.28,
-    metalness: 0.72
-  });
-  const carbonMat = new THREE.MeshStandardMaterial({
-    color: carbonColor,
-    roughness: 0.55,
-    metalness: 0.35
-  });
-  const glassMat = new THREE.MeshStandardMaterial({
-    color: glassColor,
-    roughness: 0.12,
-    metalness: 0.88,
-    transparent: true,
-    opacity: 0.90
-  });
-  const chromeMat = new THREE.MeshStandardMaterial({
-    color: chromeColor,
-    roughness: 0.18,
-    metalness: 0.95
-  });
-  const accentMat = new THREE.MeshStandardMaterial({
-    color: accentHex,
-    emissive: accentHex,
-    emissiveIntensity: 0.65,
-    roughness: 0.3,
-    metalness: 0.8
-  });
-  const headlightMat = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    emissive: 0x99e5ff,
-    emissiveIntensity: 2.6
-  });
-  const taillightMat = new THREE.MeshStandardMaterial({
-    color: 0xff002b,
-    emissive: 0xff1533,
-    emissiveIntensity: 2.8
-  });
-  const brakeMat = new THREE.MeshStandardMaterial({
-    color: caliperColor,
-    roughness: 0.35,
-    metalness: 0.4
-  });
-  const rotorMat = new THREE.MeshStandardMaterial({
-    color: 0x828896,
-    roughness: 0.22,
-    metalness: 0.90
-  });
-  const tireMat = new THREE.MeshStandardMaterial({
-    color: 0x141518,
-    roughness: 0.90
-  });
-  const rimMat = new THREE.MeshStandardMaterial({
-    color: 0x222632,
-    roughness: 0.25,
-    metalness: 0.85
-  });
-
-  // 1. Lower Main Chassis
-  const mainChassis = new THREE.Mesh(new THREE.BoxGeometry(1.68, 0.34, 3.82), paintMat);
-  mainChassis.position.y = 0.36;
-  group.add(mainChassis);
-
-  // 2. Aerodynamic Slanted Hood
-  const hood = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.16, 1.38), paintMat);
-  hood.position.set(0, 0.47, -0.92);
-  hood.rotation.x = 0.055;
-  group.add(hood);
-
-  // 3. Front Bumper with Lower Intake & Intercooler
-  const bumperF = new THREE.Mesh(new THREE.BoxGeometry(1.66, 0.30, 0.44), paintMat);
-  bumperF.position.set(0, 0.32, -1.95);
-  group.add(bumperF);
-
-  // Front Carbon Splitter with End Winglets
-  const splitter = new THREE.Mesh(new THREE.BoxGeometry(1.78, 0.04, 0.58), carbonMat);
-  splitter.position.set(0, 0.16, -2.00);
-  group.add(splitter);
-
-  const wingletL = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.12, 0.22), carbonMat);
-  wingletL.position.set(-0.89, 0.21, -1.98);
-  group.add(wingletL);
-  const wingletR = wingletL.clone();
-  wingletR.position.x = 0.89;
-  group.add(wingletR);
-
-  // Front Intercooler inside lower air dam
-  const intercooler = new THREE.Mesh(new THREE.BoxGeometry(0.86, 0.18, 0.08), chromeMat);
-  intercooler.position.set(0, 0.25, -2.02);
-  group.add(intercooler);
-
-  // 4. Widebody Overfenders (Front & Rear flared drift arches)
-  const fenderFL = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.26, 0.95), paintMat);
-  fenderFL.position.set(-0.88, 0.40, -1.25);
-  group.add(fenderFL);
-  const fenderFR = fenderFL.clone();
-  fenderFR.position.x = 0.88;
-  group.add(fenderFR);
-
-  const fenderRL = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.28, 1.05), paintMat);
-  fenderRL.position.set(-0.89, 0.42, 1.25);
-  group.add(fenderRL);
-  const fenderRR = fenderRL.clone();
-  fenderRR.position.x = 0.89;
-  group.add(fenderRR);
-
-  // Side Skirts
-  const skirtL = new THREE.Mesh(new THREE.BoxGeometry(0.10, 0.12, 1.85), carbonMat);
-  skirtL.position.set(-0.87, 0.21, 0.0);
-  group.add(skirtL);
-  const skirtR = skirtL.clone();
-  skirtR.position.x = 0.87;
-  group.add(skirtR);
-
-  // 5. Greenhouse (Cabin, Raked Windshield & Fastback Rear Glass)
-  const windshield = new THREE.Mesh(new THREE.BoxGeometry(1.36, 0.05, 0.85), glassMat);
-  windshield.position.set(0, 0.74, -0.42);
-  windshield.rotation.x = 0.58;
-  group.add(windshield);
-
-  const roof = new THREE.Mesh(new THREE.BoxGeometry(1.32, 0.06, 1.28), paintMat);
-  roof.position.set(0, 0.96, 0.22);
-  group.add(roof);
-
-  const rearGlass = new THREE.Mesh(new THREE.BoxGeometry(1.30, 0.05, 0.92), glassMat);
-  rearGlass.position.set(0, 0.76, 1.05);
-  rearGlass.rotation.x = -0.52;
-  group.add(rearGlass);
-
-  const glassSideL = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.30, 1.30), glassMat);
-  glassSideL.position.set(-0.64, 0.76, 0.25);
-  group.add(glassSideL);
-  const glassSideR = glassSideL.clone();
-  glassSideR.position.x = 0.64;
-  group.add(glassSideR);
-
-  // Aero Door Mirrors
-  const mirrorL = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.08, 0.12), carbonMat);
-  mirrorL.position.set(-0.76, 0.68, -0.32);
-  group.add(mirrorL);
-  const mirrorR = mirrorL.clone();
-  mirrorR.position.x = 0.76;
-  group.add(mirrorR);
-
-  // 6. Rear Trunk & Bumper with Carbon Diffuser & Dual Exhaust
-  const trunk = new THREE.Mesh(new THREE.BoxGeometry(1.48, 0.16, 0.68), paintMat);
-  trunk.position.set(0, 0.52, 1.62);
-  group.add(trunk);
-
-  const bumperR = new THREE.Mesh(new THREE.BoxGeometry(1.64, 0.32, 0.42), paintMat);
-  bumperR.position.set(0, 0.35, 1.94);
-  group.add(bumperR);
-
-  // Rear Diffuser
-  const diffuser = new THREE.Mesh(new THREE.BoxGeometry(1.45, 0.08, 0.45), carbonMat);
-  diffuser.position.set(0, 0.18, 2.02);
-  group.add(diffuser);
-
-  // Dual Stainless Drift Exhaust Tips
-  const exhaustL = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.065, 0.32, 16), chromeMat);
-  exhaustL.rotation.x = Math.PI / 2 + 0.12;
-  exhaustL.rotation.y = -0.08;
-  exhaustL.position.set(-0.48, 0.20, 2.12);
-  group.add(exhaustL);
-
-  const exhaustR = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.065, 0.32, 16), chromeMat);
-  exhaustR.rotation.x = Math.PI / 2 + 0.12;
-  exhaustR.rotation.y = 0.08;
-  exhaustR.position.set(0.48, 0.20, 2.12);
-  group.add(exhaustR);
-
-  // 7. High-Mount Carbon GT Drift Wing Spoiler
-  const wingDeck = new THREE.Mesh(new THREE.BoxGeometry(1.78, 0.04, 0.36), carbonMat);
-  wingDeck.position.set(0, 1.08, 1.88);
-  wingDeck.rotation.x = 0.05;
-  group.add(wingDeck);
-
-  const wingEndL = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.22, 0.40), carbonMat);
-  wingEndL.position.set(-0.89, 1.08, 1.88);
-  group.add(wingEndL);
-  const wingEndR = wingEndL.clone();
-  wingEndR.position.x = 0.89;
-  group.add(wingEndR);
-
-  const mountL = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.42, 0.12), chromeMat);
-  mountL.position.set(-0.46, 0.86, 1.82);
-  mountL.rotation.x = -0.22;
-  group.add(mountL);
-  const mountR = mountL.clone();
-  mountR.position.x = 0.46;
-  group.add(mountR);
-
-  // 8. Sleek Projector Headlights
-  const headL = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.10, 0.12), headlightMat);
-  headL.position.set(-0.62, 0.45, -1.98);
-  headL.rotation.y = -0.15;
-  group.add(headL);
-  const headR = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.10, 0.12), headlightMat);
-  headR.position.set(0.62, 0.45, -1.98);
-  headR.rotation.y = 0.15;
-  group.add(headR);
-
-  // 9. Full-Width Glowing Ruby LED Taillight Bar
-  const tailBar = new THREE.Mesh(new THREE.BoxGeometry(1.44, 0.09, 0.08), taillightMat);
-  tailBar.position.set(0, 0.48, 2.05);
-  group.add(tailBar);
-
-  // 10. Wheels (Concave 6-Spoke TE37 Wheels with Rotors & Brembo Calipers)
-  function createDetailedWheel(isFront, isRight) {
-    const wGroup = new THREE.Group();
-
-    // Tire
-    const tire = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.29, 24), tireMat);
-    tire.rotation.z = Math.PI / 2;
-    wGroup.add(tire);
-
-    // Deep Dish Polished Rim Lip
-    const rimLip = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.30, 24), chromeMat);
-    rimLip.rotation.z = Math.PI / 2;
-    wGroup.add(rimLip);
-
-    // Concave Spokes Face
-    const spokeGroup = new THREE.Group();
-    for (let s = 0; s < 6; s++) {
-      const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.21, 0.03), accentMat);
-      spoke.position.y = 0.10;
-      spoke.rotation.z = (s * Math.PI) / 3;
-      spokeGroup.add(spoke);
+  const bundle = window.S15_REAL_MESH;
+  const decodeB64 = (b64) => {
+    if (typeof atob === 'function') {
+      const bin = atob(b64);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return bytes;
     }
-    spokeGroup.position.x = isRight ? 0.12 : -0.12;
-    wGroup.add(spokeGroup);
-
-    // Center Hub Cap
-    const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.065, 0.31, 16), rimMat);
-    hub.rotation.z = Math.PI / 2;
-    wGroup.add(hub);
-
-    // Ventilated Brake Rotor
-    const rotor = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.04, 20), rotorMat);
-    rotor.rotation.z = Math.PI / 2;
-    rotor.position.x = isRight ? -0.04 : 0.04;
-    wGroup.add(rotor);
-
-    // Brembo Red Brake Caliper
-    const caliper = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.14, 0.09), brakeMat);
-    caliper.position.set(isRight ? -0.04 : 0.04, 0.12, -0.08);
-    wGroup.add(caliper);
-
-    return wGroup;
-  }
-
-  // Front Left Wheel Pivot
-  const flPivot = new THREE.Group();
-  flPivot.position.set(-0.94, 0.34, -1.25);
-  const flWheel = createDetailedWheel(true, false);
-  flPivot.add(flWheel);
-  group.add(flPivot);
-
-  // Front Right Wheel Pivot
-  const frPivot = new THREE.Group();
-  frPivot.position.set(0.94, 0.34, -1.25);
-  const frWheel = createDetailedWheel(true, true);
-  frPivot.add(frWheel);
-  group.add(frPivot);
-
-  // Rear Wheels
-  const rlWheel = createDetailedWheel(false, false);
-  rlWheel.position.set(-0.95, 0.34, 1.25);
-  group.add(rlWheel);
-
-  const rrWheel = createDetailedWheel(false, true);
-  rrWheel.position.set(0.95, 0.34, 1.25);
-  group.add(rrWheel);
-
-  return {
-    car: group,
-    flPivot: flPivot,
-    frPivot: frPivot,
-    wheels: [flWheel, frWheel, rlWheel, rrWheel]
+    const buf = Buffer.from(b64, 'base64');
+    return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength);
   };
+
+  const decodedMeshes = {};
+  Object.keys(bundle.meshes).forEach((key) => {
+    const entry = bundle.meshes[key];
+    const pB = decodeB64(entry.p);
+    const nB = decodeB64(entry.n);
+    const iB = decodeB64(entry.i);
+    decodedMeshes[key] = {
+      vCount: entry.vCount,
+      iCount: entry.iCount,
+      u32: entry.u32,
+      pos: new Float32Array(pB.buffer, pB.byteOffset, entry.vCount * 3),
+      norm: new Float32Array(nB.buffer, nB.byteOffset, entry.vCount * 3),
+      idx: entry.u32
+        ? new Uint32Array(iB.buffer, iB.byteOffset, entry.iCount)
+        : new Uint16Array(iB.buffer, iB.byteOffset, entry.iCount)
+    };
+  });
+
+  _s15DecodedCache = {
+    wheelPivots: bundle.wheelPivots,
+    totalTriangles: bundle.totalTriangles,
+    meshes: decodedMeshes
+  };
+  return _s15DecodedCache;
 }
 
-/**
- * Builds a realistic drift touge racetrack with procedural asphalt grain,
- * alternating red/white racetrack rumble kerbs, skid marks, trackside rails,
- * headlight beams, and atmospheric lighting.
- */
-function buildCleanRoadScene(stageEl) {
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x070913);
-  scene.fog = new THREE.FogExp2(0x070913, 0.025);
+const s15Viewports = {};
+if (typeof window !== 'undefined') window.s15Viewports = s15Viewports;
 
-  const w = stageEl.clientWidth || 600;
-  const h = stageEl.clientHeight || 380;
-  const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 120);
-  camera.position.set(0, 3.8, 7.2);
-  camera.lookAt(0, 0.8, -1.2);
+function createS15Viewport(cfg) {
+  const host = document.getElementById(cfg.hostId);
+  const decoded = getDecodedS15Buffers();
+  if (!host || typeof THREE === 'undefined' || !decoded) return null;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+  } catch (e) {
+    return null;
+  }
+
+  const w = host.clientWidth || 440;
+  const h = host.clientHeight || 300;
   renderer.setSize(w, h);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  stageEl.innerHTML = '';
-  stageEl.appendChild(renderer.domElement);
+  renderer.setPixelRatio(Math.min((typeof window !== 'undefined' && window.devicePixelRatio) || 1, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.28;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  host.innerHTML = '';
+  host.appendChild(renderer.domElement);
 
-  // Atmospheric Lighting
-  const ambientLight = new THREE.AmbientLight(0x24324f, 1.3);
-  scene.add(ambientLight);
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x040406);
+  scene.fog = new THREE.FogExp2(0x040406, 0.088);
 
-  const keyLight = new THREE.DirectionalLight(0xdce8ff, 1.6);
-  keyLight.position.set(6, 14, 8);
+  const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 100);
+
+  // Studio softbox reflection environment
+  try {
+    const c = document.createElement('canvas');
+    c.width = 256;
+    c.height = 128;
+    const ctx = c.getContext('2d');
+    if (ctx) {
+      const bg = ctx.createLinearGradient(0, 0, 0, 128);
+      bg.addColorStop(0.0, '#241418');
+      bg.addColorStop(0.45, '#0b0b0f');
+      bg.addColorStop(0.5, '#2b181d');
+      bg.addColorStop(1.0, '#040405');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, 256, 128);
+      ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      ctx.fillRect(16, 12, 224, 10);
+      const rg = ctx.createLinearGradient(0, 56, 256, 56);
+      rg.addColorStop(0, 'rgba(239,68,68,0.85)');
+      rg.addColorStop(0.25, 'rgba(255,255,255,0.45)');
+      rg.addColorStop(0.5, 'rgba(220,38,38,0.9)');
+      rg.addColorStop(0.75, 'rgba(255,255,255,0.45)');
+      rg.addColorStop(1, 'rgba(239,68,68,0.85)');
+      ctx.fillStyle = rg;
+      ctx.fillRect(0, 58, 256, 7);
+      const envTex = new THREE.CanvasTexture(c);
+      envTex.mapping = THREE.EquirectangularReflectionMapping;
+      envTex.encoding = THREE.sRGBEncoding;
+      if (THREE.PMREMGenerator) {
+        const pmrem = new THREE.PMREMGenerator(renderer);
+        pmrem.compileEquirectangularShader();
+        scene.environment = pmrem.fromEquirectangular(envTex).texture;
+        envTex.dispose();
+        pmrem.dispose();
+      } else {
+        scene.environment = envTex;
+      }
+    }
+  } catch (e) {}
+
+  scene.add(new THREE.HemisphereLight(0xf3f4f6, 0x1a080c, 0.95));
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.7);
+  keyLight.position.set(-4.5, 7.5, -5.5);
+  keyLight.castShadow = true;
+  keyLight.shadow.mapSize.width = 1024;
+  keyLight.shadow.mapSize.height = 1024;
   scene.add(keyLight);
 
-  const rimLight = new THREE.DirectionalLight(0x00d2ff, 0.8);
-  rimLight.position.set(-8, 6, -10);
-  scene.add(rimLight);
+  const fillLight = new THREE.DirectionalLight(0xf8fafc, 1.15);
+  fillLight.position.set(5.5, 4.2, 4.2);
+  scene.add(fillLight);
 
-  // Procedural Asphalt Grain Texture
-  const canvas = document.createElement('canvas');
-  canvas.width = 256;
-  canvas.height = 256;
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#11141e';
-  ctx.fillRect(0, 0, 256, 256);
-  for (let i = 0; i < 4000; i++) {
-    const nx = Math.random() * 256;
-    const ny = Math.random() * 256;
-    const g = Math.floor(22 + Math.random() * 28);
-    ctx.fillStyle = `rgb(${g},${g+3},${g+8})`;
-    ctx.fillRect(nx, ny, 1.5, 1.5);
-  }
-  const roadTex = new THREE.CanvasTexture(canvas);
-  roadTex.wrapS = THREE.RepeatWrapping;
-  roadTex.wrapT = THREE.RepeatWrapping;
-  roadTex.repeat.set(4, 25);
+  const rimL = new THREE.SpotLight(0xff2a3c, 2.5, 18, Math.PI / 4, 0.55);
+  rimL.position.set(-5.2, 3.0, 3.5);
+  scene.add(rimL);
 
-  // Asphalt Road Surface
-  const roadGeo = new THREE.PlaneGeometry(13.6, 140);
-  const roadMat = new THREE.MeshStandardMaterial({
-    map: roadTex,
-    roughness: 0.45,
-    metalness: 0.2
-  });
-  const road = new THREE.Mesh(roadGeo, roadMat);
-  road.rotation.x = -Math.PI / 2;
-  road.position.z = -20;
-  scene.add(road);
+  const rimR = new THREE.SpotLight(0xef4444, 2.3, 18, Math.PI / 4, 0.6);
+  rimR.position.set(5.0, 2.8, -3.5);
+  scene.add(rimR);
 
-  // Authentic Racetrack Red & White Alternating Kerbs (Suzuka / Ebisu style)
-  const kerbRedMat = new THREE.MeshStandardMaterial({ color: 0xee1525, roughness: 0.5 });
-  const kerbWhiteMat = new THREE.MeshStandardMaterial({ color: 0xf2f4f8, roughness: 0.4 });
-  const kerbGeo = new THREE.BoxGeometry(0.65, 0.10, 2.4);
+  // Showroom circular plinth floor fading cleanly into obsidian fog
+  const floorMesh = new THREE.Mesh(
+    new THREE.CircleGeometry(42, 64),
+    new THREE.MeshStandardMaterial({ color: 0x050507, roughness: 0.46, metalness: 0.24 })
+  );
+  floorMesh.rotation.x = -Math.PI / 2;
+  floorMesh.receiveShadow = true;
+  scene.add(floorMesh);
 
-  for (let z = -80; z <= 40; z += 2.4) {
-    const isRed = Math.floor((z + 100) / 2.4) % 2 === 0;
-    const kMat = isRed ? kerbRedMat : kerbWhiteMat;
+  const grid = new THREE.PolarGridHelper(5.6, 10, 5, 48, 0x7f1d1d, 0x1d1316);
+  grid.position.y = 0.004;
+  scene.add(grid);
 
-    const kerbL = new THREE.Mesh(kerbGeo, kMat);
-    kerbL.position.set(-6.8, 0.05, z);
-    scene.add(kerbL);
+  const plinthRing = new THREE.Mesh(
+    new THREE.RingGeometry(2.45, 2.52, 64),
+    new THREE.MeshBasicMaterial({ color: 0xef4444, side: THREE.DoubleSide })
+  );
+  plinthRing.rotation.x = -Math.PI / 2;
+  plinthRing.position.y = 0.008;
+  scene.add(plinthRing);
 
-    const kerbR = new THREE.Mesh(kerbGeo, kMat);
-    kerbR.position.set(6.8, 0.05, z);
-    scene.add(kerbR);
-  }
+  const mats = {
+    paint: new THREE.MeshPhysicalMaterial({ color: 0x0d0d12, metalness: 0.65, roughness: 0.20, clearcoat: 1.0, clearcoatRoughness: 0.06, envMapIntensity: 1.45 }),
+    carbon: new THREE.MeshPhysicalMaterial({ color: 0x16171d, metalness: 0.32, roughness: 0.40, clearcoat: 0.80, side: THREE.DoubleSide }),
+    glass: new THREE.MeshPhysicalMaterial({ color: 0x090b10, metalness: 0.2, roughness: 0.05, clearcoat: 1.0, transparent: true, opacity: 0.62, depthWrite: false, side: THREE.DoubleSide }),
+    lightGlass: new THREE.MeshPhysicalMaterial({ color: 0xdbeafe, metalness: 0.1, roughness: 0.04, clearcoat: 1.0, transparent: true, opacity: 0.18, depthWrite: false, side: THREE.DoubleSide }),
+    headlight: new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xe0f2fe, emissiveIntensity: 3.0, side: THREE.DoubleSide }),
+    amberLight: new THREE.MeshStandardMaterial({ color: 0xf59e0b, emissive: 0xff8c00, emissiveIntensity: 2.2, side: THREE.DoubleSide }),
+    taillight: new THREE.MeshStandardMaterial({ color: 0xdc2626, emissive: 0xff0f2b, emissiveIntensity: 3.2, side: THREE.DoubleSide }),
+    chrome: new THREE.MeshStandardMaterial({ color: 0xd8dce3, metalness: 0.94, roughness: 0.14, side: THREE.DoubleSide }),
+    susp: new THREE.MeshStandardMaterial({ color: 0x3f434a, metalness: 0.78, roughness: 0.34, side: THREE.DoubleSide }),
+    cockpit: new THREE.MeshStandardMaterial({ color: 0x121216, metalness: 0.12, roughness: 0.78, side: THREE.DoubleSide }),
+    rubber: new THREE.MeshStandardMaterial({ color: 0x131316, metalness: 0.04, roughness: 0.88 }),
+    rimSpoke: new THREE.MeshStandardMaterial({ color: 0xdc2626, metalness: 0.78, roughness: 0.22, envMapIntensity: 1.45, side: THREE.DoubleSide }),
+    rotor: new THREE.MeshStandardMaterial({ color: 0x8b9099, metalness: 0.90, roughness: 0.24, side: THREE.DoubleSide }),
+    caliper: new THREE.MeshStandardMaterial({ color: 0xe11d48, metalness: 0.45, roughness: 0.28, side: THREE.DoubleSide })
+  };
 
-  // Glowing Neon Track Outer Rail
-  const railGeo = new THREE.BoxGeometry(0.08, 0.25, 140);
-  const railMat = new THREE.MeshStandardMaterial({
-    color: 0x00d2ff,
-    emissive: 0x00d2ff,
-    emissiveIntensity: 0.9
-  });
-  const railL = new THREE.Mesh(railGeo, railMat);
-  railL.position.set(-7.15, 0.14, -20);
-  scene.add(railL);
-  const railR = railL.clone();
-  railR.position.x = 7.15;
-  scene.add(railR);
-
-  // Tire Skid Mark Trails (Dark rubber laydown on tarmac)
-  const skidMat = new THREE.MeshBasicMaterial({
-    color: 0x050609,
-    transparent: true,
-    opacity: 0.65
-  });
-  const skidL = new THREE.Mesh(new THREE.PlaneGeometry(0.36, 140), skidMat);
-  skidL.rotation.x = -Math.PI / 2;
-  skidL.position.set(-1.1, 0.015, -20);
-  scene.add(skidL);
-  const skidR = new THREE.Mesh(new THREE.PlaneGeometry(0.36, 140), skidMat);
-  skidR.rotation.x = -Math.PI / 2;
-  skidR.position.set(1.1, 0.015, -20);
-  scene.add(skidR);
-
-  // Dashed Centerline Road Stripes
-  const roadLines = [];
-  const lineGeo = new THREE.PlaneGeometry(0.22, 3.8);
-  const lineMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-  for (let z = -75; z <= 35; z += 7.5) {
-    const stripe = new THREE.Mesh(lineGeo, lineMat);
-    stripe.rotation.x = -Math.PI / 2;
-    stripe.position.set(0, 0.02, z);
-    scene.add(stripe);
-    roadLines.push(stripe);
+  function makeGeo(dEntry) {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(dEntry.pos, 3));
+    geo.setAttribute('normal', new THREE.BufferAttribute(dEntry.norm, 3));
+    geo.setIndex(new THREE.BufferAttribute(dEntry.idx, 1));
+    geo.computeBoundingSphere();
+    return geo;
   }
 
-  // Headlight Light Cones onto the Road
-  const headBeamL = new THREE.SpotLight(0xcde8ff, 3.5, 26, Math.PI / 6, 0.6, 1.2);
-  headBeamL.position.set(-0.62, 0.6, -1.9);
-  headBeamL.target.position.set(-0.8, 0, -12);
-  scene.add(headBeamL);
-  scene.add(headBeamL.target);
+  const root = new THREE.Group();
+  const bodyGroup = new THREE.Group();
+  root.add(bodyGroup);
 
-  const headBeamR = new THREE.SpotLight(0xcde8ff, 3.5, 26, Math.PI / 6, 0.6, 1.2);
-  headBeamR.position.set(0.62, 0.6, -1.9);
-  headBeamR.target.position.set(0.8, 0, -12);
-  scene.add(headBeamR);
-  scene.add(headBeamR.target);
+  [
+    { key: 'BodyPaint', mat: mats.paint, sh: true },
+    { key: 'CarbonTrim', mat: mats.carbon, sh: true },
+    { key: 'ChromeExhaust', mat: mats.chrome, sh: true },
+    { key: 'SuspUnderbody', mat: mats.susp, sh: false },
+    { key: 'Cockpit', mat: mats.cockpit, sh: false },
+    { key: 'Headlights', mat: mats.headlight, sh: false },
+    { key: 'AmberLights', mat: mats.amberLight, sh: false },
+    { key: 'Taillights', mat: mats.taillight, sh: false },
+    { key: 'Glass', mat: mats.glass, sh: false },
+    { key: 'LightGlass', mat: mats.lightGlass, sh: false }
+  ].forEach((b) => {
+    const e = decoded.meshes[b.key];
+    if (!e) return;
+    const m = new THREE.Mesh(makeGeo(e), b.mat);
+    m.castShadow = b.sh;
+    m.receiveShadow = b.sh;
+    bodyGroup.add(m);
+  });
 
-  // Rear Taillight Red Glow onto road
-  const tailGlow = new THREE.PointLight(0xff1533, 2.0, 6.0);
-  tailGlow.position.set(0, 0.5, 2.4);
-  scene.add(tailGlow);
+  const wheels = {};
+  [
+    { corner: 'WheelFL', isFront: true, isRight: false },
+    { corner: 'WheelFR', isFront: true, isRight: true },
+    { corner: 'WheelRL', isFront: false, isRight: false },
+    { corner: 'WheelRR', isFront: false, isRight: true }
+  ].forEach((cs) => {
+    const pv = decoded.wheelPivots[cs.corner] || [0, 0.33, 0];
+    const steerPivot = new THREE.Group();
+    const camberPivot = new THREE.Group();
+    const spinGroup = new THREE.Group();
+    const brakeMount = new THREE.Group();
+    steerPivot.position.set(pv[0], pv[1], pv[2]);
 
-  return { scene, camera, renderer, roadLines, headBeamL, headBeamR, tailGlow };
-}
+    let tireMesh = null;
+    const tE = decoded.meshes[cs.corner + '_Tire'];
+    if (tE) {
+      tireMesh = new THREE.Mesh(makeGeo(tE), mats.rubber);
+      tireMesh.castShadow = true;
+      spinGroup.add(tireMesh);
+    }
+    const rE = decoded.meshes[cs.corner + '_Rim'];
+    if (rE) {
+      const rm = new THREE.Mesh(makeGeo(rE), mats.rimSpoke);
+      rm.castShadow = true;
+      spinGroup.add(rm);
+    }
+    const rotE = decoded.meshes[cs.corner + '_Rotor'];
+    if (rotE) spinGroup.add(new THREE.Mesh(makeGeo(rotE), mats.rotor));
+    const calE = decoded.meshes[cs.corner + '_Caliper'];
+    if (calE) brakeMount.add(new THREE.Mesh(makeGeo(calE), mats.caliper));
 
+    camberPivot.add(spinGroup);
+    camberPivot.add(brakeMount);
+    steerPivot.add(camberPivot);
+    root.add(steerPivot);
 
-function initVisualizers() {
-  // 3D view removed as per Wariant A for a lightweight, distraction-free setup studio
-}
-function onWindowResize() {
-  const resizeViewport = (stageEl, camera, renderer) => {
-    if (!stageEl || !camera || !renderer) return;
-    const w = stageEl.clientWidth;
-    const h = stageEl.clientHeight;
-    if (w > 0 && h > 0) {
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+    wheels[cs.corner] = {
+      steerPivot,
+      camberPivot,
+      spinGroup,
+      tireMesh,
+      baseX: pv[0],
+      baseY: pv[1],
+      baseZ: pv[2],
+      isFront: cs.isFront,
+      isRight: cs.isRight,
+      sideSign: cs.isRight ? 1 : -1
+    };
+  });
+
+  scene.add(root);
+
+  const state = {
+    camTheta: -2.42,
+    camPhi: 1.24,
+    camRadius: 4.85,
+    targetCamTheta: -2.42,
+    targetCamPhi: 1.24,
+    targetCamRadius: 4.85,
+    camLookAt: new THREE.Vector3(0, 0.50, -0.05),
+    targetCamLookAt: new THREE.Vector3(0, 0.50, -0.05),
+    autoSpin: Boolean(cfg.autoSpin),
+    wheelSpin: Boolean(cfg.wheelSpin),
+    wheelsOnly: false,
+    renderMode: 'gloss',
+    isDragging: false,
+    lastX: 0,
+    lastY: 0
+  };
+
+  const el = renderer.domElement;
+  el.addEventListener('pointerdown', (e) => {
+    state.isDragging = true;
+    state.lastX = e.clientX;
+    state.lastY = e.clientY;
+    if (el.setPointerCapture) el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener('pointermove', (e) => {
+    if (!state.isDragging) return;
+    const dx = e.clientX - state.lastX;
+    const dy = e.clientY - state.lastY;
+    state.lastX = e.clientX;
+    state.lastY = e.clientY;
+    state.targetCamTheta -= dx * 0.0085;
+    state.targetCamPhi = Math.max(0.12, Math.min(1.50, state.targetCamPhi - dy * 0.0065));
+  });
+  el.addEventListener('pointerup', () => { state.isDragging = false; });
+  el.addEventListener('pointercancel', () => { state.isDragging = false; });
+  el.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    state.targetCamRadius = Math.max(1.6, Math.min(9.5, state.targetCamRadius + e.deltaY * 0.0035));
+  }, { passive: false });
+
+  function setCamPreset(preset, instant = false) {
+    ['hero', 'front', 'rear', 'side', 'top', 'wheel'].forEach((k) => {
+      const btn = document.getElementById(`${cfg.key}Cam_${k}`);
+      if (btn) btn.classList.toggle('active', k === preset);
+    });
+    const fl = decoded.wheelPivots.WheelFL || [-0.764, 0.338, -1.261];
+    const aspect = (host.clientWidth || 500) / Math.max(1, host.clientHeight || 480);
+    const frameScale = aspect < 1.35 ? 1.12 : 0.84;
+
+    if (preset === 'hero') {
+      state.targetCamTheta = -2.42; state.targetCamPhi = 1.24;
+      state.targetCamRadius = aspect < 1.35 ? 5.45 : 3.95;
+      state.targetCamLookAt.set(0, 0.48, -0.05);
+    } else if (preset === 'front') {
+      state.targetCamTheta = Math.PI; state.targetCamPhi = 1.36;
+      state.targetCamRadius = 4.25 * frameScale;
+      state.targetCamLookAt.set(0, 0.45, -0.35);
+    } else if (preset === 'rear') {
+      state.targetCamTheta = 0.0; state.targetCamPhi = 1.32;
+      state.targetCamRadius = 4.35 * frameScale;
+      state.targetCamLookAt.set(0, 0.48, 0.35);
+    } else if (preset === 'side') {
+      state.targetCamTheta = -Math.PI / 2; state.targetCamPhi = 1.40;
+      state.targetCamRadius = 5.1 * frameScale;
+      state.targetCamLookAt.set(0, 0.48, 0);
+    } else if (preset === 'top') {
+      state.targetCamTheta = 0.0; state.targetCamPhi = 0.10;
+      state.targetCamRadius = 7.4;
+      state.targetCamLookAt.set(0, 0.45, 0);
+    } else if (preset === 'wheel') {
+      state.targetCamTheta = -2.02; state.targetCamPhi = 1.38;
+      state.targetCamRadius = 1.95;
+      state.targetCamLookAt.set(fl[0], fl[1], fl[2]);
+    }
+    if (instant) {
+      state.camTheta = state.targetCamTheta;
+      state.camPhi = state.targetCamPhi;
+      state.camRadius = state.targetCamRadius;
+      state.camLookAt.copy(state.targetCamLookAt);
+    }
+  }
+
+  function setRenderMode(mode) {
+    state.renderMode = mode;
+    const isCad = (mode === 'cad');
+    mats.paint.transparent = isCad;
+    mats.paint.opacity = isCad ? 0.16 : 1.0;
+    mats.paint.needsUpdate = true;
+
+    root.traverse((obj) => {
+      if (!obj.isMesh || !obj.geometry) return;
+      let line = obj.userData.__cadEdgeLine;
+      if (isCad) {
+        if (!line) {
+          const edges = new THREE.EdgesGeometry(obj.geometry, 24);
+          line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xff2a3c, transparent: true, opacity: 0.72 }));
+          obj.userData.__cadEdgeLine = line;
+        }
+        if (line.parent !== obj) obj.add(line);
+        line.visible = true;
+      } else if (line) {
+        line.visible = false;
+      }
+    });
+
+    const bC = document.getElementById(`${cfg.key}FxCad`);
+    if (bC) bC.classList.toggle('active', isCad);
+  }
+
+  // Real damped spring-damper physics state driven by AC Suspension & Dampers tabs
+  const phys = {
+    heave: 0,
+    heaveVel: 0,
+    pitch: 0,
+    pitchVel: 0,
+    roll: 0,
+    rollVel: 0,
+    testType: null,
+    lastTestType: 'bump',
+    testLoop: false,
+    testElapsed: 0,
+    testDuration: 0,
+    staticBaseY: 0,
+    staticPitch: 0,
+    staticRoll: 0
+  };
+
+  function stepSuspensionPhysics(dt) {
+    const hasSetup = (typeof acSetupState !== 'undefined');
+    const wrF = hasSetup ? (acSetupState.wheelRateLF || 117) : 117;
+    const wrR = hasSetup ? (acSetupState.wheelRateLR || 67) : 67;
+    const arbF = hasSetup ? (acSetupState.arbFront || 12000) : 12000;
+    const arbR = hasSetup ? (acSetupState.arbRear || 4000) : 4000;
+    const bumpF = hasSetup ? ((acSetupState.dampBumpLF || 26) + (acSetupState.dampFastBumpLF || 20)) * 0.5 : 23;
+    const rebF = hasSetup ? ((acSetupState.dampReboundLF || 36) + (acSetupState.dampFastReboundLF || 32)) * 0.5 : 34;
+    const bumpR = hasSetup ? ((acSetupState.dampBumpLR || 14) + (acSetupState.dampFastBumpLR || 10)) * 0.5 : 12;
+    const rebR = hasSetup ? ((acSetupState.dampReboundLR || 32) + (acSetupState.dampFastReboundLR || 26)) * 0.5 : 29;
+
+    // External test excitation waveforms
+    let extForceHeave = 0;
+    let extTorquePitch = 0;
+    let extTorqueRoll = 0;
+    if (phys.testType && phys.testElapsed < phys.testDuration) {
+      phys.testElapsed += dt;
+      const t = phys.testElapsed;
+      if (phys.testType === 'bump') {
+        // Two-wheel kerb hit: sharp vertical bump at t=0.04 and second kerb hit at t=0.45
+        if (t < 0.14) { extForceHeave -= 2.4; extTorquePitch -= 1.8; }
+        else if (t > 0.42 && t < 0.56) { extForceHeave -= 2.0; extTorquePitch += 1.6; }
+      } else if (phys.testType === 'roll') {
+        // Cornering lateral G-load -> left then right chicane transition
+        const latG = t < 0.85 ? Math.sin((t / 0.85) * Math.PI) : -Math.sin(((t - 0.85) / 0.85) * Math.PI);
+        extTorqueRoll += latG * 5.2;
+      } else if (phys.testType === 'pitch') {
+        // Left-foot brake nose dive (0..0.7s) followed by throttle rear squat (0.7..1.45s)
+        if (t < 0.72) extTorquePitch -= 3.8 * Math.sin((t / 0.72) * Math.PI);
+        else extTorquePitch += 4.2 * Math.sin(((t - 0.72) / 0.85) * Math.PI);
+      }
+    } else if (phys.testType) {
+      if (phys.testLoop) {
+        // Seamlessly loop selected wave while user tunes Dampers & Suspension sliders
+        phys.testElapsed = 0;
+        if (phys.testType === 'bump') { phys.heaveVel = -0.35; phys.pitchVel = -0.18; }
+        else if (phys.testType === 'roll') { phys.rollVel = 0.22; }
+        else if (phys.testType === 'pitch') { phys.pitchVel = -0.22; }
+      } else {
+        phys.testType = null;
+        ['Bump', 'Roll', 'Pitch'].forEach((n) => {
+          const b = document.getElementById(`btnSuspTest${n}`);
+          if (b) b.classList.remove('active');
+        });
+      }
+    }
+
+    // Damped spring oscillator dynamics (bump when compressing, rebound when extending)
+    const kHeave = 95 + (wrF + wrR) * 0.55;
+    const cHeave = phys.heaveVel < 0 ? 1.8 + (bumpF + bumpR) * 0.28 : 1.8 + (rebF + rebR) * 0.25;
+    const aHeave = -kHeave * phys.heave - cHeave * phys.heaveVel + extForceHeave;
+    phys.heaveVel += aHeave * dt;
+    phys.heave = Math.max(-0.075, Math.min(0.075, phys.heave + phys.heaveVel * dt));
+
+    const kPitch = 90 + (wrF + wrR) * 0.48;
+    const cPitch = 2.0 + (bumpF + rebR) * 0.22;
+    const aPitch = -kPitch * phys.pitch - cPitch * phys.pitchVel + extTorquePitch;
+    phys.pitchVel += aPitch * dt;
+    phys.pitch = Math.max(-0.075, Math.min(0.075, phys.pitch + phys.pitchVel * dt));
+
+    const kRoll = 42 + (arbF + arbR) / 260.0 + (wrF + wrR) * 0.22;
+    const cRoll = 2.4 + (bumpF + rebF + bumpR + rebR) * 0.14;
+    const aRoll = -kRoll * phys.roll - cRoll * phys.rollVel + extTorqueRoll;
+    phys.rollVel += aRoll * dt;
+    phys.roll = Math.max(-0.12, Math.min(0.12, phys.roll + phys.rollVel * dt));
+
+    bodyGroup.position.y = phys.staticBaseY + phys.heave;
+    bodyGroup.rotation.x = phys.staticPitch + phys.pitch;
+    bodyGroup.rotation.z = phys.staticRoll + phys.roll;
+  }
+
+  setCamPreset(cfg.camPreset || 'hero', true);
+
+  return {
+    key: cfg.key,
+    host,
+    renderer,
+    scene,
+    camera,
+    root,
+    bodyGroup,
+    wheels,
+    mats,
+    state,
+    phys,
+    setCamPreset,
+    setRenderMode,
+    setWireframe(enable) { setRenderMode(enable ? 'cad' : 'gloss'); },
+    triggerTest(type) {
+      phys.lastTestType = type;
+      phys.testType = type;
+      phys.testElapsed = 0;
+      phys.testDuration = (type === 'bump') ? 1.4 : 1.7;
+      if (type === 'bump') { phys.heaveVel = -0.35; phys.pitchVel = -0.18; }
+      else if (type === 'roll') { phys.rollVel = 0.22; }
+      else if (type === 'pitch') { phys.pitchVel = -0.22; }
+      ['bump', 'roll', 'pitch'].forEach((k) => {
+        const cap = k.charAt(0).toUpperCase() + k.slice(1);
+        const btn = document.getElementById(`btnSuspTest${cap}`);
+        if (btn) btn.classList.toggle('active', k === type);
+      });
+    },
+    toggleLoop() {
+      phys.testLoop = !phys.testLoop;
+      const playBtn = document.getElementById('btnSuspPlayLoop');
+      const isPl = (typeof currentLang !== 'undefined' && currentLang === 'pl');
+      if (playBtn) {
+        playBtn.classList.toggle('active', phys.testLoop);
+        playBtn.textContent = phys.testLoop ? (isPl ? '⏸ Pauza' : '⏸ Pause') : '▶ Play';
+      }
+      if (phys.testLoop) {
+        if (!phys.testType) this.triggerTest(phys.lastTestType || 'bump');
+      } else {
+        phys.testType = null;
+        ['Bump', 'Roll', 'Pitch'].forEach((n) => {
+          const b = document.getElementById(`btnSuspTest${n}`);
+          if (b) b.classList.remove('active');
+        });
+      }
+    },
+    pulseSusp(mag = 0.14) {
+      phys.heaveVel -= mag;
+    },
+    resize() {
+      const nw = host.clientWidth;
+      const nh = host.clientHeight;
+      if (nw > 0 && nh > 0) {
+        camera.aspect = nw / nh;
+        camera.updateProjectionMatrix();
+        renderer.setSize(nw, nh);
+      }
+    },
+    tick(dt) {
+      if (state.autoSpin && !state.isDragging) {
+        state.targetCamTheta += dt * 0.28;
+      }
+      if (state.wheelSpin) {
+        Object.values(wheels).forEach((w) => {
+          w.spinGroup.rotation.x -= dt * 7.5;
+        });
+      }
+      stepSuspensionPhysics(dt);
+
+      const lf = 1 - Math.exp(-9 * dt);
+      state.camTheta += (state.targetCamTheta - state.camTheta) * lf;
+      state.camPhi += (state.targetCamPhi - state.camPhi) * lf;
+      state.camRadius += (state.targetCamRadius - state.camRadius) * lf;
+      state.camLookAt.lerp(state.targetCamLookAt, lf);
+
+      camera.position.x = state.camLookAt.x + state.camRadius * Math.sin(state.camPhi) * Math.sin(state.camTheta);
+      camera.position.y = state.camLookAt.y + state.camRadius * Math.cos(state.camPhi);
+      camera.position.z = state.camLookAt.z + state.camRadius * Math.sin(state.camPhi) * Math.cos(state.camTheta);
+      camera.lookAt(state.camLookAt);
+      renderer.render(scene, camera);
     }
   };
-  resizeViewport(document.getElementById('stage3D_calc'), cameraCalc, rendererCalc);
-  resizeViewport(document.getElementById('stage3D_gen'), cameraGen, rendererGen);
 }
 
-// 2D Canvas Renderer
-function draw2DCar(canvasId, driftDeg, steerDeg, isGen) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const cx = canvas.width / 2;
-  const cy = canvas.height / 2;
-
-  // Road lines
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-  ctx.lineWidth = 2;
-  ctx.strokeRect(cx - 140, 0, 280, canvas.height);
-
-  ctx.strokeStyle = 'rgba(0, 210, 255, 0.4)';
-  ctx.beginPath();
-  ctx.moveTo(cx - 140, 0); ctx.lineTo(cx - 140, canvas.height);
-  ctx.moveTo(cx + 140, 0); ctx.lineTo(cx + 140, canvas.height);
-  ctx.stroke();
-
-  // Green trajectory arrow
-  ctx.strokeStyle = '#00ff88';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(cx, cy + 90);
-  ctx.lineTo(cx, cy - 90);
-  ctx.stroke();
-
-  ctx.fillStyle = '#00ff88';
-  ctx.beginPath();
-  ctx.moveTo(cx, cy - 105);
-  ctx.lineTo(cx - 8, cy - 90);
-  ctx.lineTo(cx + 8, cy - 90);
-  ctx.fill();
-
-  // Car Body
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate((driftDeg * Math.PI) / 180);
-
-  // Shadow & Body
-  ctx.fillStyle = '#0c101d';
-  ctx.strokeStyle = isGen ? '#ff7b00' : '#00d2ff';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.roundRect(-26, -55, 52, 110, 8);
-  ctx.fill();
-  ctx.stroke();
-
-  // Front Orange Indicator
-  ctx.fillStyle = '#ff7b00';
-  ctx.fillRect(-6, -52, 12, 14);
-
-  // Rear Tires
-  ctx.fillStyle = '#222836';
-  ctx.fillRect(-32, 22, 11, 26);
-  ctx.fillRect(21, 22, 11, 26);
-
-  // Front Steered Tires
-  const steerRad = (steerDeg * Math.PI) / 180;
-
-  // Front Left
-  ctx.save();
-  ctx.translate(-26, -30);
-  ctx.rotate(steerRad);
-  ctx.fillStyle = isGen ? '#ff7b00' : '#00d2ff';
-  ctx.fillRect(-6, -13, 11, 26);
-  ctx.restore();
-
-  // Front Right
-  ctx.save();
-  ctx.translate(26, -30);
-  ctx.rotate(steerRad);
-  ctx.fillStyle = isGen ? '#ff7b00' : '#00d2ff';
-  ctx.fillRect(-6, -13, 11, 26);
-  ctx.restore();
-
-  ctx.restore();
+function initVisualizers() {
+  if (!s15Viewports.gen) {
+    s15Viewports.gen = createS15Viewport({ key: 'gen', hostId: 's15StageGen', autoSpin: false, wheelSpin: false, camPreset: 'hero' });
+  }
+  if (!s15Viewports.garage) {
+    s15Viewports.garage = createS15Viewport({ key: 'garage', hostId: 's15StageGarage', autoSpin: false, wheelSpin: false, camPreset: 'hero' });
+  }
+  updateS15Viewports();
 }
 
-// Animation Loop (Road moves forward, cars stay steady at user-chosen drift angles!)
-function animate() {
+function updateS15Viewports() {
+  // 1. Setup Generator Viewport: reflects CarX Lock, Idle Autocatch & Test Drift Angle
+  const vpGen = s15Viewports.gen;
+  if (vpGen) {
+    const genLock = parseFloat(document.getElementById('genLock')?.value || 65.0);
+    const genIdle = parseInt(document.getElementById('genIdle')?.value || 80, 10) / 100.0;
+    const rawGenTestAngle = document.getElementById('genTestAngle')?.value;
+    const genTestAngle = (rawGenTestAngle !== undefined && rawGenTestAngle !== '') ? parseFloat(rawGenTestAngle) : 0;
+    const steerDeg = Math.max(-genLock, Math.min(genLock, -genTestAngle * genIdle));
+
+    const badgeEl = document.getElementById('s15GenLockBadge');
+    if (badgeEl) badgeEl.innerHTML = `LOCK: <strong>${genLock.toFixed(1)}°</strong>`;
+    const poseEl = document.getElementById('s15GenHudPose');
+    if (poseEl) {
+      const sFmt = steerDeg > 0 ? `+${steerDeg.toFixed(1)}°` : `${steerDeg.toFixed(1)}°`;
+      poseEl.innerHTML = `STEER: <strong>${sFmt}</strong> • DRIFT: <strong>${genTestAngle.toFixed(0)}°</strong>`;
+    }
+
+    const driftRad = (genTestAngle * Math.PI) / 180;
+    vpGen.root.rotation.y = -driftRad * 0.45;
+    vpGen.phys.staticRoll = -driftRad * 0.04;
+    vpGen.bodyGroup.rotation.z = vpGen.phys.staticRoll;
+    const steerRad = (steerDeg * Math.PI) / 180;
+    ['WheelFL', 'WheelFR'].forEach((c) => {
+      const w = vpGen.wheels[c];
+      if (!w) return;
+      const factor = (steerDeg * w.sideSign > 0) ? 1.0 : 0.90;
+      w.steerPivot.rotation.y = -steerRad * factor;
+      w.camberPivot.rotation.z = w.isRight ? -(-0.087) : (-0.087); // -5 deg front drift stance
+    });
+  }
+
+  // 2. AC Garage Viewport: 1:1 with Camber (-11..+10), Toe, Ride Height, Tyre Pressure & Fuel!
+  const vpGar = s15Viewports.garage;
+  if (vpGar && typeof acSetupState !== 'undefined') {
+    const cLF = parseFloat(acSetupState.camberLF ?? -5.0);
+    const cRF = parseFloat(acSetupState.camberRF ?? -5.0);
+    const cLR = parseFloat(acSetupState.camberLR ?? -0.8);
+    const cRR = parseFloat(acSetupState.camberRR ?? -0.8);
+    const tLF = parseInt(acSetupState.toeLF ?? 40, 10);
+    const tRF = parseInt(acSetupState.toeRF ?? 40, 10);
+    const tLR = parseInt(acSetupState.toeLR ?? 40, 10);
+    const tRR = parseInt(acSetupState.toeRR ?? 40, 10);
+    const hF = ((acSetupState.heightLF ?? 60) + (acSetupState.heightRF ?? 60)) * 0.5;
+    const hR = ((acSetupState.heightLR ?? 70) + (acSetupState.heightRR ?? 70)) * 0.5;
+    const pLF = parseFloat(acSetupState.pressureLF ?? 21);
+    const pRF = parseFloat(acSetupState.pressureRF ?? 21);
+    const pLR = parseFloat(acSetupState.pressureLR ?? 17);
+    const pRR = parseFloat(acSetupState.pressureRR ?? 17);
+    const fuelL = parseFloat(acSetupState.fuel ?? 30);
+
+    const rawSteerP = document.getElementById('ac3dSteerPreview')?.value;
+    const steerPreview = (rawSteerP !== undefined && rawSteerP !== '') ? parseFloat(rawSteerP) : 0;
+    const valSteerP = document.getElementById('valAc3dSteerPreview');
+    if (valSteerP) valSteerP.textContent = (steerPreview > 0 ? `+${steerPreview.toFixed(1)}°` : `${steerPreview.toFixed(1)}°`);
+
+    const fmtC = (v) => (v > 0 ? `+${v.toFixed(1)}°` : `${v.toFixed(1)}°`);
+    const hudGeo = document.getElementById('s15GarageHudGeo');
+    if (hudGeo) hudGeo.innerHTML = `CAMBER F/R: <strong>${fmtC(cLF)} / ${fmtC(cLR)}</strong>`;
+    const hudSpec = document.getElementById('s15GarageHudSpec');
+    if (hudSpec) hudSpec.innerHTML = `PSI: <strong>${Math.round(pLF)}/${Math.round(pLR)}</strong> • FUEL: <strong>${Math.round(fuelL)}L</strong> • H: <strong>${Math.round(hF)}/${Math.round(hR)}</strong>`;
+
+    // Body height & rake pitch from front/rear ride height + fuel tank weight over rear axle
+    const fuelSquatM = (fuelL - 30) * 0.00035;
+    const baseLiftM = (((hF - 60) + (hR - 70)) * 0.5) * 0.0014 - fuelSquatM * 0.5;
+    const heightDiffM = ((hR - 70) - (hF - 60)) * 0.0016 - fuelSquatM;
+    vpGar.phys.staticBaseY = Math.max(-0.06, Math.min(0.08, baseLiftM));
+    vpGar.phys.staticPitch = -Math.atan2(heightDiffM, 2.49);
+    vpGar.bodyGroup.position.y = vpGar.phys.staticBaseY + vpGar.phys.heave;
+    vpGar.bodyGroup.rotation.x = vpGar.phys.staticPitch + vpGar.phys.pitch;
+
+    const testStatus = document.getElementById('s15SuspTestStatus');
+    if (testStatus) {
+      const arbF = Math.round(acSetupState.arbFront || 12000);
+      const arbR = Math.round(acSetupState.arbRear || 4000);
+      const wrF = Math.round(acSetupState.wheelRateLF || 117);
+      const wrR = Math.round(acSetupState.wheelRateLR || 67);
+      const lblS = (currentLang === 'pl') ? 'Sprężyny' : 'Springs';
+      testStatus.textContent = `ARB ${arbF}/${arbR} • ${lblS} ${wrF}/${wrR}`;
+    }
+
+    const steerRad = (steerPreview * Math.PI) / 180;
+    const cornerData = [
+      { corner: 'WheelFL', camber: cLF, toe: tLF, psi: pLF, isFront: true },
+      { corner: 'WheelFR', camber: cRF, toe: tRF, psi: pRF, isFront: true },
+      { corner: 'WheelRL', camber: cLR, toe: tLR, psi: pLR, isFront: false },
+      { corner: 'WheelRR', camber: cRR, toe: tRR, psi: pRR, isFront: false }
+    ];
+    cornerData.forEach((cd) => {
+      const w = vpGar.wheels[cd.corner];
+      if (!w) return;
+      const camRad = (cd.camber * Math.PI) / 180;
+      w.camberPivot.rotation.z = w.isRight ? -camRad : camRad;
+
+      const ackFactor = cd.isFront ? ((steerPreview * w.sideSign > 0) ? 1.0 : 0.90) : 0.0;
+      const toeRad = -w.sideSign * (40 - cd.toe) * 0.0022;
+      w.steerPivot.rotation.y = -(cd.isFront ? steerRad * ackFactor : 0) + toeRad;
+
+      // Tyre pressure subtle sidewall flex
+      const psiNorm = (cd.psi - 21) / 20;
+      const scaleRad = 1 + psiNorm * 0.04;
+      if (w.tireMesh) {
+        w.tireMesh.scale.set(1 - psiNorm * 0.12, scaleRad, scaleRad);
+      }
+      const yComp = Math.abs(Math.sin(camRad)) * 0.092;
+      w.steerPivot.position.y = w.baseY * scaleRad - yComp;
+    });
+  }
+}
+
+window.setS15ViewportCam = function(which, preset) {
+  if (s15Viewports[which]) s15Viewports[which].setCamPreset(preset);
+};
+window.toggleS15ViewportRender = function(which, mode) {
+  const vp = s15Viewports[which];
+  if (!vp) return;
+  const nextMode = (vp.state.renderMode === mode) ? 'gloss' : mode;
+  vp.setRenderMode(nextMode);
+};
+window.toggleS15ViewportWire = function(which) {
+  window.toggleS15ViewportRender(which, 'cad');
+};
+window.triggerAcSuspTest = function(type) {
+  if (s15Viewports.garage) s15Viewports.garage.triggerTest(type);
+};
+window.toggleAcSuspLoop = function() {
+  if (s15Viewports.garage) s15Viewports.garage.toggleLoop();
+};
+window.toggleS15ViewportAuto = function(which) {
+  const vp = s15Viewports[which];
+  if (!vp) return;
+  vp.state.autoSpin = !vp.state.autoSpin;
+  const b = document.getElementById(`${which}FxAuto`);
+  if (b) b.classList.toggle('active', vp.state.autoSpin);
+};
+window.toggleS15ViewportSpin = function(which) {
+  const vp = s15Viewports[which];
+  if (!vp) return;
+  vp.state.wheelSpin = !vp.state.wheelSpin;
+  const b = document.getElementById(`${which}FxSpin`);
+  if (b) b.classList.toggle('active', vp.state.wheelSpin);
+};
+window.toggleS15WheelsOnly = function(which) {
+  const vp = s15Viewports[which];
+  if (!vp) return;
+  vp.state.wheelsOnly = !vp.state.wheelsOnly;
+  vp.bodyGroup.visible = !vp.state.wheelsOnly;
+  const b = document.getElementById(`${which}FxWheelsOnly`);
+  if (b) b.classList.toggle('active', vp.state.wheelsOnly);
+};
+window.setS15ViewportPaint = function(hex, btnEl) {
+  Object.values(s15Viewports).forEach((vp) => { if (vp && vp.mats) vp.mats.paint.color.setHex(hex); });
+  if (btnEl && btnEl.parentElement) {
+    btnEl.parentElement.querySelectorAll('.s15-swatch-mini').forEach((b) => b.classList.remove('active'));
+    btnEl.classList.add('active');
+  }
+};
+window.setS15ViewportRim = function(hex, btnEl) {
+  Object.values(s15Viewports).forEach((vp) => { if (vp && vp.mats) vp.mats.rimSpoke.color.setHex(hex); });
+  if (btnEl && btnEl.parentElement) {
+    btnEl.parentElement.querySelectorAll('.s15-swatch-mini').forEach((b) => b.classList.remove('active'));
+    btnEl.classList.add('active');
+  }
+};
+
+function onWindowResize() {
+  Object.values(s15Viewports).forEach((vp) => { if (vp) vp.resize(); });
+}
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('resize', onWindowResize);
+}
+
+let _s15LastTick = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+function animate(now) {
   requestAnimationFrame(animate);
+  const tNow = now || (typeof performance !== 'undefined' ? performance.now() : Date.now());
+  const dt = Math.min(0.05, Math.max(0.001, (tNow - _s15LastTick) / 1000));
+  _s15LastTick = tNow;
 
-  // 1. Calculator Tab State
-  const calcSlip = parseFloat(document.getElementById('sliderSlip')?.value || -26.5);
-  const calcStick = parseFloat(document.getElementById('sliderStick')?.value || -6) / 100.0;
-  const calcLock = parseFloat(document.getElementById('sliderLock')?.value || 48.0);
-  const calcMult = parseFloat(document.getElementById('sliderMult')?.value || 1.05);
-
-  const calcBaseCounter = -calcSlip * calcMult;
-  const calcStickContrib = calcStick * calcLock * 0.45;
-  const calcSteerDeg = Math.max(-calcLock, Math.min(calcLock, calcBaseCounter + calcStickContrib));
-
-  // Scroll Road Stripes (Smooth forward motion)
-  const speed = 0.55;
-  roadLinesCalc.forEach(stripe => {
-    stripe.position.z += speed;
-    if (stripe.position.z > 35) stripe.position.z = -75;
-  });
-
-  if (carGroupCalc) {
-    const slipRad = (calcSlip * Math.PI) / 180;
-    carGroupCalc.rotation.y = -slipRad;
-    carGroupCalc.rotation.z = -(calcSlip * 0.0018); // subtle chassis roll
-    carGroupCalc.position.x = Math.sin(slipRad) * 0.45;
-
-    const wheelSteerRad = -(calcSteerDeg * Math.PI) / 180;
-    if (frontLeftCalc) {
-      frontLeftCalc.rotation.y = wheelSteerRad;
-      frontLeftCalc.rotation.z = 0.05;
-    }
-    if (frontRightCalc) {
-      frontRightCalc.rotation.y = wheelSteerRad;
-      frontRightCalc.rotation.z = -0.05;
-    }
-  }
-  if (rendererCalc && sceneCalc && cameraCalc && currentViewModeCalc === '3d') {
-    rendererCalc.render(sceneCalc, cameraCalc);
-  }
-  if (currentViewModeCalc === '2d') {
-    draw2DCar('canvas2D_calc', calcSlip, calcSteerDeg, false);
-  }
-
-  // 2. Generator Tab State
-  const genLock = parseFloat(document.getElementById('genLock')?.value || 65.0);
-  const genIdle = parseInt(document.getElementById('genIdle')?.value || 80) / 100.0;
-  const genTestAngle = parseFloat(document.getElementById('genTestAngle')?.value || -32.0);
-
-  const genSteerDeg = Math.max(-genLock, Math.min(genLock, -genTestAngle * genIdle));
-
-  roadLinesGen.forEach(stripe => {
-    stripe.position.z += speed;
-    if (stripe.position.z > 35) stripe.position.z = -75;
-  });
-
-  if (carGroupGen) {
-    const genSlipRad = (genTestAngle * Math.PI) / 180;
-    carGroupGen.rotation.y = -genSlipRad;
-    carGroupGen.rotation.z = -(genTestAngle * 0.0018); // subtle chassis roll
-    carGroupGen.position.x = Math.sin(genSlipRad) * 0.45;
-
-    const genSteerRad = -(genSteerDeg * Math.PI) / 180;
-    if (frontLeftGen) {
-      frontLeftGen.rotation.y = genSteerRad;
-      frontLeftGen.rotation.z = 0.05;
-    }
-    if (frontRightGen) {
-      frontRightGen.rotation.y = genSteerRad;
-      frontRightGen.rotation.z = -0.05;
-    }
-  }
-  if (rendererGen && sceneGen && cameraGen && currentViewModeGen === '3d') {
-    rendererGen.render(sceneGen, cameraGen);
-  }
-  if (currentViewModeGen === '2d') {
-    draw2DCar('canvas2D_gen', genTestAngle, genSteerDeg, true);
+  const genTabActive = document.getElementById('tab-gen')?.classList.contains('active');
+  if (genTabActive) {
+    Object.values(s15Viewports).forEach((vp) => {
+      if (vp && vp.host && vp.host.clientWidth > 0) vp.tick(dt);
+    });
   }
 }
+requestAnimationFrame(animate);
 
 // Initialization on load
 window.addEventListener('DOMContentLoaded', () => {
   let initL = 'pl';
   try { const s = localStorage.getItem('carx_assist_lang'); if (s) initL = s; } catch(e) {}
-  setLang(initL);
   initVisualizers();
+  setLang(initL);
   onCalcSliderChange();
   onGenSliderChange();
-  updateAcWorkflowLang(lang);
+  updateAcWorkflowLang(initL);
   initAcGarage();
 });
 
@@ -2590,6 +2803,7 @@ const acSetupState = {
   heightLR: 70, heightRR: 70,
   arbRear: 4000
 };
+if (typeof window !== 'undefined') window.acSetupState = acSetupState;
 
 // Parameter specs: [unit, step, min, max, isFloat]
 const acParamSpecs = {
@@ -2599,14 +2813,14 @@ const acParamSpecs = {
   pressureLR: [" psi", 1, 15, 35, false],
   pressureRR: [" psi", 1, 15, 35, false],
   fuel: [" L", 1, 5, 70, false],
-  camberLF: ["°", 0.1, -7.0, 0.0, true],
-  camberRF: ["°", 0.1, -7.0, 0.0, true],
+  camberLF: ["°", 0.1, -11.0, 10.0, true],
+  camberRF: ["°", 0.1, -11.0, 10.0, true],
   toeLF: ["", 1, 0, 80, false],
   toeRF: ["", 1, 0, 80, false],
   toeLR: ["", 1, 0, 80, false],
   toeRR: ["", 1, 0, 80, false],
-  camberLR: ["°", 0.1, -4.0, 1.0, true],
-  camberRR: ["°", 0.1, -4.0, 1.0, true],
+  camberLR: ["°", 0.1, -11.0, 10.0, true],
+  camberRR: ["°", 0.1, -11.0, 10.0, true],
   dampBumpLF: ["", 1, 5, 45, false],
   dampBumpRF: ["", 1, 5, 45, false],
   dampFastBumpLF: ["", 1, 5, 40, false],
@@ -2695,7 +2909,9 @@ function updateAcUIParam(paramName) {
 
   if (slider) slider.value = val;
   if (display) {
-    if (isFloat) {
+    if (paramName.startsWith('camber')) {
+      display.textContent = (Math.abs(val) < 0.0001) ? `0.0${unit}` : ((val > 0) ? `+${val.toFixed(1)}${unit}` : `${val.toFixed(1)}${unit}`);
+    } else if (isFloat) {
       display.textContent = `${val.toFixed(paramName === 'finalRatio' ? 2 : 1)}${unit}`;
     } else {
       display.textContent = `${Math.round(val)}${unit}`;
@@ -2739,6 +2955,10 @@ function stepAcParam(paramName, dirMultiplier) {
     drawAcGearsChart();
   }
   updateAdvisorDynamicFeedback();
+  updateS15Viewports();
+  if (/^(damp|wheelRate|arb|height)/.test(paramName) && s15Viewports.garage) {
+    s15Viewports.garage.pulseSusp(0.14);
+  }
 }
 
 // ==========================================================================
@@ -2934,8 +3154,10 @@ function updateAdvisorDynamicFeedback() {
   }
 
   // 4. ALIGNMENT ADVISOR (SEPARATED FRONT & REAR WITH DYNAMIC TOE & CAMBER)
-  const cF = (acSetupState.camberLF || -5.0).toFixed(1);
-  const cR = (acSetupState.camberLR || -0.9).toFixed(1);
+  const cFVal = acSetupState.camberLF !== undefined ? acSetupState.camberLF : -5.0;
+  const cRVal = acSetupState.camberLR !== undefined ? acSetupState.camberLR : -0.9;
+  const cF = (cFVal > 0 ? '+' : '') + cFVal.toFixed(1);
+  const cR = (cRVal > 0 ? '+' : '') + cRVal.toFixed(1);
   const tLF = Math.round(acSetupState.toeLF !== undefined ? acSetupState.toeLF : 40);
   const tRF = Math.round(acSetupState.toeRF !== undefined ? acSetupState.toeRF : 40);
   const tLR = Math.round(acSetupState.toeLR !== undefined ? acSetupState.toeLR : 40);
@@ -2992,14 +3214,24 @@ function updateAdvisorDynamicFeedback() {
     }
 
     const aCard1Title = isPl ? `📐 PRZÓD: CAMBER ${cF}° • TOE ${avgToeF}` : `📐 FRONT: CAMBER ${cF}° • TOE ${avgToeF}`;
-    const aCard1Desc = isPl ?
-      `Duży negatyw z przodu (<strong>${cF}°</strong>) w połączeniu z Casterem (9°–10°) sprawia, że koło zewnętrzne w pełnym skręcie leży <strong>w 100% płasko na asfalcie</strong>.<br>${frontToeDesc}` :
-      `Front negative camber (<strong>${cF}°</strong>) combined with high caster (9°–10°) keeps the outside tire <strong>100% flat on asphalt</strong> at full lock.<br>${frontToeDesc}`;
+    const frontCamText = cFVal > 0.2
+      ? (isPl
+        ? `Dodatni pozytyw przodu (<strong>${cF}°</strong>): Górna krawędź koła pochylona na zewnątrz — specyficzny setup pod owale lub ekstremalny test stance.`
+        : `Front positive camber (<strong>${cF}°</strong>): Top of wheel tilted outward — specialized oval/extreme stance setup.`)
+      : (isPl
+        ? `Negatyw z przodu (<strong>${cF}°</strong>) w połączeniu z Casterem (9°–10°) sprawia, że koło zewnętrzne w pełnym skręcie leży <strong>płasko na asfalcie</strong>.`
+        : `Front negative camber (<strong>${cF}°</strong>) combined with high caster (9°–10°) keeps the outside tire <strong>flat on asphalt</strong> at full lock.`);
+    const aCard1Desc = `${frontCamText}<br>${frontToeDesc}`;
 
     const aCard2Title = isPl ? `🏎️ TYŁ: CAMBER ${cR}° • TOE ${avgToeR}` : `🏎️ REAR: CAMBER ${cR}° • TOE ${avgToeR}`;
-    const aCard2Desc = isPl ?
-      `Bliski zera negatyw z tyłu (<strong>${cR}°</strong>): Podczas przysiadu auta w drifcie (squat) opona klei <strong>całą szerokością bieżnika</strong>.<br>${rearToeDesc}` :
-      `Near-zero rear camber (<strong>${cR}°</strong>): When the car squats in drift, 100% of the rear tire width contacts the pavement.<br>${rearToeDesc}`;
+    const rearCamText = cRVal > 0.2
+      ? (isPl
+        ? `Pozytyw z tyłu (<strong>${cR}°</strong>): Mniejsza powierzchnia styku w szybkim łuku (łatwe zrywanie trakcji).`
+        : `Rear positive camber (<strong>${cR}°</strong>): Reduced lateral patch for rapid rear breakaway.`)
+      : (isPl
+        ? `Camber z tyłu (<strong>${cR}°</strong>): Bliski zera kąt maksymalizuje powierzchnię styku opony przy przysiadzie w drifcie.`
+        : `Rear camber (<strong>${cR}°</strong>): Near-zero camber maximizes rear tire contact patch under drift squat.`);
+    const aCard2Desc = `${rearCamText}<br>${rearToeDesc}`;
 
     const aCard3Title = isPl ? `⚖️ BALANS GEOMETRII PRZÓD VS TYŁ` : `⚖️ ALIGNMENT BALANCE FRONT VS REAR`;
     const aCard3Desc = isPl ?
@@ -3270,7 +3502,9 @@ function onAcSliderInput(paramName, valStr) {
   acSetupState[paramName] = val;
   const display = document.getElementById(`acVal_${paramName}`);
   if (display) {
-    if (isFloat) {
+    if (paramName.startsWith('camber')) {
+      display.textContent = (Math.abs(val) < 0.0001) ? `0.0${unit}` : ((val > 0) ? `+${val.toFixed(1)}${unit}` : `${val.toFixed(1)}${unit}`);
+    } else if (isFloat) {
       display.textContent = `${val.toFixed(paramName === 'finalRatio' ? 2 : 1)}${unit}`;
     } else {
       display.textContent = `${Math.round(val)}${unit}`;
@@ -3293,6 +3527,10 @@ function onAcSliderInput(paramName, valStr) {
     drawAcGearsChart();
   }
   updateAdvisorDynamicFeedback();
+  updateS15Viewports();
+  if (/^(damp|wheelRate|arb|height)/.test(paramName) && s15Viewports.garage) {
+    s15Viewports.garage.pulseSusp(0.14);
+  }
 }
 
 function recalculateGearSpeeds() {
@@ -3319,7 +3557,7 @@ function drawAcGearsChart() {
   ctx.clearRect(0, 0, w, h);
 
   // Background Grid
-  ctx.fillStyle = '#060a12';
+  ctx.fillStyle = '#050507';
   ctx.fillRect(0, 0, w, h);
 
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
@@ -3445,6 +3683,7 @@ function loadDefaultDriftSetup() {
   Object.keys(acParamSpecs).forEach(updateAcUIParam);
   recalculateGearSpeeds();
   drawAcGearsChart();
+  updateS15Viewports();
   showToast("🚗 Załadowano bazowy profesjonalny setup driftowy!");
 }
 const resetToDefaultDriftSetup = loadDefaultDriftSetup;
@@ -3471,6 +3710,8 @@ function syncFromCarXAssist() {
   acSetupState.diffCoast = 100;
 
   Object.keys(acParamSpecs).forEach(updateAcUIParam);
+  updateAdvisorDynamicFeedback();
+  updateS15Viewports();
   showToast("🔄 Zsynchronizowano parametry z asystą CarX!");
 }
 
@@ -3546,23 +3787,17 @@ function parseAcIniSetup(iniText) {
   if (iniMap["DIFF_PRELOAD"]) acSetupState.diffPreload = parseInt(iniMap["DIFF_PRELOAD"], 10);
   if (iniMap["FUEL"]) acSetupState.fuel = parseInt(iniMap["FUEL"], 10);
 
-  // Camber in AC INI is often *10
-  if (iniMap["CAMBER_LF"]) {
-    let v = parseFloat(iniMap["CAMBER_LF"]);
-    acSetupState.camberLF = v < -10 ? v / 10.0 : v;
-  }
-  if (iniMap["CAMBER_RF"]) {
-    let v = parseFloat(iniMap["CAMBER_RF"]);
-    acSetupState.camberRF = v < -10 ? v / 10.0 : v;
-  }
-  if (iniMap["CAMBER_LR"]) {
-    let v = parseFloat(iniMap["CAMBER_LR"]);
-    acSetupState.camberLR = v < -10 ? v / 10.0 : v;
-  }
-  if (iniMap["CAMBER_RR"]) {
-    let v = parseFloat(iniMap["CAMBER_RR"]);
-    acSetupState.camberRR = v < -10 ? v / 10.0 : v;
-  }
+  // Camber in AC INI is often *10; clamp cleanly within [-11.0, +10.0]
+  const parseIniCamber = (raw) => {
+    let v = parseFloat(raw);
+    if (isNaN(v)) return 0.0;
+    if (Math.abs(v) > 12.0) v = v / 10.0;
+    return Math.max(-11.0, Math.min(10.0, v));
+  };
+  if (iniMap["CAMBER_LF"]) acSetupState.camberLF = parseIniCamber(iniMap["CAMBER_LF"]);
+  if (iniMap["CAMBER_RF"]) acSetupState.camberRF = parseIniCamber(iniMap["CAMBER_RF"]);
+  if (iniMap["CAMBER_LR"]) acSetupState.camberLR = parseIniCamber(iniMap["CAMBER_LR"]);
+  if (iniMap["CAMBER_RR"]) acSetupState.camberRR = parseIniCamber(iniMap["CAMBER_RR"]);
 
   // Pressures in AC INI: 1:1 direct PSI match with Assetto Corsa
   if (iniMap["PRESSURE_LF"]) acSetupState.pressureLF = parseInt(iniMap["PRESSURE_LF"], 10);
@@ -3822,5 +4057,6 @@ function initAcGarage() {
   recalculateGearSpeeds();
   updateAdvisorDynamicFeedback();
   updateAcWorkflowLang(currentLang);
+  updateS15Viewports();
   setTimeout(drawAcGearsChart, 100);
 }
