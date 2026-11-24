@@ -3,608 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CarX Drift Assist for Assetto Corsa — Calculator & Setup Guide</title>
+  <title>CarX Drift Assist for Assetto Corsa — Master Guide & Setup Generator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0b0d13;
-      --bg-card: rgba(18, 22, 34, 0.75);
-      --bg-card-hover: rgba(26, 32, 50, 0.85);
-      --border-color: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(0, 210, 255, 0.3);
-      --cyan: #00d2ff;
-      --cyan-glow: 0 0 20px rgba(0, 210, 255, 0.4);
-      --orange: #ff7b00;
-      --orange-glow: 0 0 20px rgba(255, 123, 0, 0.4);
-      --green: #00ff88;
-      --purple: #9d4edd;
-      --text-main: #f0f3f8;
-      --text-muted: #8e9bb0;
-      --font-display: 'Rajdhani', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 15% 20%, rgba(0, 210, 255, 0.07) 0%, transparent 40%),
-        radial-gradient(circle at 85% 70%, rgba(255, 123, 0, 0.06) 0%, transparent 40%),
-        linear-gradient(180deg, #090a0f 0%, #0d1017 100%);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Header & Navigation */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background: rgba(11, 13, 19, 0.85);
-      border-bottom: 1px solid var(--border-color);
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .brand-badge {
-      background: linear-gradient(135deg, var(--orange), #ff4500);
-      color: #fff;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 6px;
-      box-shadow: var(--orange-glow);
-    }
-
-    .brand-title {
-      font-family: var(--font-display);
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, #fff, #99bbff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .lang-toggle {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      padding: 4px;
-      display: flex;
-      cursor: pointer;
-    }
-
-    .lang-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-family: var(--font-display);
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 13px;
-    }
-
-    .lang-btn.active {
-      background: var(--cyan);
-      color: #0b0d13;
-      font-weight: 700;
-      box-shadow: var(--cyan-glow);
-    }
-
-    .btn-github {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border-color);
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn-github:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: var(--cyan);
-      transform: translateY(-1px);
-    }
-
-    .btn-github.disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      pointer-events: none;
-      user-select: none;
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.08);
-      color: var(--text-muted);
-      transform: none !important;
-      box-shadow: none !important;
-    }
-
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 32px 20px 80px 20px;
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      margin-bottom: 48px;
-      padding: 40px 20px;
-      position: relative;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      font-family: var(--font-display);
-      text-transform: uppercase;
-      font-size: 13px;
-      letter-spacing: 2px;
-      color: var(--cyan);
-      background: rgba(0, 210, 255, 0.1);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      padding: 6px 16px;
-      border-radius: 30px;
-      margin-bottom: 16px;
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: 48px;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 16px;
-      letter-spacing: 0.5px;
-    }
-
-    .hero-title span {
-      background: linear-gradient(135deg, var(--orange), #ff4500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 18px;
-      color: var(--text-muted);
-      max-width: 760px;
-      margin: 0 auto 28px auto;
-      font-weight: 300;
-    }
-
-    .hero-btns {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--cyan), #0077ff);
-      color: #0b0d13;
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 700;
-      padding: 12px 28px;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: var(--cyan-glow);
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(0, 210, 255, 0.6);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      color: #fff;
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Grid Layouts */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    @media (max-width: 860px) {
-      .grid-2, .grid-3 {
-        grid-template-columns: 1fr;
-      }
-      .hero-title {
-        font-size: 34px;
-      }
-    }
-
-    /* Cards */
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 24px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      position: relative;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(0, 210, 255, 0.3);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 14px;
-    }
-
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card-title .icon {
-      color: var(--cyan);
-    }
-
-    /* Interactive Calculator & Canvas */
-    .canvas-container {
-      background: #07090e;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-    }
-
-    canvas {
-      display: block;
-      width: 100%;
-      max-width: 460px;
-      height: 280px;
-    }
-
-    .control-group {
-      margin-bottom: 16px;
-    }
-
-    .control-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .control-val {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--cyan);
-      font-weight: 600;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-      outline: none;
-      -webkit-appearance: none;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--cyan);
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
-      transition: transform 0.1s ease;
-    }
-
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.15);
-    }
-
-    /* Preset Buttons */
-    .preset-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .chip {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-family: var(--font-display);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .chip:hover {
-      background: rgba(0, 210, 255, 0.15);
-      border-color: var(--cyan);
-      color: #fff;
-    }
-
-    .chip.active {
-      background: var(--cyan);
-      color: #0b0d13;
-      border-color: var(--cyan);
-      box-shadow: var(--cyan-glow);
-    }
-
-    /* Stat Box */
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .stat-box {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 10px 12px;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
-
-    .stat-value {
-      font-family: var(--font-mono);
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      margin-top: 2px;
-    }
-
-    .stat-value.highlight {
-      color: var(--cyan);
-    }
-
-    /* Code & Output Blocks */
-    .code-block {
-      background: #07090e;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 14px;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: #a6accd;
-      overflow-x: auto;
-      position: relative;
-      margin-top: 12px;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: #fff;
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: var(--font-body);
-      transition: background 0.2s;
-    }
-
-    .copy-btn:hover {
-      background: var(--cyan);
-      color: #000;
-    }
-
-    /* Controller Tweaks Table */
-    .tweaks-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      margin-top: 12px;
-    }
-
-    .tweaks-table th, .tweaks-table td {
-      padding: 10px 12px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .tweaks-table th {
-      color: var(--text-muted);
-      font-weight: 500;
-      text-transform: uppercase;
-      font-size: 11px;
-      letter-spacing: 0.5px;
-    }
-
-    .tweaks-table td.val {
-      font-family: var(--font-mono);
-      color: var(--cyan);
-      font-weight: 600;
-    }
-
-    .pill-rec {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
-      background: rgba(0, 255, 136, 0.15);
-      color: var(--green);
-      font-weight: 600;
-      font-size: 11px;
-    }
-
-    /* Steps List */
-    .step-list {
-      list-style: none;
-      counter-reset: steps;
-    }
-
-    .step-item {
-      position: relative;
-      padding-left: 36px;
-      margin-bottom: 18px;
-    }
-
-    .step-item::before {
-      counter-increment: steps;
-      content: counter(steps);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 24px;
-      height: 24px;
-      background: linear-gradient(135deg, var(--cyan), #0077ff);
-      color: #000;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 13px;
-      line-height: 24px;
-      text-align: center;
-    }
-
-    .step-item h4 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: #fff;
-    }
-
-    .step-item p {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border-color);
-      padding: 32px 20px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 13px;
-      margin-top: 60px;
-    }
-
-    footer a {
-      color: var(--cyan);
-      text-decoration: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Top Navigation -->
+  <!-- Top Header with Brand Logo & Language Switcher -->
   <header>
-    <a href="#" class="brand">
-      <span class="brand-badge">CARX</span>
-      <span class="brand-title">GAMEPAD ASSIST</span>
-    </a>
-    <div class="nav-actions">
-      <div class="lang-toggle" id="langToggle">
-        <button class="lang-btn" data-lang="pl">PL</button>
-        <button class="lang-btn active" data-lang="en">EN</button>
+    <div class="header-inner">
+      <div class="brand">
+        <img src="Dova_CarX_Assist_shield.png" alt="CarX Drift Assist Logo" class="brand-logo-img">
+        <div class="brand-text-col">
+          <div class="brand-title">CarX Drift Assist</div>
+          <div class="brand-sub">Assetto Corsa Gamepad FX • CSP Edition</div>
+        </div>
       </div>
-      <div class="btn-github disabled" title="Download ZIP unavailable">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-        <span data-i18n="downloadZip">Download ZIP</span>
+
+      <div class="header-actions">
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btnLangEn" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="btnLangPl" onclick="setLang('pl')">PL</button>
+        </div>
+        <div class="btn-download-disabled" title="Official Download via Assetto Corsa Community">
+          <span>📦</span> <span data-i18n="navVersion">V5.2.0 • Offline Ready</span>
+        </div>
       </div>
     </div>
   </header>
@@ -613,648 +38,1848 @@
 
     <!-- Hero Section -->
     <section class="hero">
-      <span class="hero-badge" data-i18n="heroBadge">CarX Physics in Assetto Corsa</span>
+      <div class="hero-badge" data-i18n="heroBadge">Official Assetto Corsa Community Guide</div>
       <h1 class="hero-title">
-        <span data-i18n="heroTitle1">Masterful Gamepad Drift Steering</span><br>
-        <span data-i18n="heroTitle2">For Every Drift Car Pack</span>
+        <span data-i18n="heroTitle1">CarX Gamepad Drift Assist</span><br>
+        <span data-i18n="heroTitle2" style="color: #fff; text-shadow: none;">Master Parameter & Setup Manual</span>
       </h1>
-      <p class="hero-subtitle" data-i18n="heroDesc">
-        Official steer lock calculator, controller setup guide, and CarX Assist config generator for CSP. Calculate the optimal countersteer angle for WDT, Gravy Garage, VDC packs and enjoy smooth drifting without accidental spins.
+      <p class="hero-desc" data-i18n="heroDesc">
+        The ultimate mathematical gamepad drifting physics assist for Assetto Corsa. Built for CarX veterans and sim drift enthusiasts transitioning to AC.
       </p>
-      <div class="hero-btns">
-        <a href="#calculator" class="btn-primary" data-i18n="btnCalc">Angle Calculator</a>
-        <a href="#tweaks" class="btn-secondary" data-i18n="btnTweaks">Controller Settings</a>
-        <a href="#install" class="btn-secondary" data-i18n="btnInstall">Installation Guide</a>
+      <div class="hero-cta">
+        <button class="btn btn-cyan" onclick="switchTab('tab-gen')" data-i18n="btnHeroGen">🛠️ Launch Setup Generator & Presets</button>
+        <button class="btn btn-orange" onclick="switchTab('tab-tuning')" data-i18n="btnHeroTuning">🎯 Master Tuning Guide (All 12 Parameters)</button>
+        <button class="btn btn-ghost" onclick="switchTab('tab-tweaks')" data-i18n="btnTweaks">🎮 Controller Settings (CM)</button>
+        <button class="btn btn-ghost" onclick="switchTab('tab-install')" data-i18n="btnInstall">📦 Installation Guide</button>
       </div>
     </section>
 
-    <!-- Main Grid: Interactive Canvas + Live Angle Tuner -->
-    <div class="grid-2" id="calculator">
-      
-      <!-- Interactive Visualizer -->
+    <!-- Navigation Tabs -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="tab-gen" onclick="switchTab('tab-gen')" data-i18n="navGen">🛠️ Setup Generator & Presets</button>
+      <button class="tab-btn" data-tab="tab-tuning" onclick="switchTab('tab-tuning')" data-i18n="navTuning">🎯 Master Tuning (0% vs 100%)</button>
+      <button class="tab-btn" data-tab="tab-tweaks" onclick="switchTab('tab-tweaks')" data-i18n="navTweaks">🎮 Controller Setup (CM)</button>
+      <button class="tab-btn" data-tab="tab-extra" onclick="switchTab('tab-extra')" data-i18n="navExtra">🚀 Extra Features & Aids</button>
+      <button class="tab-btn" data-tab="tab-overlay" onclick="switchTab('tab-overlay')" data-i18n="navOverlay">🕹️ Gamepad Overlay</button>
+      <button class="tab-btn" data-tab="tab-guide" onclick="switchTab('tab-guide')" data-i18n="navGuide">🏁 CarX to AC Drift Guide</button>
+      <button class="tab-btn" data-tab="tab-install" onclick="switchTab('tab-install')" data-i18n="navInstall">📦 Installation & FAQ</button>
+    </nav>
+
+    <!-- TAB: Setup Generator (Primary Studio) -->
+    <section id="tab-gen" class="tab-content active">
+      <div class="grid-2">
+        <!-- Left: Setup Profile, Live Diagnosis & In-Game Import/Export -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <span class="icon">📋</span>
+              <span data-i18n="genProfileTitle">Setup Profile & Actions</span>
+            </h2>
+          </div>
+
+          <!-- Setup Name Input -->
+          <div class="slider-group" style="background: rgba(0,0,0,0.3); padding: 14px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 18px;">
+            <div class="slider-header" style="margin-bottom: 8px;">
+              <span class="slider-label" style="font-size: 14px; font-weight: 700; color: #fff;" data-i18n="genLblName">Setup Name:</span>
+            </div>
+            <input type="text" id="genName" value="CarX Assist (DRO 1:1)" style="width: 100%; background: #040508; border: 1px solid rgba(0,210,255,0.3); color: #fff; padding: 10px 14px; border-radius: 6px; font-family: var(--font-body); font-size: 15px; font-weight: 600;">
+            <div class="slider-desc" data-i18n="genNameHelp">Enter a custom name for your profile before saving or copying.</div>
+          </div>
+
+          <!-- Stability Diagnosis Card -->
+          <div class="diag-card">
+            <div class="diag-title">
+              <span>🩺</span>
+              <span data-i18n="diagTitle">Live Setup Stability Diagnosis</span>
+            </div>
+            <div class="diag-item">
+              <span class="diag-lbl" data-i18n="diagEngineLbl">Physics Engine:</span>
+              <span class="diag-val" id="diagEngine" style="color: var(--cyan); font-weight: 700;">CarX 1:1 SteerV6 (DRO)</span>
+            </div>
+            <div class="diag-item">
+              <span class="diag-lbl" data-i18n="diagStyleLbl">Handling Style:</span>
+              <span class="diag-val" id="diagStyle">CarX 1:1 Pure Street Drift</span>
+            </div>
+            <div class="diag-item">
+              <span class="diag-lbl" data-i18n="diagSpinLbl">Spinout Protection:</span>
+              <span class="diag-val" id="diagSpin" style="color: var(--green);">High (80% Idle Counter)</span>
+            </div>
+            <div class="diag-item">
+              <span class="diag-lbl" data-i18n="diagTransLbl">Transitions:</span>
+              <span class="diag-val" id="diagTrans">Responsive (5.5 rad/s)</span>
+            </div>
+          </div>
+
+          <!-- Export & Import Action Buttons -->
+          <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+            <!-- Export Row -->
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-cyan" onclick="copySetupJson()" style="flex: 1;" data-i18n="btnCopyJson">📋 Copy Setup to Clipboard</button>
+              <button class="btn btn-orange" onclick="downloadSetupJson()" style="flex: 1;" data-i18n="btnDlJson">💾 Download .carx.json File</button>
+            </div>
+            <!-- Import Row (2-Way Full Compatibility!) -->
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-ghost" onclick="triggerSetupFileInput()" style="flex: 1; border-color: rgba(0, 210, 255, 0.35); color: var(--cyan);" data-i18n="btnImportFile">📥 Import Setup from File</button>
+              <button class="btn btn-ghost" onclick="pasteSetupFromClipboard()" style="flex: 1; border-color: rgba(255, 123, 0, 0.35); color: var(--orange);" data-i18n="btnPasteClip">📋 Paste Setup from Clipboard</button>
+            </div>
+          </div>
+
+          <!-- Hidden File Input for .json / .carx.json / .carx / .ini / .csv uploads -->
+          <input type="file" id="setupFileInput" accept=".json,.carx.json,.carx,.ini,.csv" style="display: none;" onchange="handleSetupFileUpload(event)">
+
+          <div style="margin-top: 20px; background: rgba(0, 210, 255, 0.04); border: 1px solid rgba(0, 210, 255, 0.15); border-radius: 8px; padding: 14px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            <div style="font-weight: 700; color: var(--cyan); margin-bottom: 6px;">📥 How to load in Assetto Corsa:</div>
+            <div><strong style="color: #fff;">1.</strong> <span data-i18n="genHelpStep1">Open Assetto Corsa and launch any drift track with CarX Assist active.</span></div>
+            <div><strong style="color: #fff;">2.</strong> <span data-i18n="genHelpStep2">Open the 'CarX Gamepad' app on the right HUD app tray and go to the 'Setups' tab.</span></div>
+            <div><strong style="color: #fff;">3.</strong> <span data-i18n="genHelpStep3">Click 'Imp Clip' to paste from clipboard, or click 'Imp File' to load the downloaded file.</span></div>
+          </div>
+        </div>
+
+        <!-- Right: Presets & Setup Parameters -->
+<!-- Right: Presets & Setup Parameters -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <span class="icon">⚙️</span>
+              <span data-i18n="genParamsTitle">Setup Parameters</span>
+            </h2>
+            <button class="btn btn-secondary" onclick="switchTab('tab-tuning')" style="font-size: 12px; padding: 6px 12px; margin-left: auto; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+              <span>📖</span>
+              <span data-i18n="btnOpenTuningGuide">Open Parameter Guide</span>
+            </button>
+          </div>
+
+          <!-- Presets -->
+          <div style="margin-bottom: 12px; font-size: 13px; color: var(--text-muted);" data-i18n="genPresetsTitle">Quick Drift Car Presets:</div>
+          <div class="preset-pills">
+            <button class="preset-pill active" onclick="loadGenPreset('v2test')" style="border-color: rgba(0, 210, 255, 0.75); color: #fff; font-weight: 700;">⚡ CarX Assist (DRO 1:1)</button>
+            
+            <button class="preset-pill" onclick="loadGenPreset('wdt_street')">WDT Street (48°)</button>
+            <button class="preset-pill" onclick="loadGenPreset('wdt_pro')">WDT Pro (53°)</button>
+            <button class="preset-pill" onclick="loadGenPreset('gravy')">Gravy Garage (55°)</button>
+            <button class="preset-pill" onclick="loadGenPreset('vdc')">Formula Drift / VDC (68°)</button>
+            <button class="preset-pill" onclick="loadGenPreset('spin360')">360 Freestyle</button>
+          </div>
+
+          <!-- Sliders matching EXACT Lua script ranges -->
+          
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblLock">Max Drift Lock Angle:</span>
+              <span class="slider-val" id="valGenLock">65.0°</span>
+            </div>
+            <input type="range" id="genLock" min="35" max="75" value="65.0" step="0.5" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenLock">Physical steering lock limit matched to your car pack (e.g. WDT 48°-53°, VDC 60°-68°).</div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblKeep">Anti-Straighten Lock (Inward Keep):</span>
+              <span class="slider-val" id="valGenKeep">45%</span>
+            </div>
+            <input type="range" id="genKeep" min="0" max="85" value="45" step="1" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenKeep">Prevents sudden grip-up and violent snap-straightening when steering towards the apex.</div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblIdle">Idle Countersteer Ratio:</span>
+              <span class="slider-val" id="valGenIdle">80%</span>
+            </div>
+            <input type="range" id="genIdle" min="50" max="100" value="80" step="1" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenIdle">Automatic countersteer strength when thumbstick is released to center (idle).</div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblStabK">Drift Damping (StabK):</span>
+              <span class="slider-val" id="valGenStabK">0.10</span>
+            </div>
+            <input type="range" id="genStabK" min="0.00" max="0.35" value="0.10" step="0.01" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenStabK">Gyroscopic damping to eliminate high-speed steering wobble and tank-slappers.</div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblSmoothK1">Steering Speed (SmoothK1):</span>
+              <span class="slider-val" id="valGenSmoothK1">5.5 rad/s</span>
+            </div>
+            <input type="range" id="genSmoothK1" min="1.5" max="14.0" value="5.5" step="0.1" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenSmoothK1">Base steering rack transition speed from lock to lock in radians per second.</div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblSmoothK2">Yaw Counter Boost (SmoothK2):</span>
+              <span class="slider-val" id="valGenSmoothK2">1.80</span>
+            </div>
+            <input type="range" id="genSmoothK2" min="0.00" max="4.00" value="1.80" step="0.05" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenSmoothK2">Dynamic countersteer boost scaled by aggressive vehicle spin rate (yaw).</div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblPred">Prediction 0.2s Lookahead Gain:</span>
+              <span class="slider-val" id="valGenPredGain">1.00</span>
+            </div>
+            <input type="range" id="genPredGain" min="0.00" max="2.00" value="1.00" step="0.05" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenPred">Proactive lookahead predicting car trajectory by 200ms to eliminate pad latency.</div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblGasGamma">Gas Trigger Curve (RT Gamma):</span>
+              <span class="slider-val" id="valGenGasGamma">1.00</span>
+            </div>
+            <input type="range" id="genGasGamma" min="0.50" max="2.50" value="1.00" step="0.05" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenGasGamma">Right trigger (RT) throttle linearity curve (1.0 = linear, >1.0 = soft start).</div>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span class="slider-label" data-i18n="genLblBrakeGamma">Brake Sensitivity (LT Gamma):</span>
+              <span class="slider-val" id="valGenBrakeGamma">1.30</span>
+            </div>
+            <input type="range" id="genBrakeGamma" min="0.50" max="2.50" value="1.30" step="0.05" oninput="onGenSliderChange()">
+            <div class="slider-desc" data-i18n="descGenBrakeGamma">Left trigger (LT) brake sensitivity for left-foot brake drift modulation.</div>
+          </div>
+
+          <!-- Checkboxes (NO tyre smoke) -->
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="genAbs" checked onchange="onGenSliderChange()">
+              <span data-i18n="genCbAbs">Drift Brake Anti-Lock Assist (Left-Foot Braking)</span>
+            </label>
+            <div class="slider-desc" style="margin-left: 28px; margin-bottom: 10px;" data-i18n="descGenAbs">Balances brake bias to pitch front wheels without stalling rear drift wheelspin.</div>
+            <label class="checkbox-label">
+              <input type="checkbox" id="genRev" onchange="onGenSliderChange()">
+              <span data-i18n="genCbRev">Reverse Entry & 360 Spin Recovery (>90° / >140°)</span>
+            </label>
+            <div class="slider-desc" style="margin-left: 28px; margin-bottom: 10px;" data-i18n="descGenRev">Inverts steering past 90° for backwards entries and smooth 360° freestyle spins.</div>
+            <label class="checkbox-label">
+              <input type="checkbox" id="genAuto" onchange="onGenSliderChange()">
+              <span data-i18n="genCbAuto">CarX Drift Auto-Gearbox Mode</span>
+            </label>
+            <div class="slider-desc" style="margin-left: 28px; margin-bottom: 10px;" data-i18n="descGenAuto">Drift-optimized gearbox logic holding optimal powerband gears through slides.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASSETTO CORSA PITSTOP GARAGE & SETUP ADVISOR (1:1 ACCURATE IN-GAME REPLICA) -->
+      <div class="ac-garage-container" id="carxTuningSection">
+        <div class="ac-garage-topbar">
+          <div class="ac-garage-badge-wrap">
+            <span class="icon" style="font-size: 26px;">🏎️</span>
+            <div>
+              <h2 class="ac-garage-title">
+                <span>Assetto Corsa Garage & Setup Advisor</span>
+                <span class="badge-ac-sync" id="acBadgeReadout" style="font-size: 11px; padding: 3px 8px;">
+                  <span class="pulse-dot"></span> 1:1 Odczyt z Gry
+                </span>
+              </h2>
+              <div class="ac-garage-sub" id="acGarageSub">
+                Uniwersalny edytor setupu dla dowolnego auta Assetto Corsa • Ciśnienia co 1 PSI • Asysta driftu CarX
+              </div>
+            </div>
+          </div>
+          <div class="ac-garage-actions">
+            <button class="btn btn-cyan" id="acBtnUpload" onclick="triggerAcIniUpload()" style="font-size: 12px; padding: 6px 14px;">
+              📥 Wczytaj plik .ini
+            </button>
+            <button class="btn btn-orange" id="acBtnDownload" onclick="downloadAcIniFile()" style="font-size: 12px; padding: 6px 14px;">
+              💾 Pobierz plik .ini
+            </button>
+            <button class="btn btn-ghost" id="acBtnSync" onclick="syncFromCarXAssist()" style="font-size: 12px; padding: 6px 14px; border-color: rgba(255,255,255,0.2); color: #cbd5e1;">
+              🔄 Zsynchronizuj z CarX
+            </button>
+            <input type="file" id="acIniFileInput" accept=".ini,.json,.carx.json,.carx,.csv" style="display:none;" onchange="handleAcIniUpload(event)">
+          </div>
+        </div>
+
+                        <!-- Workflow Guide: Step-by-Step CarX -> Web -> Assetto Corsa -->
+        <div style="margin: 0 24px 16px 24px; background: rgba(14, 20, 32, 0.85); border: 1px solid rgba(0, 210, 255, 0.25); border-radius: 10px; padding: 14px 18px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 16px;">🏁</span>
+              <span id="acWfHeader" style="font-family: var(--font-display); font-size: 13.5px; font-weight: 700; color: #f8fafc; letter-spacing: 0.04em;">
+                JAK TO DZIAŁA? PRZEPŁYW DANYCH: CARX ➔ STRONA WWW ➔ ASSETTO CORSA
+              </span>
+            </div>
+            <button class="btn btn-ghost" id="acWfBtnCopy" onclick="navigator.clipboard.writeText('C:\\Users\\Gaming\\Documents\\Assetto Corsa\\setups'); showToast('Skopiowano ścieżkę do folderu setupów AC!');" style="font-size: 11px; padding: 4px 10px; border-color: rgba(0,210,255,0.35); color: var(--cyan);">
+              📋 Kopiuj ścieżkę do setupów AC
+            </button>
+          </div>
+
+          <div class="ac-adv-grid" style="margin-top: 0; gap: 12px;">
+            <!-- KROK 1 -->
+            <div class="ac-adv-card alert-info" style="border-left-width: 3px;">
+              <div class="ac-adv-card-title" id="acWfCard1Title" style="color: var(--cyan);">
+                <span>1️⃣</span> CO WCZYTAĆ NA STRONIE WWW?
+              </div>
+              <div id="acWfCard1Body" style="font-size: 12px; line-height: 1.55; color: #cbd5e1;">
+                Kliknij przycisk <strong>„Wczytaj plik”</strong> powyżej:<br>
+                • <strong>Z CarX:</strong> Wgraj plik <code style="color: var(--cyan); background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">.json</code> lub <code style="color: var(--cyan); background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">.csv</code> z folderu <code style="color:#e2e8f0; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">Kino/CarX_Assist/</code> (statystyki z jazdy lub profil auta). Strona automatycznie odczyta telemetrię i ustawi geometrię!<br>
+                • <strong>Z Assetto Corsa:</strong> Wgraj plik <code style="color: var(--orange); background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last.ini</code> lub <code style="color: var(--orange); background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code>, aby podejrzeć i zmodyfikować obecny setup.
+              </div>
+            </div>
+
+            <!-- KROK 2 -->
+            <div class="ac-adv-card alert-grip" style="border-left-width: 3px;">
+              <div class="ac-adv-card-title" id="acWfCard2Title" style="color: #22c55e;">
+                <span>2️⃣</span> EDYCJA I POBRANIE .INI
+              </div>
+              <div id="acWfCard2Body" style="font-size: 12px; line-height: 1.55; color: #cbd5e1;">
+                • Dostosuj ciśnienia opon, przełożenia skrzyni i sztywność amortyzatorów (suwaki automatycznie synchronizują symetrię lewej i prawej strony LF/RF i LR/RR).<br>
+                • Gdy setup jest gotowy, kliknij pomarańczowy przycisk <strong>„💾 Pobierz plik .ini dla AC”</strong>.<br>
+                • Przeglądarka pobierze gotowy plik konfiguracyjny <code style="color:#22c55e; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code>.
+              </div>
+            </div>
+
+            <!-- KROK 3 -->
+            <div class="ac-adv-card alert-slip" style="border-left-width: 3px;">
+              <div class="ac-adv-card-title" id="acWfCard3Title" style="color: #f59e0b;">
+                <span>3️⃣</span> CO WCZYTAĆ W ASSETTO CORSA?
+              </div>
+              <div id="acWfCard3Body" style="font-size: 12px; line-height: 1.55; color: #cbd5e1;">
+                • <strong>Setup auta:</strong> Przenieś pobrany plik <code style="color:#f59e0b; background: rgba(0,0,0,0.4); padding: 1px 5px; border-radius: 3px;">last_carx.ini</code> do folderu:<br>
+                <code style="display:inline-block; margin-top:2px; font-size:11px; background:rgba(0,0,0,0.5); padding:2px 6px; border-radius:4px; color:#f8fafc;">Dokumenty\Assetto Corsa\setups\&lt;auto&gt;\generic\</code><br>
+                W grze w Pitstopie wejdź w <strong>Setup ➔ Load ➔ generic</strong> i wybierz <strong>last_carx</strong>.<br>
+                • <strong>Asysta kierowania (Gamepad FX):</strong> W Content Managerze (<em>Settings ➔ Controls ➔ Gamepad FX</em>) upewnij się, że aktywny jest skrypt <strong>CarX Assist</strong>.
+              </div>
+            </div>
+
+            <!-- KROK 4 / STEROWANIE -->
+            <div class="ac-adv-card" style="border-left: 3px solid #a855f7; background: rgba(168, 85, 247, 0.08); grid-column: 1 / -1;">
+              <div class="ac-adv-card-title" style="color: #c084fc; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 6px;" id="acWfCard4Title">
+                  <span>🎮</span>
+                  <span>USTAWIENIA STEROWANIA PADA & SKRYPTU ASSIST.LUA (GDZIE SĄ, GDZIE SIĘ ZAPISUJĄ I JAK WCZYTAĆ?)</span>
+                </div>
+                <button class="btn btn-ghost" id="acWfBtnCopyAssist" onclick="navigator.clipboard.writeText('C:\\Users\\Gaming\\Desktop\\Skrypt CarX Assetto\\extension\\lua\\joypad-assist\\carx_assist'); showToast('Skopiowano ścieżkę do folderu assist.lua!');" style="font-size: 11px; padding: 2px 8px; border-color: rgba(192, 132, 252, 0.4); color: #c084fc;">
+                  📋 Kopiuj ścieżkę do assist.lua
+                </button>
+              </div>
+              <div id="acWfCard4Body" style="font-size: 12px; line-height: 1.6; color: #cbd5e1; margin-top: 4px;">
+                <strong>1. Gdzie są ustawienia sterowania na stronie WWW?</strong><br>
+                W zakładce u góry: <strong>🛠️ Setup Generator & Presets</strong> masz suwaki skrętu (Kąt skrętu 50°–75°, Autocatch Ratio, Stabilizacja yaw, Płynność kontry, Anti-spin). Możesz tam kliknąć <strong>„💾 Pobierz plik assist.lua”</strong> lub <strong>„📋 Kopiuj kod do schowka”</strong>.<br><br>
+                <strong>2. Gdzie wkleić / wczytać do skryptu CarX Assist w grze?</strong><br>
+                Plik <code style="color:#c084fc; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">assist.lua</code> oraz <code style="color:#c084fc; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">settings.ini</code> znajdują się w folderze gry:<br>
+                <code style="display:inline-block; margin: 3px 0; background:rgba(0,0,0,0.5); padding:2px 8px; border-radius:4px; color:#f8fafc; font-family:var(--font-mono);">assettocorsa\extension\lua\joypad-assist\carx_assist\assist.lua</code><br>
+                Gdy podmienisz ten plik, gra od razu wystartuje z Twoją nową fizyką sterowania.<br><br>
+                <strong>3. Gdzie zapisują się ustawienia z Content Managera i podczas jazdy?</strong><br>
+                • <strong>Ustawienia pada (CM):</strong> <em>Settings ➔ Controls ➔ Gamepad</em> zapisują się w <code style="color:#38bdf8; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">Documents\Assetto Corsa\cfg\controls.ini</code>.<br>
+                • <strong>Ustawienia skryptu na żywo:</strong> W grze po prawej stronie włącz aplikację <strong>CarXGamepad</strong>. Zmiany suwaków w grze zapisują się automatycznie w <code style="color:#38bdf8; background:rgba(0,0,0,0.4); padding:1px 5px; border-radius:3px;">Documents\Assetto Corsa\cfg\extension\joypad-assist\carx_assist.ini</code>.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ac-garage-shell">
+          <!-- LEFT SIDEBAR: EXACT AC GAME TABS -->
+          <div class="ac-garage-sidebar">
+            <div class="ac-sidebar-btn-load" onclick="triggerAcIniUpload()">
+              <span>Load</span>
+              <span style="font-size: 12px; opacity: 0.6;">📁</span>
+            </div>
+            <div class="ac-sidebar-tab active" data-actab="gears" onclick="switchAcTab('gears')">
+              <span>Gears</span>
+              <span class="ac-tab-dot"></span>
+            </div>
+            <div class="ac-sidebar-tab" data-actab="tyres" onclick="switchAcTab('tyres')">
+              <span>Tyres</span>
+              <span class="ac-tab-dot"></span>
+            </div>
+            <div class="ac-sidebar-tab" data-actab="fuel" onclick="switchAcTab('fuel')">
+              <span>Fuel</span>
+              <span class="ac-tab-dot" style="opacity: 0;"></span>
+            </div>
+            <div class="ac-sidebar-tab" data-actab="alignment" onclick="switchAcTab('alignment')">
+              <span>Alignment</span>
+              <span class="ac-tab-dot"></span>
+            </div>
+            <div class="ac-sidebar-tab" data-actab="dampers" onclick="switchAcTab('dampers')">
+              <span>Dampers</span>
+              <span class="ac-tab-dot" style="opacity: 0;"></span>
+            </div>
+            <div class="ac-sidebar-tab" data-actab="drivetrain" onclick="switchAcTab('drivetrain')">
+              <span>Drivetrain</span>
+              <span class="ac-tab-dot" style="opacity: 0;"></span>
+            </div>
+            <div class="ac-sidebar-tab" data-actab="generic" onclick="switchAcTab('generic')">
+              <span>Generic</span>
+              <span class="ac-tab-dot" style="opacity: 0;"></span>
+            </div>
+            <div class="ac-sidebar-tab" data-actab="suspension" onclick="switchAcTab('suspension')">
+              <span>Suspension</span>
+              <span class="ac-tab-dot" style="opacity: 0;"></span>
+            </div>
+            <div class="ac-sidebar-tab" data-actab="summary" onclick="switchAcTab('summary')">
+              <span>Summary</span>
+              <span class="ac-tab-dot" style="background: var(--cyan); opacity: 0.9;"></span>
+            </div>
+          </div>
+
+          <!-- RIGHT CONTENT: TABS -->
+          <div class="ac-garage-main">
+
+            <!-- 1. GEARS PANE -->
+            <div class="ac-pane active" id="pane-gears">
+              <div class="ac-gears-wrap">
+                <!-- Table of Gear Speeds -->
+                <div>
+                  <table class="ac-gears-table">
+                    <thead>
+                      <tr>
+                        <th>Gear</th>
+                        <th>Top speed (km/h)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>1</td><td id="acSpeedG1">90 km/h</td></tr>
+                      <tr><td>2</td><td id="acSpeedG2">122 km/h</td></tr>
+                      <tr><td>3</td><td id="acSpeedG3">157 km/h</td></tr>
+                      <tr><td>4</td><td id="acSpeedG4">186 km/h</td></tr>
+                      <tr><td>5</td><td id="acSpeedG5">220 km/h</td></tr>
+                    </tbody>
+                  </table>
+                  <div style="margin-top: 16px;">
+                    <!-- Final Gear Ratio Slider -->
+                    <div class="ac-ctrl-unit">
+                      <button class="ac-btn-step" onclick="stepAcParam('finalRatio', -1)">&lt;</button>
+                      <div class="ac-slider-body">
+                        <span class="ac-ctrl-label">Final Gear Ratio</span>
+                        <div class="ac-ctrl-slider-wrap">
+                          <input type="range" class="ac-range-input" id="acSlider_finalRatio" min="2.50" max="5.00" step="0.01" value="3.69" oninput="onAcSliderInput('finalRatio', this.value)">
+                        </div>
+                        <span class="ac-ctrl-val-display" id="acVal_finalRatio">3.69</span>
+                      </div>
+                      <button class="ac-btn-step" onclick="stepAcParam('finalRatio', 1)">&gt;</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RPM Chart Canvas -->
+                <div class="ac-gears-canvas-box">
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: #94a3b8; margin-bottom: 6px; width: 100%; display: flex; justify-content: space-between;">
+                    <span>RPM vs SPEED (km/h)</span>
+                    <span style="color: #ef4444;">REDLINE: 7200 RPM</span>
+                  </div>
+                  <canvas id="acGearsCanvas" width="380" height="190" style="width: 100%; max-width: 420px; height: 190px;"></canvas>
+                </div>
+              </div>
+
+              <!-- Drift Advisor for Gears -->
+              <div class="ac-drift-advisor-box">
+                <div class="ac-advisor-header">
+                  <div class="ac-advisor-tag" id="acAdvTag_gears">💡 ASYSTENT DRIFTU: SKRZYNIA BIEGÓW</div>
+                  <div class="ac-advisor-carx-map" id="acAdvMap_gears">CarX Map: 3.69 Final Drive • 5-biegowa skrzynia</div>
+                </div>
+                <div class="ac-advisor-text" id="acAdvText_gears">
+                  <strong>3. bieg (157 km/h)</strong> to w driftowych autach RWD główny bieg roboczy do szybkich, szerokich łuków (np. Tor Poznań sekcja kartingowa i nawrót). Prędkość ok. 120 km/h na 2. biegu pozwala na agresywne wejścia ze sprzęgła (Clutch Kick). Jeśli na wolniejszych torach brakuje momentu do utrzymania poślizgu bez redukcji, skróć przełożenie główne (Final Ratio) na <strong>3.90 – 4.10</strong>.
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. TYRES PANE -->
+            <div class="ac-pane" id="pane-tyres">
+              <div class="ac-controls-grid-2">
+                <!-- LF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('pressureLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Pressure LF*</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_pressureLF" min="15" max="35" step="1" value="21" oninput="onAcSliderInput('pressureLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_pressureLF">21 psi</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('pressureLF', 1)">&gt;</button>
+                </div>
+
+                <!-- RF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('pressureRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Pressure RF*</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_pressureRF" min="15" max="35" step="1" value="21" oninput="onAcSliderInput('pressureRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_pressureRF">21 psi</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('pressureRF', 1)">&gt;</button>
+                </div>
+
+                <!-- LR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('pressureLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Pressure LR*</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_pressureLR" min="15" max="35" step="1" value="17" oninput="onAcSliderInput('pressureLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_pressureLR">17 psi</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('pressureLR', 1)">&gt;</button>
+                </div>
+
+                <!-- RR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('pressureRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Pressure RR*</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_pressureRR" min="15" max="35" step="1" value="17" oninput="onAcSliderInput('pressureRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_pressureRR">17 psi</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('pressureRR', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <!-- Wheels graphic matching screenshot 2 -->
+              <div class="ac-tyres-art-container">
+                <div class="ac-wheel-graphic"><div class="ac-wheel-spokes"></div><span class="ac-wheel-lbl" id="acWheelLbl_LF">LF: 21 psi</span></div>
+                  <div class="ac-wheel-graphic"><div class="ac-wheel-spokes"></div><span class="ac-wheel-lbl" id="acWheelLbl_RF">RF: 21 psi</span></div>
+                  <div class="ac-wheel-graphic"><div class="ac-wheel-spokes"></div><span class="ac-wheel-lbl" id="acWheelLbl_LR">LR: 17 psi</span></div>
+                  <div class="ac-wheel-graphic"><div class="ac-wheel-spokes"></div><span class="ac-wheel-lbl" id="acWheelLbl_RR">RR: 17 psi</span></div>
+              </div>
+
+              <!-- Drift Advisor for Tyres -->
+              <div class="ac-drift-advisor-box">
+                <div class="ac-advisor-header">
+                  <div class="ac-advisor-tag" id="acAdvTag_tyres">💡 ASYSTENT DRIFTU: CIŚNIENIA OPON (TYRES)</div>
+                  <div class="ac-advisor-carx-map" id="acAdvMap_tyres">CarX Map: Przód 150 kPa (21 psi) • Tył 120 kPa (17 psi)</div>
+                </div>
+                <div class="ac-advisor-text" id="acAdvText_tyres">
+                  Krok ciśnienia w grze wynosi <strong>dokładnie 1 PSI</strong> (brak ułamków typu 21.4). Z przodu <strong>21 psi</strong> zapewnia sztywny bark opony, natychmiastowe reagowanie na kontrę asysty Autocatch i zapobiega podsterowności przy agresywnym flicku. Z tyłu <strong>17 psi</strong> rozkłada maksymalną powierzchnię styku opon driftowych, dając równomierne dymienie i płynne odpychanie bez nagłego zerwania przyczepności.
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. FUEL PANE -->
+            <div class="ac-pane" id="pane-fuel">
+              <div class="ac-controls-grid-1">
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('fuel', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fuel (Ilość paliwa)</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_fuel" min="5" max="70" step="1" value="30" oninput="onAcSliderInput('fuel', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_fuel">30 L</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('fuel', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <!-- Drift Advisor for Fuel -->
+              <div class="ac-drift-advisor-box">
+                <div class="ac-advisor-header">
+                  <div class="ac-advisor-tag" id="acAdvTag_fuel">💡 ASYSTENT DRIFTU: PALIWO (FUEL)</div>
+                  <div class="ac-advisor-carx-map" id="acAdvMap_fuel">CarX Map: 30 L (wartość optymalna)</div>
+                </div>
+                <div class="ac-advisor-text" id="acAdvText_fuel">
+                  Masa paliwa (30 litrów = ok. 22 kg) znajduje się w zbiorniku nad tylną osią. Dociąża to tył i daje optymalny rozkład mas 52:48. Zbyt mało paliwa (&lt;10L) sprawia, że tył staje się nerwowy i ma skłonność do gwałtownych obrotów.
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. ALIGNMENT PANE -->
+            <div class="ac-pane" id="pane-alignment">
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">PRZÓD (FRONT ALIGNMENT - CAMBER & TOE)</div>
+              <div class="ac-controls-grid-2">
+                <!-- Camber LF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('camberLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Camber LF*</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_camberLF" min="-7.0" max="0.0" step="0.1" value="-5.0" oninput="onAcSliderInput('camberLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_camberLF">-5.0°</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('camberLF', 1)">&gt;</button>
+                </div>
+
+                <!-- Camber RF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('camberRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Camber RF*</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_camberRF" min="-7.0" max="0.0" step="0.1" value="-5.0" oninput="onAcSliderInput('camberRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_camberRF">-5.0°</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('camberRF', 1)">&gt;</button>
+                </div>
+
+                <!-- Toe LF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('toeLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Toe LF</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_toeLF" min="0" max="80" step="1" value="40" oninput="onAcSliderInput('toeLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_toeLF">40</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('toeLF', 1)">&gt;</button>
+                </div>
+
+                <!-- Toe RF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('toeRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Toe RF</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_toeRF" min="0" max="80" step="1" value="40" oninput="onAcSliderInput('toeRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_toeRF">40</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('toeRF', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">TYŁ (REAR ALIGNMENT - CAMBER & TOE)</div>
+              <div class="ac-controls-grid-2">
+                <!-- Camber LR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('camberLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Camber LR*</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_camberLR" min="-4.0" max="1.0" step="0.1" value="-0.8" oninput="onAcSliderInput('camberLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_camberLR">-0.8°</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('camberLR', 1)">&gt;</button>
+                </div>
+
+                <!-- Camber RR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('camberRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Camber RR</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_camberRR" min="-4.0" max="1.0" step="0.1" value="-0.8" oninput="onAcSliderInput('camberRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_camberRR">-0.8°</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('camberRR', 1)">&gt;</button>
+                </div>
+
+                <!-- Toe LR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('toeLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Toe LR</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_toeLR" min="0" max="80" step="1" value="40" oninput="onAcSliderInput('toeLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_toeLR">40</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('toeLR', 1)">&gt;</button>
+                </div>
+
+                <!-- Toe RR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('toeRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Toe RR</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_toeRR" min="0" max="80" step="1" value="40" oninput="onAcSliderInput('toeRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_toeRR">40</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('toeRR', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <!-- Drift Advisor for Alignment -->
+              <div class="ac-drift-advisor-box">
+                <div class="ac-advisor-header">
+                  <div class="ac-advisor-tag" id="acAdvTag_alignment">💡 ASYSTENT DRIFTU: GEOMETRIA ZAWIESZENIA (ALIGNMENT)</div>
+                  <div class="ac-advisor-carx-map" id="acAdvMap_alignment">CarX Map: Camber F -5.0° • Caster 9.5° • Camber R -0.8°</div>
+                </div>
+                <div class="ac-advisor-text" id="acAdvText_alignment">
+                  Kąt <strong>-5.0° z przodu</strong> jest sercem asysty driftowej CarX: gdy przednie koła są w pełnej kontrze (np. 50° skrętu), duży negatyw koryguje kąt pochylenia koła zewnętrznego tak, że opona przylega w 100% płasko do asfaltu. Z tyłu <strong>-0.8° do 0.0°</strong> daje maksymalną przyczepność wzdłużną do napędzania auta. Zbieżność <strong>Toe 40</strong> (neutralna 0.00°) zapewnia błyskawiczny powrót kierownicy bez myszkowania na prostych.
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. DAMPERS PANE -->
+            <div class="ac-pane" id="pane-dampers">
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 2px;">PRZÓD (FRONT DAMPER SETTINGS)</div>
+              <div class="ac-controls-grid-2">
+                <!-- Bump F -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampBumpLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Bump</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampBumpLF" min="5" max="45" step="1" value="26" oninput="onAcSliderInput('dampBumpLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampBumpLF">26</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampBumpLF', 1)">&gt;</button>
+                </div>
+
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampBumpRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Bump</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampBumpRF" min="5" max="45" step="1" value="26" oninput="onAcSliderInput('dampBumpRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampBumpRF">26</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampBumpRF', 1)">&gt;</button>
+                </div>
+
+                <!-- Fast Bump F -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastBumpLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fast Bump</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampFastBumpLF" min="5" max="40" step="1" value="20" oninput="onAcSliderInput('dampFastBumpLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampFastBumpLF">20</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastBumpLF', 1)">&gt;</button>
+                </div>
+
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastBumpRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fast Bump</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampFastBumpRF" min="5" max="40" step="1" value="20" oninput="onAcSliderInput('dampFastBumpRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampFastBumpRF">20</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastBumpRF', 1)">&gt;</button>
+                </div>
+
+                <!-- Rebound F -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampReboundLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Rebound</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampReboundLF" min="10" max="50" step="1" value="36" oninput="onAcSliderInput('dampReboundLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampReboundLF">36</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampReboundLF', 1)">&gt;</button>
+                </div>
+
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampReboundRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Rebound</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampReboundRF" min="10" max="50" step="1" value="36" oninput="onAcSliderInput('dampReboundRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampReboundRF">36</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampReboundRF', 1)">&gt;</button>
+                </div>
+
+                <!-- Fast Rebound F -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastReboundLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fast Rebound</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampFastReboundLF" min="10" max="45" step="1" value="32" oninput="onAcSliderInput('dampFastReboundLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampFastReboundLF">32</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastReboundLF', 1)">&gt;</button>
+                </div>
+
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastReboundRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fast Rebound</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampFastReboundRF" min="10" max="45" step="1" value="32" oninput="onAcSliderInput('dampFastReboundRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampFastReboundRF">32</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastReboundRF', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 2px;">TYŁ (REAR DAMPER SETTINGS)</div>
+              <div class="ac-controls-grid-2">
+                <!-- Bump R -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampBumpLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Bump</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampBumpLR" min="5" max="40" step="1" value="14" oninput="onAcSliderInput('dampBumpLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampBumpLR">14</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampBumpLR', 1)">&gt;</button>
+                </div>
+
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampBumpRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Bump</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampBumpRR" min="5" max="40" step="1" value="14" oninput="onAcSliderInput('dampBumpRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampBumpRR">14</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampBumpRR', 1)">&gt;</button>
+                </div>
+
+                <!-- Fast Bump R -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastBumpLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fast Bump</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampFastBumpLR" min="5" max="35" step="1" value="10" oninput="onAcSliderInput('dampFastBumpLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampFastBumpLR">10</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastBumpLR', 1)">&gt;</button>
+                </div>
+
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastBumpRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fast Bump</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampFastBumpRR" min="5" max="35" step="1" value="10" oninput="onAcSliderInput('dampFastBumpRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampFastBumpRR">10</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastBumpRR', 1)">&gt;</button>
+                </div>
+
+                <!-- Rebound R -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampReboundLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Rebound</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampReboundLR" min="10" max="45" step="1" value="32" oninput="onAcSliderInput('dampReboundLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampReboundLR">32</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampReboundLR', 1)">&gt;</button>
+                </div>
+
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampReboundRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Rebound</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampReboundRR" min="10" max="45" step="1" value="32" oninput="onAcSliderInput('dampReboundRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampReboundRR">32</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampReboundRR', 1)">&gt;</button>
+                </div>
+
+                <!-- Fast Rebound R -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastReboundLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fast Rebound</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampFastReboundLR" min="5" max="40" step="1" value="26" oninput="onAcSliderInput('dampFastReboundLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampFastReboundLR">26</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastReboundLR', 1)">&gt;</button>
+                </div>
+
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastReboundRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Fast Rebound</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_dampFastReboundRR" min="5" max="40" step="1" value="26" oninput="onAcSliderInput('dampFastReboundRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_dampFastReboundRR">26</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('dampFastReboundRR', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <!-- Drift Advisor for Dampers -->
+              <div class="ac-drift-advisor-box">
+                <div class="ac-advisor-header">
+                  <div class="ac-advisor-tag" id="acAdvTag_dampers">💡 ASYSTENT DRIFTU: AMORTYZATORY (DAMPERS)</div>
+                  <div class="ac-advisor-carx-map" id="acAdvMap_dampers">CarX Map: Przód twardszy (26/36) • Tył miększy (14/32)</div>
+                </div>
+                <div class="ac-advisor-text" id="acAdvText_dampers">
+                  Sztywniejszy przód (<strong>Bump 26 / Rebound 36</strong>) eliminuje gwałtowne nurkowanie przy wciśnięciu hamulca lewą nogą i stabilizuje kąt wejścia. Miększy tył (<strong>Bump 14 / Fast Bump 10</strong>) pozwala zawieszeniu na przysiadanie (squat) pod 100% gazem, co maksymalizuje trakcję odpychającą i daje pełną kontrolę nad kątem poślizgu.
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. DRIVETRAIN PANE -->
+            <div class="ac-pane" id="pane-drivetrain">
+              <div class="ac-controls-grid-1">
+                <!-- Diff Power -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('diffPower', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Diff Power</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_diffPower" min="0" max="100" step="1" value="100" oninput="onAcSliderInput('diffPower', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_diffPower">100%</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('diffPower', 1)">&gt;</button>
+                </div>
+
+                <!-- Diff Coast -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('diffCoast', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Diff Coast</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_diffCoast" min="0" max="100" step="1" value="100" oninput="onAcSliderInput('diffCoast', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_diffCoast">100%</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('diffCoast', 1)">&gt;</button>
+                </div>
+
+                <!-- Diff Preload -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('diffPreload', -5)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Diff Preload</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_diffPreload" min="0" max="200" step="5" value="0" oninput="onAcSliderInput('diffPreload', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_diffPreload">0 Nm</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('diffPreload', 5)">&gt;</button>
+                </div>
+              </div>
+
+              <!-- Drift Advisor for Drivetrain -->
+              <div class="ac-drift-advisor-box">
+                <div class="ac-advisor-header">
+                  <div class="ac-advisor-tag" id="acAdvTag_drivetrain">💡 ASYSTENT DRIFTU: UKŁAD NAPĘDOWY & DYFERENCJAŁ</div>
+                  <div class="ac-advisor-carx-map" id="acAdvMap_drivetrain">CarX Map: 100% Spaw (Welded Diff / 2-way LSD)</div>
+                </div>
+                <div class="ac-advisor-text" id="acAdvText_drivetrain">
+                  Ustawienie <strong>Diff Power 100% i Diff Coast 100%</strong> to złoty standard driftu w CarX i Assetto Corsa. Odpowiada w 100% zaspawanemu mostowi (Spaw): koła tylnej osi obracają się zawsze z identyczną prędkością. Zapobiega to rozpinaniu osi po odpuszczeniu gazu i eliminuje niebezpieczne nagłe wyprostowanie auta.
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. GENERIC PANE -->
+            <div class="ac-pane" id="pane-generic">
+              <div class="ac-controls-grid-1">
+                <!-- Brake Bias -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('brakeBias', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Brake Bias</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_brakeBias" min="50" max="90" step="1" value="70" oninput="onAcSliderInput('brakeBias', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_brakeBias">70%</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('brakeBias', 1)">&gt;</button>
+                </div>
+
+                <!-- Brake Power -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('brakePower', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Brake Power</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_brakePower" min="50" max="100" step="1" value="100" oninput="onAcSliderInput('brakePower', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_brakePower">100%</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('brakePower', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <!-- Drift Advisor for Generic -->
+              <div class="ac-drift-advisor-box">
+                <div class="ac-advisor-header">
+                  <div class="ac-advisor-tag" id="acAdvTag_generic">💡 ASYSTENT DRIFTU: UKŁAD HAMULCOWY (GENERIC)</div>
+                  <div class="ac-advisor-carx-map" id="acAdvMap_generic">CarX Map: Brake Bias 70% Przód • Power 100%</div>
+                </div>
+                <div class="ac-advisor-text" id="acAdvText_generic">
+                  Ustawienie <strong>Brake Bias 70%</strong> na przód jest kluczowe dla techniki <em>Left-Foot Braking</em> (hamowanie lewą nogą na padzie LT). Wciśnięcie hamulca w poślizgu natychmiast dociąża przednią oś i dociąga auto do wewnętrznej krawędzi zakrętu (Apex / Inward Keep), nie gasząc jednocześnie rotacji tylnych kół.
+                </div>
+              </div>
+            </div>
+
+            <!-- 8. SUSPENSION PANE -->
+            <div class="ac-pane" id="pane-suspension">
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--cyan); margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">PRZÓD (FRONT SUSPENSION - ARB, SPRĘŻYNY, PRZEŚWIT)</div>
+              <!-- ARB Front -->
+              <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+                <div class="ac-ctrl-unit" style="width: 100%; max-width: 440px;">
+                  <button class="ac-btn-step" onclick="stepAcParam('arbFront', -500)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">ARB Front</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_arbFront" min="2000" max="25000" step="500" value="12000" oninput="onAcSliderInput('arbFront', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_arbFront">12000 N/m</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('arbFront', 500)">&gt;</button>
+                </div>
+              </div>
+
+              <div class="ac-controls-grid-2">
+                <!-- Wheel rate LF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('wheelRateLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Wheel rate LF</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_wheelRateLF" min="40" max="200" step="1" value="117" oninput="onAcSliderInput('wheelRateLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_wheelRateLF">117 N/mm</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('wheelRateLF', 1)">&gt;</button>
+                </div>
+
+                <!-- Wheel rate RF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('wheelRateRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Wheel rate RF</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_wheelRateRF" min="40" max="200" step="1" value="117" oninput="onAcSliderInput('wheelRateRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_wheelRateRF">117 N/mm</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('wheelRateRF', 1)">&gt;</button>
+                </div>
+
+                <!-- Height LF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('heightLF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Height LF</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_heightLF" min="20" max="100" step="1" value="60" oninput="onAcSliderInput('heightLF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_heightLF">60</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('heightLF', 1)">&gt;</button>
+                </div>
+
+                <!-- Height RF -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('heightRF', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Height RF</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_heightRF" min="20" max="100" step="1" value="60" oninput="onAcSliderInput('heightRF', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_heightRF">60</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('heightRF', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--orange); margin-top: 14px; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em;">TYŁ (REAR SUSPENSION - ARB, SPRĘŻYNY, PRZEŚWIT)</div>
+              <!-- ARB Rear -->
+              <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+                <div class="ac-ctrl-unit" style="width: 100%; max-width: 440px;">
+                  <button class="ac-btn-step" onclick="stepAcParam('arbRear', -500)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">ARB Rear</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_arbRear" min="1000" max="15000" step="500" value="4000" oninput="onAcSliderInput('arbRear', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_arbRear">4000 N/m</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('arbRear', 500)">&gt;</button>
+                </div>
+              </div>
+
+              <div class="ac-controls-grid-2">
+                <!-- Wheel rate LR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('wheelRateLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Wheel rate LR</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_wheelRateLR" min="30" max="150" step="1" value="67" oninput="onAcSliderInput('wheelRateLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_wheelRateLR">67 N/mm</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('wheelRateLR', 1)">&gt;</button>
+                </div>
+
+                <!-- Wheel rate RR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('wheelRateRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Wheel rate RR</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_wheelRateRR" min="30" max="150" step="1" value="67" oninput="onAcSliderInput('wheelRateRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_wheelRateRR">67 N/mm</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('wheelRateRR', 1)">&gt;</button>
+                </div>
+
+                <!-- Height LR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('heightLR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Height LR</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_heightLR" min="20" max="100" step="1" value="70" oninput="onAcSliderInput('heightLR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_heightLR">70</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('heightLR', 1)">&gt;</button>
+                </div>
+
+                <!-- Height RR -->
+                <div class="ac-ctrl-unit">
+                  <button class="ac-btn-step" onclick="stepAcParam('heightRR', -1)">&lt;</button>
+                  <div class="ac-slider-body">
+                    <span class="ac-ctrl-label">Height RR</span>
+                    <div class="ac-ctrl-slider-wrap">
+                      <input type="range" class="ac-range-input" id="acSlider_heightRR" min="20" max="100" step="1" value="70" oninput="onAcSliderInput('heightRR', this.value)">
+                    </div>
+                    <span class="ac-ctrl-val-display" id="acVal_heightRR">70</span>
+                  </div>
+                  <button class="ac-btn-step" onclick="stepAcParam('heightRR', 1)">&gt;</button>
+                </div>
+              </div>
+
+              <!-- Drift Advisor for Suspension -->
+              <div class="ac-drift-advisor-box">
+                <div class="ac-advisor-header">
+                  <div class="ac-advisor-tag" id="acAdvTag_suspension">💡 ASYSTENT DRIFTU: ZAWIESZENIE (SUSPENSION)</div>
+                  <div class="ac-advisor-carx-map" id="acAdvMap_suspension">CarX Map: ARB F 12000 N/m • ARB R 4000 N/m • Sprężyny 117/67</div>
+                </div>
+                <div class="ac-advisor-text" id="acAdvText_suspension">
+                  Sztywny przedni stabilizator (<strong>12000 N/m</strong>) i twarde sprężyny (<strong>117 N/mm</strong>) ograniczają przechyły przodu i sprawiają, że auto reaguje na ruch drążka pada błyskawicznie jak gokart. Miękki tył (<strong>ARB 4000 N/m, sprężyny 67 N/mm</strong>) pozwala tylnym kołom swobodnie kopiować asfalt, co daje niesamowitą kontrolę i zapobiega nerwowemu snap-oversteerowi.
+                </div>
+              </div>
+            </div>
+
+            <!-- 9. SUMMARY / TELEMETRY PANE (MATCHING SCREENSHOT 8) -->
+            <div class="ac-pane" id="pane-summary">
+              <div class="ac-summary-wrap">
+                <div class="ac-telem-header-box">
+                  <div>
+                    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan); letter-spacing: 0.08em;">VEHICLE CHASSIS TELEMETRY</div>
+                    <div class="ac-telem-car-title" id="acTelemCarTitle">Uniwersalny Setup Telemetrii (Wczytaj .ini)</div>
+                  </div>
+                  <div style="display: flex; gap: 8px;">
+                    <span class="badge-ac-sync" id="acTelemBadge" style="background: rgba(0,210,255,0.15); border-color: rgba(0,210,255,0.4); color: var(--cyan);">
+                      Assetto Corsa Physics
+                    </span>
+                  </div>
+                </div>
+
+                <!-- FRONT AXLE TABLE -->
+                <table class="ac-telem-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 32%;">Parametr</th>
+                      <th style="width: 26%;">Left</th>
+                      <th style="width: 16%;">Σ / Δ</th>
+                      <th style="width: 26%;">Right</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="ac-telem-axle-hdr">
+                      <td colspan="4">PRZÓD (FRONT AXLE)</td>
+                    </tr>
+                    <tr>
+                      <td>Toe (°)</td>
+                      <td>0.00</td>
+                      <td>Σ 0.00</td>
+                      <td>-0.00</td>
+                    </tr>
+                    <tr>
+                      <td>Camber (°)</td>
+                      <td>-4.91</td>
+                      <td>Δ 0.04</td>
+                      <td>-4.95</td>
+                    </tr>
+                    <tr>
+                      <td>Caster (°)</td>
+                      <td>-3.00</td>
+                      <td>Δ 0.00</td>
+                      <td>-3.00</td>
+                    </tr>
+                    <tr>
+                      <td>Pressure (psi) Cold / Hot</td>
+                      <td>21.0 / 29.6</td>
+                      <td>—</td>
+                      <td>21.0 / 29.6</td>
+                    </tr>
+                    <tr>
+                      <td>Ride height (mm)</td>
+                      <td colspan="3" style="font-weight: 700; color: var(--cyan);">0.5 mm</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- AXLE CONNECTOR & CHASSIS BALANCE -->
+                <div style="text-align: center; margin: 12px 0; padding: 10px; background: rgba(0, 0, 0, 0.35); border-radius: 6px; border: 1px dashed rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center; gap: 10px;">
+                  <span style="font-family: var(--font-display); font-size: 12px; color: #94a3b8; font-weight: 600; letter-spacing: 0.05em;">🚗 ROZSTAW OSI & GEOMETRIA PODWOZIA</span>
+                </div>
+
+                <!-- REAR AXLE TABLE -->
+                <table class="ac-telem-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 32%;">Parametr</th>
+                      <th style="width: 26%;">Left</th>
+                      <th style="width: 16%;">Σ / Δ</th>
+                      <th style="width: 26%;">Right</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="ac-telem-axle-hdr">
+                      <td colspan="4">TYŁ (REAR AXLE)</td>
+                    </tr>
+                    <tr>
+                      <td>Toe (°)</td>
+                      <td>0.00</td>
+                      <td>Σ 0.00</td>
+                      <td>0.00</td>
+                    </tr>
+                    <tr>
+                      <td>Camber (°)</td>
+                      <td>-0.81</td>
+                      <td>Δ -1.02</td>
+                      <td>0.21</td>
+                    </tr>
+                    <tr>
+                      <td>Pressure (psi) Cold / Hot</td>
+                      <td>17.0 / 25.6</td>
+                      <td>—</td>
+                      <td>17.0 / 25.6</td>
+                    </tr>
+                    <tr>
+                      <td>Ride height (mm)</td>
+                      <td colspan="3" style="font-weight: 700; color: var(--orange);">4.7 mm</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    
+<!-- TAB 3: Master Tuning (0% vs 100%) -->
+    <section id="tab-tuning" class="tab-content">
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">
-            <span class="icon">◎</span>
-            <span data-i18n="visTitle">Real-Time Countersteer Angle Visualizer</span>
+            <span class="icon">🎯</span>
+            <span data-i18n="tuningTitle">Master Tuning Reference (0% vs 100% Impact Guide)</span>
+          </h2>
+          <button class="btn btn-secondary" onclick="switchTab('tab-gen')" style="font-size: 12px; padding: 6px 12px; margin-left: auto; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+            <span>🛠️</span>
+            <span data-i18n="btnBackToGenerator">Back to Setup Generator</span>
+          </button>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;" data-i18n="tuningIntro">
+          Understand exactly how every single slider and assist checkbox mathematically alters car dynamics in Assetto Corsa. Compare the physical extremes to dial in your personal drift style.
+        </p>
+
+        <!-- Parameter 1: Max Drift Lock Angle -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_lock">Steering Geometry</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="lock_name">Max Drift Lock Angle (35° – 75°)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="lock_summary">
+            Defines the physical front steering lock limit. Crucial to match your drift pack's steering rack geometry.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="lock_min_title">At 35.0° (Street OEM Lock):</div>
+              <div class="tuning-desc" data-i18n="lock_min_text">Tight factory steering angle. Suitable for subtle street slides, but will instantly spin on deep drift angles.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="lock_max_title">At 75.0° (Extreme Pro Angle):</div>
+              <div class="tuning-desc" data-i18n="lock_max_text">Enormous steering travel allowing insane backwards entries and deep slip angles without spinning out.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="lock_tip">Street cars (WDT Street) use 48°. Pro cars (WDT Pro, Gravy) use 53°–55°. Formula Drift / VDC uses 60°–68°. Match this value to your car pack!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 2: Anti-Straighten Lock (Inward Keep) -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_keep">Drift Line Lock</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="keep_name">Anti-Straighten Lock (Inward Keep)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="keep_summary">
+            Limits how far wheels can turn inward toward the turn apex during active drift. Prevents the car from suddenly gripping up and violently snapping straight.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="keep_min_title">At 0% (Full Manual Angle Control):</div>
+              <div class="tuning-desc" data-i18n="keep_min_text">No inward steering angle clamping. The driver can steer all the way inward to straighten the car instantly. Requires high stick precision.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="keep_max_title">At 85% (Maximum Lockout):</div>
+              <div class="tuning-desc" data-i18n="keep_max_text">Heavily prevents wheels from turning inside the turn while sliding. The car stays locked in drift angle even if you push the stick inwards.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="keep_tip">40%–50% is the golden sweet spot for authentic CarX feel: forgiving mid-drift stability without feeling glued or artificial.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 3: Idle Countersteer Ratio -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_idle">Core Assist Autocatch</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="idle_name">Idle Countersteer Ratio</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="idle_summary">
+            Determines the automatic countersteer angle applied when the thumbstick is released to center (idle).
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="idle_min_title">At 50% (Weak Autocatch):</div>
+              <div class="tuning-desc" data-i18n="idle_min_text">Wheels countersteer only half of the required angle when centering the stick. The car will spin if you do not actively push the stick into counter.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="idle_max_title">At 100% (Full Mathematical Autocatch):</div>
+              <div class="tuning-desc" data-i18n="idle_max_text">Releasing the stick perfectly locks wheels at the kinematic countersteer angle. Makes flick entries and high-speed chicanes effortless.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="idle_tip">Set to 80% for authentic CarX street feel, or 90%–100% if you are learning or prefer effortless tandem transitions.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 4: Drift Damping (StabK) -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_stab">Gyro Stabilization</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="stab_name">Drift Damping (StabK)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="stab_summary">
+            Calculates angular velocity damping to eliminate high-frequency steering wobble, oscillation, and tank-slappers.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="stab_min_title">At 0.00 (Unfiltered Raw):</div>
+              <div class="tuning-desc" data-i18n="stab_min_text">Zero damping on angular velocity. The car reacts with lightning speed but may wobble or fish-tail wildly on high grip tires.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="stab_max_title">At 0.35 (Heavy Damping):</div>
+              <div class="tuning-desc" data-i18n="stab_max_text">Maximum stabilizing resistance. Completely eliminates tank-slappers and wobble, but transitions will feel slower and more deliberate.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="stab_tip">0.10–0.14 gives flawless high-speed stability on 99% of Assetto Corsa drift tracks without muting car agility.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 5: Steering Speed (SmoothK1) -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_sk1">Rack Speed</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="sk1_name">Steering Speed (SmoothK1)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="sk1_summary">
+            The base rotational speed of the virtual steering rack in radians per second during transitions.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="sk1_min_title">At 1.5 rad/s (Slow & Heavy):</div>
+              <div class="tuning-desc" data-i18n="sk1_min_text">Very slow steering rack. Suitable for heavy GT or highway cruisers, but will lag behind fast drift transitions.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="sk1_max_title">At 14.0 rad/s (Instant Twitch):</div>
+              <div class="tuning-desc" data-i18n="sk1_max_text">Near instantaneous wheel repositioning. Wheels snap from lock to lock immediately. Recommended for competition pro tandem drifters.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="sk1_tip">5.0–6.0 rad/s simulates realistic wheel mass for street cars; 7.5–9.0 rad/s provides razor-sharp pro drift transitions.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 6: Yaw Counter Boost (SmoothK2) -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_sk2">Dynamic Snap Boost</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="sk2_name">Yaw Counter Boost (SmoothK2)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="sk2_summary">
+            Multiplies countersteer speed when the car rotates aggressively (high angular velocity), catching violent snap oversteer.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="sk2_min_title">At 0.00 (Fixed Steering Speed):</div>
+              <div class="tuning-desc" data-i18n="sk2_min_text">Steering rack moves at constant speed regardless of violent snap oversteer. Requires early manual anticipation.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="sk2_max_title">At 4.00 (Instant Snap Saver):</div>
+              <div class="tuning-desc" data-i18n="sk2_max_text">Instantly flings front wheels into counter at four times base speed during aggressive inertia kicks, catching almost any entry.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="sk2_tip">1.50–2.00 provides the ideal balance between realistic physical feedback and catching sudden aggressive entries.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 7: Prediction 0.2s Lookahead Gain -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_pred">Latency Killer</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="pred_name">Prediction 0.2s Lookahead Gain</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="pred_summary">
+            Anticipates vehicle trajectory 200 milliseconds into the future based on lateral Gs and yaw rate to eliminate gamepad input lag.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="pred_min_title">At 0.00 (Reactive Only):</div>
+              <div class="tuning-desc" data-i18n="pred_min_text">Assist calculates counter purely based on current angles. Can feel slightly lagging on fast, twitchy modern drift cars.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="pred_max_title">At 2.00 (Maximum Predictive Bias):</div>
+              <div class="tuning-desc" data-i18n="pred_max_text">Aggressive lookahead. Wheels start countersteering milliseconds before your eyes can even register the initiation.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="pred_tip">1.00 is mathematically tuned for standard 60-144Hz displays and gamepad thumbstick travel.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 8: Gas Trigger Curve (RT Gamma) -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_gas">Throttle Modulation</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="gas_name">Gas Trigger Curve (RT Gamma)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="gas_summary">
+            Shapes the throttle curve on the right trigger (RT). 1.00 is linear; higher values soften initial trigger travel for high-horsepower cars.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="gas_min_title">At 0.50 (Aggressive Bite):</div>
+              <div class="tuning-desc" data-i18n="gas_min_text">Huge power delivered right at the top of the trigger. Great for low-powered naturally aspirated cars (e.g. AE86).</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="gas_max_title">At 2.50 (Ultra-Delicate Feathering):</div>
+              <div class="tuning-desc" data-i18n="gas_max_text">First 70% of trigger travel delivers gentle power. Crucial for modulating 1000hp turbo monsters without spinning tires uncontrollably.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="gas_tip">1.00–1.20 provides the most natural throttle feathering in high-angle drift zones.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 9: Brake Sensitivity (LT Gamma) -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_brake">Left-Foot Braking</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="brake_name">Brake Sensitivity (LT Gamma)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="brake_summary">
+            Shapes the left trigger (LT) brake progression for delicate left-foot braking and mid-drift clipping point adjustments.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="brake_min_title">At 0.50 (Hard Bite):</div>
+              <div class="tuning-desc" data-i18n="brake_min_text">Full braking pressure is applied with light trigger squeeze. Prone to upsetting car balance mid-drift.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="brake_max_title">At 2.50 (Gradual Trail Braking):</div>
+              <div class="tuning-desc" data-i18n="brake_max_text">Extremely gradual brake buildup. Allows resting your finger on LT to adjust angle without locking wheels.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="brake_tip">1.30 allows you to drag the front brakes mid-drift to tuck the nose into clipping points effortlessly.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 10: Drift Brake Anti-Lock Assist -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_abs">Smart Brake Bias</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="abs_name">Drift Brake Anti-Lock Assist (Left-Foot Braking)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="abs_summary">
+            Dynamically optimizes brake bias during active drift so pressing the brake pedal pitches the car without killing rear wheelspin.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="abs_min_title">Disabled [ ] (Standard AC Brake Physics):</div>
+              <div class="tuning-desc" data-i18n="abs_min_text">Pressing LT mid-drift clamps all 4 wheels equally, often locking the rear differential and killing drift momentum.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="abs_max_title">Enabled [✔] (Smart Drift Bias Optimizer):</div>
+              <div class="tuning-desc" data-i18n="abs_max_text">Prioritizes front brake bite to transfer weight forward and tighten drift line, leaving rear tires spinning freely.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="abs_tip">Keep [✔] ON at all times for pro-level left-foot braking techniques on gamepad.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 11: Reverse Entry & 360 Spin Recovery -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_rev">Freestyle & Gymkhana</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="rev_name">Reverse Entry & 360 Spin Recovery (>90° / >140°)</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="rev_summary">
+            Special physics algorithm that inverts steering lock past 90° so you can initiate backward entries and complete 360° spins.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="rev_min_title">Disabled [ ] (90° Strict Clamp):</div>
+              <div class="tuning-desc" data-i18n="rev_min_text">Countersteer stops at 90°. Going past 90° will force maximum countersteer and cause an instant spinout.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="rev_max_title">Enabled [✔] (Freestyle Angle Inversion):</div>
+              <div class="tuning-desc" data-i18n="rev_max_text">Inverts steering logic through 90°–180°, guiding wheels smoothly through full 360° rotations back into forward drift.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="rev_tip">Enable [✔] if you do gymkhana, freestyle, or backwards entries into high-speed banked corners!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parameter 12: CarX Drift Auto-Gearbox Mode -->
+        <div class="tuning-card-item">
+          <span class="tuning-badge" data-i18n="badge_auto">Transmission Control</span>
+          <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 6px;" data-i18n="auto_name">CarX Drift Auto-Gearbox Mode</h3>
+          <p style="font-size: 14px; color: var(--text-muted);" data-i18n="auto_summary">
+            Drift-optimized automatic gearbox logic that locks gears in peak torque band and eliminates mid-drift shifting.
+          </p>
+          <div class="tuning-grid">
+            <div class="tuning-col min">
+              <div class="tuning-header" data-i18n="auto_min_title">Disabled [ ] (Standard AC Automatic):</div>
+              <div class="tuning-desc" data-i18n="auto_min_text">Stock game transmission often downshifts or upshifts awkwardly mid-corner when wheelspin spikes, upsetting balance.</div>
+            </div>
+            <div class="tuning-col max">
+              <div class="tuning-header" data-i18n="auto_max_title">Enabled [✔] (CarX Style RPM Governor):</div>
+              <div class="tuning-desc" data-i18n="auto_max_text">Maintains current gear throughout the entire slide, keeping the engine singing at peak torque until you straighten.</div>
+            </div>
+            <div class="tuning-tip-box">
+              <strong>💡 Pro Tip & Sweet Spot:</strong> <span data-i18n="auto_tip">A must-have if you drive with automatic shifting! If you shift manually with bumpers, leave it off.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+<!-- TAB 4: Controller Setup (CM) -->
+    <section id="tab-tweaks" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="icon">🎮</span>
+            <span data-i18n="tweaksTitle">Content Manager & Controller Configuration</span>
+          </h2>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 16px;" data-i18n="tweaksIntro">
+          To give CarX Assist 100% pure control over the steering rack without vanilla Assetto Corsa filters interfering, set the following parameters in Content Manager:
+        </p>
+
+        <div class="callout" data-i18n="tweaksWarning">
+          ⚠️ Crucial Rule: Assetto Corsa's built-in speed sensitivity and steering filters fight against the CarX Assist mathematical countersteer solver! Zero them out below.
+        </div>
+
+        <div class="code-box">
+[Content Manager -> Settings -> Assetto Corsa -> Controls -> Gamepad]
+Speed sensitivity:       0%    (Essential! Do NOT use AC speed limiter)
+Steering speed:          100%  (Allows assist to turn rack at full rate)
+Steering gamma:          100%  (Linear 1.0 gamma - assist handles curve)
+Steering filter:         0%    (Disabled - assist has built-in StabK)
+Steering deadzone:       0%    (Assist applies exact 6% circular deadzone)
+Rumble effects:          0%    (Prevents motor vibration shaking analog stick)</div>
+
+        <div style="margin-top: 20px;">
+          <h3 style="font-family: var(--font-display); font-size: 18px; color: var(--cyan); margin-bottom: 8px;" data-i18n="tweaksAppTabTitle">Inside the CarX Gamepad App (Controller Tweaks Tab):</h3>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;" data-i18n="tweaksAppTabDesc">
+            When you open the 'CarX Gamepad' app on the right HUD during a driving session, open the 3rd tab: <strong>'Controller Tweaks'</strong>. It displays a live real-time input monitor showing your raw analog stick position, deadzone ring, steering gamma curve, and direct sliders for steering deadzone and stick gamma.
+          </p>
+        </div>
+      </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 5: Extra Features & Aids (NO Tyre Smoke) -->
+    <section id="tab-extra" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="icon">🚀</span>
+            <span data-i18n="extraTitle">Extra Features & Advanced Driving Aids</span>
+          </h2>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 16px;" data-i18n="extraIntro">
+          Advanced modules included directly in CarX Assist to replicate the iconic freestyle features of CarX Drift Racing Online.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="feature-box-title">
+              <span>🔄</span>
+              <span data-i18n="f_rev_title">Reverse Entry & 360 Spin Recovery (>90° / >140°)</span>
+            </div>
+            <div class="feature-box-desc" data-i18n="f_rev_desc">
+              Dynamically flips the countersteer polarity when yaw angle exceeds 90° with full outside stick, or past 140° drift angle. Enables launching huge reverse backward entries and performing seamless 360 spins without wheels catching backwards.
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-title">
+              <span>⚡</span>
+              <span data-i18n="f_gear_title">CarX Drift Auto-Gearbox</span>
+            </div>
+            <div class="feature-box-desc" data-i18n="f_gear_desc">
+              Intelligent drifting transmission logic: prevents unwanted upshifts while sliding sideways at high RPM, downshifts early on handbrake/left-foot brake flick entries, and automatically blips throttle for rev-matching.
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-title">
+              <span>🦶</span>
+              <span data-i18n="f_pedals_title">Pedal Trigger Curves (RT / LT Gamma)</span>
+            </div>
+            <div class="feature-box-desc" data-i18n="f_pedals_desc">
+              Independent progressive non-linear trigger sensitivity. 1.00 = linear standard. Recommended 1.30 for gamepad: provides wide precision in the 50-75% throttle range for tandem proximity, and soft progressive left-foot brake bite.
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-title">
+              <span>⌨️</span>
+              <span data-i18n="f_kb_title">CarX Keyboard Drift Mode (A/D/W/S)</span>
+            </div>
+            <div class="feature-box-desc" data-i18n="f_kb_desc">
+              Original progressive virtual stick algorithm with flick acceleration for keyboard players. Allows high-level competitive drifting using keyboard A/D keys for steering, W/S for throttle/brake, and Space for handbrake.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 6: Gamepad Overlay (ACCURATE: Dual Xbox/PS modes, stick tracking, trigger bars) -->
+    <section id="tab-overlay" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="icon">🕹️</span>
+            <span data-i18n="overlayTitle">Gamepad Overlay – Exclusive Addon by Dova</span>
+          </h2>
+          <span style="font-family: var(--font-mono); font-size: 12px; color: var(--green); background: rgba(0,255,136,0.1); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(0,255,136,0.3);" data-i18n="overlayBadge">★ Bundled Inside CarX_Assist.zip ★</span>
+        </div>
+        <p style="color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;" data-i18n="overlayDesc">
+          A real-time animated HUD gamepad overlay built specifically for drift drivers, content creators, and streamers in Assetto Corsa. Since no modern responsive gamepad visualizer existed for AC drift, this app was created and included for free!
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="feature-box-title">
+              <span>🎮</span>
+              <span data-i18n="overlayF1Title">Analog Stick Travel & Deadzone</span>
+            </div>
+            <div class="feature-box-desc" data-i18n="overlayF1Desc">
+              Real-Time Stick Tracking: Smooth virtual analog thumbstick motion showing exact steering inputs and active deadzone radius.
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-title">
+              <span>⚡</span>
+              <span data-i18n="overlayF2Title">RT / LT Trigger Pressure Bars</span>
+            </div>
+            <div class="feature-box-desc" data-i18n="overlayF2Desc">
+              Progressive Glow Bars: Dynamic visual pressure bars for RT (throttle) and LT (left-foot braking) with instant response.
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-title">
+              <span>🔘</span>
+              <span data-i18n="overlayF3Title">Active Buttons & Bumpers</span>
+            </div>
+            <div class="feature-box-desc" data-i18n="overlayF3Desc">
+              Active Button Glow: Instant visual illumination for face buttons (A/B/X/Y), bumpers (LB/RB), D-Pad, and handbrake.
+            </div>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-box-title">
+              <span>🔀</span>
+              <span data-i18n="overlayF4Title">Dual Controller Modes (Xbox & PlayStation)</span>
+            </div>
+            <div class="feature-box-desc" data-i18n="overlayF4Desc">
+              1-Click Layout Switch: Direct toggle on the HUD pill between Xbox layout (ABXY, LB/RB, LT/RT) and PlayStation layout (✕○□△, L1/R1, L2/R2).
+            </div>
+          </div>
+        </div>
+
+        <div class="callout-cyan" style="margin-top: 24px; border-radius: 8px; padding: 14px 18px;" data-i18n="overlayTip">
+          💡 How to enable in game: Move mouse to the right edge of the screen, open the Apps tray, click 'Gamepad Overlay', and pin it anywhere on your screen for streaming or learning!
+        </div>
+      </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 7: CarX to AC Drift Guide -->
+    <section id="tab-guide" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="icon">🏁</span>
+            <span data-i18n="guideTitle">CarX Players' Transition Guide to Assetto Corsa</span>
           </h2>
         </div>
         
-        <div class="canvas-container">
-          <canvas id="driftCanvas" width="460" height="280"></canvas>
-        </div>
-        <div style="display: flex; justify-content: space-around; font-size: 11px; margin-top: 6px; color: var(--text-muted); background: rgba(0,0,0,0.25); padding: 6px; border-radius: 6px;">
-          <span><strong style="color: #00ff88;">── ➔</strong> <span data-i18n="legTraj">Motion Trajectory</span></span>
-          <span><strong style="color: #ff7b00;">■</strong> <span data-i18n="legNose">Car Front (Nose)</span></span>
-          <span><strong style="color: #00d2ff;">──</strong> <span data-i18n="legWheels">Wheel Countersteer</span></span>
-        </div>
+        <h3 style="font-family: var(--font-display); font-size: 20px; color: var(--cyan); margin-bottom: 10px;" data-i18n="guideWhyTitle">Why is Assetto Corsa Impossible on Gamepad Without This Script?</h3>
+        <p style="color: var(--text-muted); margin-bottom: 18px; line-height: 1.6;" data-i18n="guideWhyText">
+          In vanilla Assetto Corsa, your analog stick maps directly to steering rack rotation. Unlike CarX Drift Racing Online, which features a sophisticated built-in countersteer solver, AC requires you to manually spin the wheels 900 degrees in milliseconds — a physical impossibility on a tiny 15mm thumbstick. The CarX Assist script ports the exact mathematical algorithm from CarX SteerVersion 6 directly into Custom Shaders Patch, giving you the natural steering flow of CarX combined with Assetto Corsa's unmatched physics engine.
+        </p>
 
-        <div class="stat-row">
-          <div class="stat-box">
-            <div class="stat-label" data-i18n="statDriftAngle">Car Drift Angle</div>
-            <div class="stat-value" id="dispDriftAngle">35.0°</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label" data-i18n="statSteerAngle">Wheel Angle (Counter)</div>
-            <div class="stat-value highlight" id="dispWheelAngle">38.5°</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-label" data-i18n="statStatus">Status</div>
-            <div class="stat-value" id="dispStatus" style="color: var(--green);">STABLE</div>
-          </div>
-        </div>
+        <h3 style="font-family: var(--font-display); font-size: 20px; color: var(--orange); margin-bottom: 10px;" data-i18n="guideRulesTitle">Core Drifting Rules with CarX Assist:</h3>
+        <ul style="color: var(--text-muted); margin-left: 20px; line-height: 1.8; margin-bottom: 20px;">
+          <li data-i18n="guideRule1"><strong>The stick indicates your INTENTION, not raw wheel angle:</strong> To increase drift angle, pull the stick slightly in the direction of the turn. To straighten up, push toward the outside.</li>
+          <li data-i18n="guideRule2"><strong>Let the assist catch the car (Idle Countersteer):</strong> When initiating a high-speed flick or transition, release the analog stick to center for a fraction of a second. The assist will catch the momentum at the optimal tire slip angle without spinning!</li>
+          <li data-i18n="guideRule3"><strong>Throttle controls your trajectory line:</strong> More throttle pushes the car wider towards the outside of the track; lifting off pulls the car tighter into the inside apex.</li>
+          <li data-i18n="guideRule4"><strong>Left-foot brake for speed adjustments:</strong> Keep Drift Brake Anti-Lock assist active so you can tap LT to scrub speed in tandem without washing out the front tires.</li>
+        </ul>
       </div>
+    </section>
 
-      <!-- Presets & Parameter Calculator -->
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">
-            <span class="icon">⚡</span>
-            <span data-i18n="calcTitle">Car Pack Angle Calculator</span>
-          </h2>
-          <span style="font-size: 12px; color: var(--text-muted);" data-i18n="selectPack">Select car pack:</span>
-        </div>
-
-        <div class="preset-chips">
-          <button class="chip" onclick="setPreset('wdt_street')">WDT Street (48°)</button>
-          <button class="chip active" onclick="setPreset('wdt_pro')">WDT Pro (53°)</button>
-          <button class="chip" onclick="setPreset('gravy')">Gravy Garage (55°)</button>
-          <button class="chip" onclick="setPreset('vdc')">VDC / FD (60°)</button>
-          <button class="chip" onclick="setPreset('kunos')">Kunos E30 (43°)</button>
-        </div>
-
-        <!-- Slider 1: Drift Angle -->
-        <div class="control-group">
-          <div class="control-label">
-            <span data-i18n="lblSimSlip">Simulated Drift Angle:</span>
-            <span class="control-val" id="valSimSlip">35.0°</span>
-          </div>
-          <input type="range" id="sliderSlip" min="-65" max="65" step="0.5" value="35">
-        </div>
-
-        <!-- Slider 2: Gamepad Stick Position -->
-        <div class="control-group">
-          <div class="control-label">
-            <span data-i18n="lblStick">Gamepad Stick Input:</span>
-            <span class="control-val" id="valStick">0%</span>
-          </div>
-          <input type="range" id="sliderStick" min="-100" max="100" step="1" value="0">
-        </div>
-
-        <!-- Slider 3: Max Car Lock -->
-        <div class="control-group">
-          <div class="control-label">
-            <span data-i18n="lblLock">Max Car Steering Lock:</span>
-            <span class="control-val" id="valLock">53.0°</span>
-          </div>
-          <input type="range" id="sliderLock" min="40" max="68" step="0.5" value="53">
-        </div>
-
-        <!-- Slider 4: Countersteer Multiplier -->
-        <div class="control-group">
-          <div class="control-label">
-            <span data-i18n="lblCounterMult">Countersteer Multiplier:</span>
-            <span class="control-val" id="valCounterMult">1.10x</span>
-          </div>
-          <input type="range" id="sliderCounterMult" min="0.70" max="1.60" step="0.05" value="1.10">
-        </div>
-
-        <!-- Recommended Values Box -->
-        <div style="background: rgba(0, 210, 255, 0.05); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 8px; padding: 12px; margin-top: 14px;">
-          <div style="font-size: 12px; font-weight: 600; color: var(--cyan); margin-bottom: 6px;" data-i18n="recHeader">
-            RECOMMENDED IN-GAME SETTINGS (CARX GAMEPAD):
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px;">
-            <span>Max Drift Steer Angle: <strong id="recAngle" style="color: #fff;">53.0°</strong></span>
-            <span>Drift Damping: <strong id="recDamp" style="color: #fff;">0.35</strong></span>
-            <span>Speed Centering: <strong id="recCenter" style="color: #fff;">1.05</strong></span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- Controller Tweaks Section -->
-    <div class="card" id="tweaks" style="margin-bottom: 40px;">
-      <div class="card-header">
-        <h2 class="card-title">
-          <span class="icon">🎮</span>
-          <span data-i18n="tweaksTitle">Optimal Gamepad Settings in Content Manager</span>
-        </h2>
-        <span class="pill-rec" data-i18n="tweaksImportant">Crucial for proper operation</span>
-      </div>
-
-      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;" data-i18n="tweaksIntro">
-        Skrypt CarX Assist przejmuje całkowitą kontrolę nad fizyką wirtualnej kierownicy. Aby uniknąć opóźnień ("laga") i martwych stref, w zakładce <strong>Settings &rarr; Assetto Corsa &rarr; Controls &rarr; Gamepad</strong> należy ustawić:
-      </p>
-
-      <table class="tweaks-table">
-        <thead>
-          <tr>
-            <th data-i18n="thParam">Setting</th>
-            <th data-i18n="thVal">Recommended Value</th>
-            <th data-i18n="thWhy">Why?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Deadzone (Martwa Strefa)</strong></td>
-            <td class="val">0%</td>
-            <td data-i18n="whyDeadzone">Removes dead space at stick center. The script has its own micro noise filter.</td>
-          </tr>
-          <tr>
-            <td><strong>Steering Speed (Szybkość Skrętu)</strong></td>
-            <td class="val">100%</td>
-            <td data-i18n="whySpeed">Removes artificial Kunos lag. Countersteer speed is controlled directly by CarX.</td>
-          </tr>
-          <tr>
-            <td><strong>Speed Sensitivity (Czułość do Prędkości)</strong></td>
-            <td class="val">0 km/h</td>
-            <td data-i18n="whySens">Prevents steer angle lockouts during high speed entries (90+ km/h).</td>
-          </tr>
-          <tr>
-            <td><strong>Gamma (Krzywa Liniowości)</strong></td>
-            <td class="val">1.50 - 2.20</td>
-            <td data-i18n="whyGamma">Provides surgical micro-correction precision around stick center.</td>
-          </tr>
-          <tr>
-            <td><strong>Steering Filter (Filtr Skrętu)</strong></td>
-            <td class="val">0%</td>
-            <td data-i18n="whyFilter">Filtering is handled internally by the CarX Damping algorithm in assist.lua.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Installation & Setup Guide -->
-    <div class="grid-2" id="install">
-      
+    <!-- TAB 8: Installation & FAQ -->
+    <section id="tab-install" class="tab-content">
       <div class="card">
         <div class="card-header">
           <h2 class="card-title">
             <span class="icon">📦</span>
-            <span data-i18n="installTitle">Step-by-Step Installation</span>
+            <span data-i18n="installTitle">Installation, Updates & Frequently Asked Questions</span>
           </h2>
         </div>
 
-        <ol class="step-list">
-          <li class="step-item">
-            <h4 data-i18n="step1Title">Custom Shaders Patch (CSP) Required</h4>
-            <p data-i18n="step1Desc">Ensure Content Manager and CSP 0.2.3 or higher are installed.</p>
-          </li>
-          <li class="step-item">
-            <h4 data-i18n="step2Title">Extract CarX_Assist.zip</h4>
-            <p data-i18n="step2Desc">Copy extension and apps folders directly to your main Assetto Corsa root folder.</p>
-          </li>
-          <li class="step-item">
-            <h4 data-i18n="step3Title">Activate script in Content Manager</h4>
-            <p data-i18n="step3Desc">Navigate to Settings → CSP → Gamepad FX. Check Active and select CarX Drift Assist.</p>
-          </li>
-          <li class="step-item">
-            <h4 data-i18n="step4Title">Enable In-Game App</h4>
-            <p data-i18n="step4Desc">In-game, open the right-side apps bar and activate CarX Gamepad to tune angles live!</p>
-          </li>
+        <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--cyan); margin-bottom: 10px;" data-i18n="installStepsTitle">10-Second Drag & Drop Installation:</h3>
+        <ol style="color: var(--text-muted); margin-left: 20px; line-height: 1.8; margin-bottom: 24px;">
+          <li data-i18n="installStep1">Open <strong>Content Manager</strong>.</li>
+          <li data-i18n="installStep2">Drag and drop <strong>CarX_Assist.zip</strong> directly into the Content Manager window.</li>
+          <li data-i18n="installStep3">Click the green hamburger / download icon in the top right corner and click <strong>'Install'</strong>.</li>
+          <li data-i18n="installStep4">Go to: <strong>Settings -> Custom Shaders Patch -> GAMEPAD FX</strong>: check <strong>[x] Active</strong>, and select <strong>CarX Assist</strong> as the script.</li>
+          <li data-i18n="installStep5">Done! In game, open <strong>CarX Gamepad</strong> from the right HUD app shelf.</li>
         </ol>
+
+        <h3 style="font-family: var(--font-display); font-size: 19px; color: var(--orange); margin-bottom: 10px;" data-i18n="faqTitle">Frequently Asked Questions (FAQ):</h3>
+        <div style="margin-bottom: 16px;">
+          <strong style="color: #fff;" data-i18n="faq1Q">Q: Does this work in online multiplayer servers?</strong>
+          <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;" data-i18n="faq1A">A: Yes! 100% compatible with all public and private online drift servers. Custom Shaders Patch Gamepad FX scripts run locally on client input and never trigger server mismatches or checksum kicks.</p>
+        </div>
+        <div style="margin-bottom: 16px;">
+          <strong style="color: #fff;" data-i18n="faq2Q">Q: Does this require any DLL injection or CarX files?</strong>
+          <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;" data-i18n="faq2A">A: Zero DLLs! It is written in 100% pure CSP Lua and Python. It is completely safe, zero ban risk, and does not require CarX Drift Racing Online to be installed.</p>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">
-            <span class="icon">💡</span>
-            <span data-i18n="faqTitle">FAQ & Pro Tips</span>
-          </h2>
-        </div>
-
-        <div style="margin-bottom: 16px;">
-          <h4 style="font-size: 14px; color: var(--cyan); margin-bottom: 4px;" data-i18n="q1">Dlaczego auto wpada w "rybkę" (tank-slapper)?</h4>
-          <p style="font-size: 13px; color: var(--text-muted);" data-i18n="a1">Zwiększ parametr <strong>Drift Damping</strong> w menu aplikacji (np. z 0.35 do 0.45) lub obniż lekko <strong>Steering Assist Speed</strong>. Wyciszy to gwałtowne odbicia kół przy przekładce.</p>
-        </div>
-
-        <div style="margin-bottom: 16px;">
-          <h4 style="font-size: 14px; color: var(--cyan); margin-bottom: 4px;" data-i18n="q2">Drift Brake Anti-Lock Assist — co to daje?</h4>
-          <p style="font-size: 13px; color: var(--text-muted);" data-i18n="a2">Podczas poślizgu pozwala na dohamowywanie lewym spustem (LT) bez natychmiastowego blokowania przednich kół i utraty kierowalności — dokładnie tak, jak działa lewa noga w prawdziwym driftingu!</p>
-        </div>
-
-        <div>
-          <h4 style="font-size: 14px; color: var(--cyan); margin-bottom: 4px;" data-i18n="q3">Jak wpisać dokładny kąt (np. 48.0°)?</h4>
-          <p style="font-size: 13px; color: var(--text-muted);" data-i18n="a3">W zakładce Tuning wpisz wartość w pole tekstowe i wciśnij Enter, lub kliknij jeden z gotowych przycisków szybkiego wyboru: [48.0°], [50.0°], [53.0°], [55.0°].</p>
-        </div>
-
       </div>
-
-    </div>
+    </section>
 
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <div style="margin-bottom: 8px;">
-      CarX Gamepad Assist for Assetto Corsa &bull; Open Source Mod &bull; 
-      <span data-i18n="footerFree">Free hosting via GitHub Pages</span>
-    </div>
-    <div style="font-size: 12px; color: #5a667a;">
-      Stworzone dla społeczności Assetto Corsa Drift &bull; Inspirowane fizyką CarX Drift Racing Online
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        
+        <!-- Brand & Description -->
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand">
+            <img src="Dova_CarX_Assist_shield.png" alt="CarX Drift Assist Logo" class="footer-logo-img">
+            <div class="footer-brand-text">
+              <div class="footer-brand-title">CarX Drift Assist</div>
+              <div class="footer-brand-sub">Assetto Corsa Gamepad FX • CSP Edition</div>
+            </div>
+          </div>
+          <p class="footer-desc" data-i18n="footerDesc">
+            The ultimate mathematical gamepad drifting physics assist for Assetto Corsa. Bringing authentic CarX drift physics, countersteer kinematics, and arcade-fluid control to simulation.
+          </p>
+          <div class="footer-badges">
+            <span class="f-badge f-badge-cyan">100% Pure Lua</span>
+            <span class="f-badge f-badge-orange">Zero Ban Risk</span>
+            <span class="f-badge f-badge-green">Online Safe</span>
+            <span class="f-badge f-badge-purple">CSP 0.2.3+ Ready</span>
+          </div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="footer-col">
+          <h4 class="footer-col-title" data-i18n="footerNavTitle">Quick Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#tab-gen" onclick="switchTab('tab-gen')"><span class="f-arrow">›</span> <span data-i18n="navGen">Setup Generator & 3D</span></a></li>
+            <li><a href="#tab-tuning" onclick="switchTab('tab-tuning')"><span class="f-arrow">›</span> <span data-i18n="navTuning">Master Tuning (0% vs 100%)</span></a></li>
+            <li><a href="#tab-tweaks" onclick="switchTab('tab-tweaks')"><span class="f-arrow">›</span> <span data-i18n="navTweaks">Controller Setup (CM)</span></a></li>
+            <li><a href="#tab-extra" onclick="switchTab('tab-extra')"><span class="f-arrow">›</span> <span data-i18n="navExtra">Extra Features & Aids</span></a></li>
+            <li><a href="#tab-overlay" onclick="switchTab('tab-overlay')"><span class="f-arrow">›</span> <span data-i18n="navOverlay">Gamepad Overlay</span></a></li>
+            <li><a href="#tab-guide" onclick="switchTab('tab-guide')"><span class="f-arrow">›</span> <span data-i18n="navGuide">CarX to AC Drift Guide</span></a></li>
+            <li><a href="#tab-install" onclick="switchTab('tab-install')"><span class="f-arrow">›</span> <span data-i18n="navInstall">Installation & FAQ</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Compatibility -->
+        <div class="footer-col">
+          <h4 class="footer-col-title" data-i18n="footerCompatTitle">Compatibility</h4>
+          <ul class="footer-meta-list">
+            <li><strong data-i18n="footerPlatformLbl">Platform:</strong> <span data-i18n="footerPlatformVal">Assetto Corsa PC (Steam)</span></li>
+            <li><strong data-i18n="footerModLbl">Required Mod:</strong> <span data-i18n="footerModVal">CSP 0.2.3+ (Gamepad FX)</span></li>
+            <li><strong data-i18n="footerManagerLbl">Recommended:</strong> <span data-i18n="footerManagerVal">Content Manager</span></li>
+            <li><strong data-i18n="footerInputLbl">Supported Inputs:</strong> <span data-i18n="footerInputVal">Xbox, PlayStation, Steam Deck</span></li>
+            <li><strong data-i18n="footerArchLbl">Script Engine:</strong> <span data-i18n="footerArchVal">Client-side CSP Lua FX</span></li>
+          </ul>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="footer-col footer-col-actions">
+          <h4 class="footer-col-title" data-i18n="footerActionsTitle">Quick Actions</h4>
+          <p class="footer-actions-desc" data-i18n="footerActionsDesc">Get the latest release archive with drag & drop Content Manager support.</p>
+          <a href="CarX_Assist.zip" class="btn btn-primary footer-dl-btn" download>
+            <span class="icon">💾</span>
+            <span data-i18n="footerBtnDownload">Download Script (.zip)</span>
+          </a>
+          <button class="btn btn-secondary footer-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <span class="icon">⬆</span>
+            <span data-i18n="footerBackToTop">Back to Top</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>© 2026 CarX Drift Assist CSP Project • <span data-i18n="footerCommunity">Free Open Community Mod</span></span>
+        </div>
+        <div class="footer-disclaimer" data-i18n="footerDisclaimer">
+          Assetto Corsa is a registered trademark of Kunos Simulazioni S.r.l. CarX Drift Racing is a registered trademark of CarX Technologies, LLC. This mod is an independent open community project and is not affiliated with or endorsed by Kunos Simulazioni or CarX Technologies.
+        </div>
+      </div>
     </div>
   </footer>
 
-  <script>
-    // --- Internationalization (PL / EN) ---
-    const i18n = {
-      pl: {
-        downloadZip: "Pobierz ZIP",
-        heroBadge: "Fizyka CarX w Assetto Corsa",
-        heroTitle1: "Mistrzowskie Sterowanie Padem",
-        heroTitle2: "Dla Każdego Auta Driftowego",
-        heroDesc: "Oficjalny kalkulator kątów, przewodnik ustawień kontrolera i konfigurator skryptu CarX Assist dla CSP. Oblicz idealny kąt kontry dla paczek WDT, Gravy Garage, VDC i ciesz się płynnym driftem bez spinów.",
-        btnCalc: "Kalkulator Kątów",
-        btnTweaks: "Ustawienia Kontrolera",
-        btnInstall: "Instrukcja Instalacji",
-        visTitle: "Wizualizacja Kąta Kontry w Czasie Rzeczywistym",
-        statDriftAngle: "Kąt Ślizgu Auta",
-        statSteerAngle: "Kąt Kół (Kontra)",
-        statStatus: "Status",
-        legTraj: "Trajektoria Ruchu",
-        legNose: "Maska (Przód)",
-        legWheels: "Kontra Kół",
-        dirLeft: "(Lewo)",
-        dirRight: "(Prawo)",
-        counterP: "(Prawo / Kontra)",
-        counterL: "(Lewo / Kontra)",
-        center: "(Środek)", 
-        statusStable: "STABILNY",
-        statusCounter: "PEŁNA KONTRA",
-        statusSpin: "RYZYKO SPINU!",
-        calcTitle: "Kalkulator Paczek Samochodów",
-        selectPack: "Wybierz paczkę:",
-        lblSimSlip: "Symulowany Kąt Poślizgu (Drift Angle):",
-        lblStick: "Wychylenie Gałki Pada (Stick Input):",
-        lblLock: "Maksymalny Kąt Skrętu Auta (Car Lock):",
-        lblCounterMult: "Siła Kontry Asysty (Countersteer Multiplier):",
-        recHeader: "RECOMMENDED IN-GAME SETTINGS (CARX GAMEPAD):",
-        tweaksTitle: "Optymalne Ustawienia Gamepada w Content Manager",
-        tweaksImportant: "Kluczowe dla prawidłowego działania",
-        tweaksIntro: "Skrypt CarX Assist przejmuje całkowitą kontrolę nad fizyką wirtualnej kierownicy. Aby uniknąć opóźnień (\"laga\") i martwych stref, w zakładce Settings → Controls → Gamepad należy ustawić:",
-        thParam: "Parametr",
-        thVal: "Zalecana Wartość",
-        thWhy: "Dlaczego?",
-        whyDeadzone: "Eliminuje dziurę w środku gałki. Skrypt posiada własny mikrofiltr szumów.",
-        whySpeed: "Usuwa sztuczne opóźnienie Kunos. Szybkość kontry reguluje sam skrypt CarX.",
-        whySens: "Zapobiega blokowaniu skrętu przy wyższych prędkościach driftu (90+ km/h).",
-        whyGamma: "Zapewnia chirurgiczną precyzję mikro-korekt w środkowym zakresie drążka.",
-        whyFilter: "Filtrowanie wykonuje algorytm CarX Damping wewnątrz assist.lua.",
-        installTitle: "Instalacja Skryptu Krok po Kroku",
-        step1Title: "Wymagany Custom Shaders Patch (CSP)",
-        step1Desc: "Upewnij się, że masz zainstalowany Content Manager oraz CSP 0.2.3 lub nowszy.",
-        step2Title: "Wypakuj archiwum CarX_Assist.zip",
-        step2Desc: "Skopiuj foldery extension oraz apps bezpośrednio do głównego katalogu Assetto Corsa.",
-        step3Title: "Aktywuj asystę w Content Manager",
-        step3Desc: "Przejdź do Settings → CSP → Gamepad FX. Zaznacz Active i wybierz CarX Drift Assist.",
-        step4Title: "Włącz menu w grze",
-        step4Desc: "W grze otwórz listę aplikacji po prawej stronie i kliknij CarX Gamepad, aby dostrajać kąty na żywo!",
-        faqTitle: "Częste Pytania & Porady",
-        q1: "Dlaczego auto wpada w \"rybkę\" (tank-slapper)?",
-        a1: "Zwiększ parametr Drift Damping w menu aplikacji (np. z 0.35 do 0.45) lub obniż lekko Steering Assist Speed. Wyciszy to gwałtowne odbicia kół przy przekładce.",
-        q2: "Drift Brake Anti-Lock Assist — co to daje?",
-        a2: "Podczas poślizgu pozwala na dohamowywanie lewym spustem (LT) bez natychmiastowego blokowania przednich kół i utraty kierowalności — dokładnie tak, jak działa lewa noga w prawdziwym driftingu!",
-        q3: "Jak wpisać dokładny kąt (np. 48.0°)?",
-        a3: "W zakładce Tuning wpisz wartość w pole tekstowe i wciśnij Enter, lub kliknij jeden z gotowych przycisków szybkiego wyboru: [48.0°], [50.0°], [53.0°], [55.0°].",
-        footerFree: "Darmowy hosting na GitHub Pages"
-      },
-      en: {
-        downloadZip: "Download ZIP",
-        heroBadge: "CarX Physics in Assetto Corsa",
-        heroTitle1: "Masterful Gamepad Drift Steering",
-        heroTitle2: "For Every Drift Car Pack",
-        heroDesc: "Official steer lock calculator, controller setup guide, and CarX Assist config generator for CSP. Calculate the optimal countersteer angle for WDT, Gravy Garage, VDC packs and enjoy smooth drifting without accidental spins.",
-        btnCalc: "Angle Calculator",
-        btnTweaks: "Controller Settings",
-        btnInstall: "Installation Guide",
-        visTitle: "Real-Time Countersteer Angle Visualizer",
-        statDriftAngle: "Car Drift Angle",
-        statSteerAngle: "Wheel Angle (Counter)",
-                statStatus: "Status",
-        legTraj: "Motion Trajectory",
-        legNose: "Car Front (Nose)",
-        legWheels: "Wheel Countersteer",
-        dirLeft: "(Left)",
-        dirRight: "(Right)",
-        counterP: "(Right / Counter)",
-        counterL: "(Left / Counter)",
-        center: "(Center)", 
-        statusStable: "STABLE",
-        statusCounter: "FULL LOCK",
-        statusSpin: "SPIN RISK!",
-        calcTitle: "Car Pack Angle Calculator",
-        selectPack: "Select car pack:",
-        lblSimSlip: "Simulated Drift Angle:",
-        lblStick: "Gamepad Stick Input:",
-        lblLock: "Max Car Steering Lock:",
-        lblCounterMult: "Countersteer Multiplier:",
-        recHeader: "RECOMMENDED IN-GAME SETTINGS (CARX GAMEPAD):",
-        tweaksTitle: "Optimal Gamepad Settings in Content Manager",
-        tweaksImportant: "Crucial for proper operation",
-        tweaksIntro: "The CarX Assist script takes complete control over virtual steering physics. To eliminate input lag and dead zones, configure Settings → Controls → Gamepad as follows:",
-        thParam: "Setting",
-        thVal: "Recommended Value",
-        thWhy: "Why?",
-        whyDeadzone: "Removes dead space at stick center. The script has its own micro noise filter.",
-        whySpeed: "Removes artificial Kunos lag. Countersteer speed is controlled directly by CarX.",
-        whySens: "Prevents steer angle lockouts during high speed entries (90+ km/h).",
-        whyGamma: "Provides surgical micro-correction precision around stick center.",
-        whyFilter: "Filtering is handled internally by the CarX Damping algorithm in assist.lua.",
-        installTitle: "Step-by-Step Installation",
-        step1Title: "Custom Shaders Patch (CSP) Required",
-        step1Desc: "Ensure Content Manager and CSP 0.2.3 or higher are installed.",
-        step2Title: "Extract CarX_Assist.zip",
-        step2Desc: "Copy extension and apps folders directly to your main Assetto Corsa root folder.",
-        step3Title: "Activate script in Content Manager",
-        step3Desc: "Navigate to Settings → CSP → Gamepad FX. Check Active and select CarX Drift Assist.",
-        step4Title: "Enable In-Game App",
-        step4Desc: "In-game, open the right-side apps bar and activate CarX Gamepad to tune angles live!",
-        faqTitle: "FAQ & Pro Tips",
-        q1: "Why does the car wobble or snap violently (tank-slapper)?",
-        a1: "Increase Drift Damping in the app menu (e.g. from 0.35 to 0.45) or slightly reduce Steering Assist Speed to smooth out high-speed transitions.",
-        q2: "What is Drift Brake Anti-Lock Assist?",
-        a2: "It allows aggressive left-foot braking (LT trigger) while in drift without locking up the front steer tires, keeping full steering authority intact!",
-        q3: "How to set an exact steering angle (e.g. 48.0°)?",
-        a3: "In the Tuning tab, type the exact value into the input box and press Enter, or click one of the quick buttons: [48.0°], [50.0°], [53.0°], [55.0°].",
-        footerFree: "Free hosting via GitHub Pages"
-      }
-    };
+  <div id="toast">Setup copied to clipboard!</div>
 
-    let currentLang = 'en';
-
-    function setLanguage(lang) {
-      currentLang = lang;
-      document.querySelectorAll('#langToggle .lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-      });
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.dataset.i18n;
-        if (i18n[lang][key]) {
-          el.textContent = i18n[lang][key];
-        }
-      });
-      updatePhysics();
-    }
-
-    document.querySelectorAll('#langToggle .lang-btn').forEach(btn => {
-      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
-    });
-
-    // --- Presets Data ---
-    const presets = {
-      wdt_street: { lock: 48.0, mult: 1.05, damp: 0.38, center: 1.00 },
-      wdt_pro:    { lock: 53.0, mult: 1.10, damp: 0.35, center: 1.05 },
-      gravy:      { lock: 55.0, mult: 1.15, damp: 0.32, center: 1.10 },
-      vdc:        { lock: 60.0, mult: 1.20, damp: 0.30, center: 1.15 },
-      kunos:      { lock: 43.0, mult: 1.00, damp: 0.40, center: 0.95 }
-    };
-
-    function setPreset(key) {
-      const p = presets[key];
-      if (!p) return;
-      document.querySelectorAll('.preset-chips .chip').forEach(c => c.classList.remove('active'));
-      event.target.classList.add('active');
-
-      document.getElementById('sliderLock').value = p.lock;
-      document.getElementById('sliderCounterMult').value = p.mult;
-      document.getElementById('recAngle').textContent = p.lock.toFixed(1) + '°';
-      document.getElementById('recDamp').textContent = p.damp.toFixed(2);
-      document.getElementById('recCenter').textContent = p.center.toFixed(2);
-      updatePhysics();
-    }
-
-    // --- Interactive Simulation & Canvas ---
-    const canvas = document.getElementById('driftCanvas');
-    const ctx = canvas.getContext('2d');
-
-    const sliderSlip = document.getElementById('sliderSlip');
-    const sliderStick = document.getElementById('sliderStick');
-    const sliderLock = document.getElementById('sliderLock');
-    const sliderCounterMult = document.getElementById('sliderCounterMult');
-
-    const valSimSlip = document.getElementById('valSimSlip');
-    const valStick = document.getElementById('valStick');
-    const valLock = document.getElementById('valLock');
-    const valCounterMult = document.getElementById('valCounterMult');
-
-    const dispDriftAngle = document.getElementById('dispDriftAngle');
-    const dispWheelAngle = document.getElementById('dispWheelAngle');
-    const dispStatus = document.getElementById('dispStatus');
-
-    function clamp(val, min, max) {
-      return Math.max(min, Math.min(max, val));
-    }
-
-    function updatePhysics() {
-      const driftAngle = parseFloat(sliderSlip.value);
-      const stickInput = parseFloat(sliderStick.value) / 100.0;
-      const maxLock = parseFloat(sliderLock.value);
-      const counterMult = parseFloat(sliderCounterMult.value);
-
-      valSimSlip.textContent = driftAngle.toFixed(1) + '°';
-      valStick.textContent = (stickInput * 100).toFixed(0) + '%';
-      valLock.textContent = maxLock.toFixed(1) + '°';
-      valCounterMult.textContent = counterMult.toFixed(2) + 'x';
-
-      // CarX countersteer calculation logic:
-      // When car drifts (slip angle != 0), assist countersteers in opposite direction to catch the slide.
-      // E.g. car rotated left (-25°): wheels must steer right (+angle relative to chassis).
-      const assistCounter = -driftAngle * counterMult;
-      const userSteer = stickInput * maxLock;
-      let calculatedWheelAngle = assistCounter + userSteer;
-      
-      const isClamped = Math.abs(calculatedWheelAngle) > maxLock;
-      calculatedWheelAngle = clamp(calculatedWheelAngle, -maxLock, maxLock);
-
-      const texts = i18n[currentLang];
-      const slipDir = driftAngle < -0.5 ? texts.dirLeft : (driftAngle > 0.5 ? texts.dirRight : texts.center);
-      const wheelDir = calculatedWheelAngle > 0.5 ? texts.counterP : (calculatedWheelAngle < -0.5 ? texts.counterL : texts.center);
-
-      dispDriftAngle.textContent = Math.abs(driftAngle).toFixed(1) + '° ' + slipDir;
-      dispWheelAngle.textContent = Math.abs(calculatedWheelAngle).toFixed(1) + '° ' + wheelDir;
-
-      // Evaluate stability
-      if (Math.abs(driftAngle) > maxLock * 1.05) {
-        dispStatus.textContent = texts.statusSpin;
-        dispStatus.style.color = '#ff3344';
-      } else if (isClamped) {
-        dispStatus.textContent = texts.statusCounter;
-        dispStatus.style.color = '#ffaa00';
-      } else {
-        dispStatus.textContent = texts.statusStable;
-        dispStatus.style.color = '#00ff88';
-      }
-
-      drawCar(driftAngle, calculatedWheelAngle);
-    }
-
-    function drawCar(driftAngleDeg, wheelAngleDeg) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2 + 10;
-      const carWidth = 52;
-      const carLength = 110;
-      const wheelW = 12;
-      const wheelL = 26;
-
-      // 1. WORLD SPACE (ROAD & MOTION TRAJECTORY)
-      // Car is traveling along the road straight up (towards 12 o'clock)
-      ctx.save();
-
-      // Road track edges
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(centerX - 130, 0);
-      ctx.lineTo(centerX - 130, canvas.height);
-      ctx.moveTo(centerX + 130, 0);
-      ctx.lineTo(centerX + 130, canvas.height);
-      ctx.stroke();
-
-      // Road center dashed line
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-      ctx.setLineDash([8, 8]);
-      ctx.beginPath();
-      ctx.moveTo(centerX, 0);
-      ctx.lineTo(centerX, canvas.height);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Fixed World Trajectory Arrow (Motion Vector)
-      ctx.strokeStyle = '#00ff88';
-      ctx.fillStyle = '#00ff88';
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY + 85);
-      ctx.lineTo(centerX, centerY - 110);
-      ctx.stroke();
-
-      // Arrowhead
-      ctx.beginPath();
-      ctx.moveTo(centerX - 5, centerY - 100);
-      ctx.lineTo(centerX, centerY - 115);
-      ctx.lineTo(centerX + 5, centerY - 100);
-      ctx.fill();
-
-      // Small trajectory badge
-      ctx.font = '10px Rajdhani, sans-serif';
-      ctx.fillStyle = '#00ff88';
-      ctx.textAlign = 'right';
-      ctx.fillText(currentLang === 'pl' ? 'TRAJEKTORIA RUCHU (DROGA)' : 'MOTION TRAJECTORY (ROAD)', centerX - 10, centerY - 102);
-
-      ctx.restore();
-
-      // 2. CAR BODY SPACE (Rotated by car drift heading)
-      ctx.save();
-      ctx.translate(centerX, centerY);
-
-      // In canvas: positive rotation = clockwise.
-      // driftAngleDeg: negative = nose pointing left, positive = nose pointing right
-      const driftRad = (driftAngleDeg * Math.PI) / 180;
-      ctx.rotate(driftRad);
-
-      // Skid marks behind rear wheels (when sideways)
-      if (Math.abs(driftAngleDeg) > 4.0) {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
-        ctx.fillRect(-carWidth / 2 - 7, carLength / 2 - 12, wheelW, 40);
-        ctx.fillRect(carWidth / 2 - 5, carLength / 2 - 12, wheelW, 40);
-      }
-
-      // Car Body
-      ctx.fillStyle = '#161d2d';
-      ctx.strokeStyle = '#00d2ff';
-      ctx.lineWidth = 2;
-      ctx.shadowColor = 'rgba(0, 210, 255, 0.35)';
-      ctx.shadowBlur = 12;
-      
-      // Rounded chassis
-      ctx.beginPath();
-      ctx.roundRect(-carWidth / 2, -carLength / 2, carWidth, carLength, 8);
-      ctx.fill();
-      ctx.stroke();
-      ctx.shadowBlur = 0;
-
-      // Cabin / Windshield
-      ctx.fillStyle = '#0c1019';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.roundRect(-carWidth / 2 + 6, -carLength / 2 + 30, carWidth - 12, 45, 4);
-      ctx.fill();
-      ctx.stroke();
-
-      // Front Hood Direction Indicator (Orange arrow showing car's nose heading)
-      ctx.fillStyle = '#ff7b00';
-      ctx.fillRect(-3, -carLength / 2 + 4, 6, 22);
-
-      // Rear Wheels (fixed parallel to car chassis)
-      ctx.fillStyle = '#222';
-      ctx.strokeStyle = '#555';
-      ctx.lineWidth = 1.5;
-      
-      // Rear Left
-      ctx.beginPath();
-      ctx.roundRect(-carWidth / 2 - 7, carLength / 2 - 32, wheelW, wheelL, 3);
-      ctx.fill();
-      ctx.stroke();
-
-      // Rear Right
-      ctx.beginPath();
-      ctx.roundRect(carWidth / 2 - 5, carLength / 2 - 32, wheelW, wheelL, 3);
-      ctx.fill();
-      ctx.stroke();
-
-      // Front Wheels (steered by calculatedWheelAngle)
-      // wheelAngleDeg is relative to chassis (positive = steered right, negative = steered left)
-      const wheelRad = (wheelAngleDeg * Math.PI) / 180;
-
-      function drawFrontWheel(x, y) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(wheelRad); // Front wheel countersteer
-        ctx.fillStyle = '#00d2ff';
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 1.5;
-        ctx.shadowColor = 'rgba(0, 210, 255, 0.85)';
-        ctx.shadowBlur = 8;
-        ctx.beginPath();
-        ctx.roundRect(-wheelW / 2, -wheelL / 2, wheelW, wheelL, 3);
-        ctx.fill();
-        ctx.stroke();
-
-        // Countersteer direction vector line
-        ctx.strokeStyle = 'rgba(0, 210, 255, 0.7)';
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([3, 3]);
-        ctx.beginPath();
-        ctx.moveTo(0, -wheelL / 2);
-        ctx.lineTo(0, -wheelL / 2 - 30);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        ctx.restore();
-      }
-
-      // Front Left
-      drawFrontWheel(-carWidth / 2 - 1, -carLength / 2 + 22);
-      // Front Right
-      drawFrontWheel(carWidth / 2 + 1, -carLength / 2 + 22);
-
-      ctx.restore();
-    }
-
-    // Attach event listeners
-    [sliderSlip, sliderStick, sliderLock, sliderCounterMult].forEach(el => {
-      el.addEventListener('input', updatePhysics);
-    });
-
-    // Initialize with English as default
-    setLanguage('en');
-    updatePhysics();
-  </script>
+  <!-- Local Three.js script -->
+  <script src="three.min.js"></script>
+  <!-- Main Application Script -->
+  <script src="app.js"></script>
 </body>
 </html>
